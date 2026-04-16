@@ -70,9 +70,15 @@ export default function Pricing() {
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
             靈活的授權方案
           </h2>
-          <p className="text-gray-400 text-lg">
+          <p className="text-gray-400 text-lg mb-6">
             Choose the plan that fits your organization
           </p>
+          <a
+            href="/roi"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-[#14B8A6]/50 text-[#14B8A6] hover:bg-[#14B8A6]/10 text-sm font-medium transition-colors"
+          >
+            🧮 算看看能省多少 → ROI 計算器
+          </a>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
