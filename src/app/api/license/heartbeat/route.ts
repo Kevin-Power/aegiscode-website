@@ -1,5 +1,6 @@
 import { NextRequest } from "next/server"
 import { findById, upsert } from "@/lib/license-store"
+import { rateLimit } from "@/lib/rate-limit"
 
 export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
@@ -10,12 +11,22 @@ interface HeartbeatBody {
   callerIp?: string
 }
 
+const LICENSE_ID_RE = /^[A-Za-z0-9_-]+$/
+
 /**
  * Audit-only endpoint: records that a license phoned home. Always returns
  * 200 ok unless the body is malformed, so a hostile client cannot probe
  * which licenseIds exist by status code alone.
  */
 export async function POST(req: NextRequest): Promise<Response> {
+  const rl = await rateLimit(req, "license-heartbeat", 20, 60_000)
+  if (!rl.ok) {
+    return Response.json(
+      { error: "Rate limit exceeded", retryAfter: rl.retryAfter },
+      { status: 429, headers: { "Retry-After": String(rl.retryAfter) } },
+    )
+  }
+
   let body: HeartbeatBody
   try {
     body = (await req.json()) as HeartbeatBody
@@ -29,6 +40,23 @@ export async function POST(req: NextRequest): Promise<Response> {
       { ok: false, message: "licenseId is required" },
       { status: 400 },
     )
+  }
+  if (typeof licenseId !== "string" || licenseId.length > 100 || !LICENSE_ID_RE.test(licenseId)) {
+    return Response.json(
+      {
+        ok: false,
+        message: "licenseId must be a non-empty string up to 100 chars matching ^[A-Za-z0-9_-]+$",
+      },
+      { status: 400 },
+    )
+  }
+  if (body.hardwareFingerprint !== undefined) {
+    if (typeof body.hardwareFingerprint !== "string" || body.hardwareFingerprint.length > 200) {
+      return Response.json(
+        { ok: false, message: "hardwareFingerprint must be a string under 200 chars" },
+        { status: 400 },
+      )
+    }
   }
 
   const record = await findById(licenseId)

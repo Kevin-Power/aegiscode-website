@@ -1,5 +1,7 @@
 import { NextRequest } from "next/server"
 import { isAuthorized, unauthorized } from "@/lib/admin-auth"
+import { recordAudit, adminCallerIp } from "@/lib/audit-log"
+import { rateLimit } from "@/lib/rate-limit"
 import {
   loadAll,
   upsert,
@@ -13,6 +15,13 @@ export const dynamic = "force-dynamic"
 
 const VALID_TIERS: LicenseTier[] = ["STARTER", "PROFESSIONAL", "ENTERPRISE"]
 
+function rateLimitResponse(retryAfter: number): Response {
+  return Response.json(
+    { error: "Rate limit exceeded", retryAfter },
+    { status: 429, headers: { "Retry-After": String(retryAfter) } },
+  )
+}
+
 interface RegisterBody {
   licenseId?: string
   customerName?: string
@@ -23,6 +32,9 @@ interface RegisterBody {
 }
 
 export async function GET(req: NextRequest): Promise<Response> {
+  const rl = await rateLimit(req, "admin-licenses", 60, 60_000)
+  if (!rl.ok) return rateLimitResponse(rl.retryAfter)
+
   if (!isAuthorized(req)) return unauthorized()
 
   const records = await loadAll()
@@ -34,6 +46,9 @@ export async function GET(req: NextRequest): Promise<Response> {
 }
 
 export async function POST(req: NextRequest): Promise<Response> {
+  const rl = await rateLimit(req, "admin-licenses", 60, 60_000)
+  if (!rl.ok) return rateLimitResponse(rl.retryAfter)
+
   if (!isAuthorized(req)) return unauthorized()
 
   let body: RegisterBody
@@ -83,6 +98,15 @@ export async function POST(req: NextRequest): Promise<Response> {
   }
 
   await upsert(record)
+
+  await recordAudit({
+    action: "REGISTER",
+    licenseId: record.licenseId,
+    customerName: record.customerName,
+    tier: record.tier,
+    expiresAt: record.expiresAt,
+    adminIp: adminCallerIp(req),
+  })
 
   return Response.json({ ok: true, license: record }, { status: 201 })
 }

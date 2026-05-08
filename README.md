@@ -50,9 +50,24 @@ to issue and revoke licenses.
 |-------------------------|----------|--------------------------------------------------------------------------------------------------|
 | `ADMIN_TOKEN`           | yes      | Shared secret for the admin API and `/admin/licenses` UI. Sent as `x-admin-token` header.        |
 | `LICENSE_REGISTRY_JSON` | prod     | JSON-stringified `LicenseRecord[]` used as the read-only registry on Vercel (see "Storage").     |
+| `LICENSE_PUBLIC_KEY`    | recommended | RSA PEM public key (RS256) used to verify the `licenseKey` JWT. See "JWT verification" below. |
 
-Set them in Vercel via `vercel env add ADMIN_TOKEN` (and `LICENSE_REGISTRY_JSON`).
-For local dev, drop them in `.env.local`.
+Set them in Vercel via `vercel env add ADMIN_TOKEN` (and `LICENSE_REGISTRY_JSON`,
+`LICENSE_PUBLIC_KEY`). For local dev, drop them in `.env.local`.
+
+#### Formatting `LICENSE_PUBLIC_KEY` as a single-line env var
+
+PEM keys span multiple lines. Vercel env vars are single-line, so escape every
+newline as the literal two-character sequence `\n`:
+
+```
+LICENSE_PUBLIC_KEY="-----BEGIN PUBLIC KEY-----\nMIIBIjANBgk...\n...\n-----END PUBLIC KEY-----\n"
+```
+
+The validate route un-escapes `\n` back to real newlines at startup. If
+`LICENSE_PUBLIC_KEY` is unset the server logs a warning ONCE per cold start
+and skips the JWT signature check — the registry lookup still runs, so
+revocations remain enforced (graceful degradation).
 
 ### Endpoints
 
@@ -125,3 +140,86 @@ curl -X POST https://<host>/api/admin/licenses/AC-2026-001/revoke \
 After revocation the validate endpoint returns
 `{ valid: false, revoked: true, message: "License revoked: …" }` and the
 client transitions into degraded mode within one phone-home cycle.
+
+### Security hardening
+
+The license server applies several hardening layers (see
+`src/middleware.ts`, `src/lib/rate-limit.ts`, `src/lib/audit-log.ts`).
+
+#### Rate limiting
+
+In-memory IP-keyed fixed-window limiter, applied at the top of every public
+and admin route:
+
+| Route                              | Limit            |
+|------------------------------------|------------------|
+| `POST /api/license/validate`       | 10 req/min/IP    |
+| `POST /api/license/heartbeat`      | 20 req/min/IP    |
+| `GET/POST /api/admin/licenses`     | 60 req/min/IP    |
+| `POST /api/admin/licenses/:id/revoke` | 60 req/min/IP |
+
+Excess requests get HTTP `429 Rate limit exceeded` with a `Retry-After`
+header. Caller IP is read from `x-forwarded-for` (first hop), fallback
+`x-real-ip`, fallback `"unknown"`.
+
+> The limiter is process-local. On Vercel each cold start spins up a fresh
+> map and concurrent function instances do not share state — adequate as an
+> abuse deterrent, not a global quota. Migrate to Vercel KV or Upstash for
+> hard global limits (see `TODO(prod)` in `src/lib/rate-limit.ts`).
+
+#### JWT signature verification
+
+`POST /api/license/validate` accepts an optional `licenseKey` (a JWT signed
+with RS256 using the vendor's private key). When `LICENSE_PUBLIC_KEY` is
+configured the server verifies the signature and rejects:
+
+- invalid signatures (returns `valid: false, message: "Invalid signature"`)
+- mismatched `licenseId` claims (`message: "JWT licenseId mismatch"`)
+
+This is defense-in-depth on top of the registry lookup. If
+`LICENSE_PUBLIC_KEY` is unset, signature verification is skipped (logged
+once) and only the registry lookup gates validity.
+
+#### Security headers (middleware)
+
+`src/middleware.ts` attaches the following to every response:
+
+- `Strict-Transport-Security: max-age=63072000; includeSubDomains`
+- `X-Content-Type-Options: nosniff`
+- `X-Frame-Options: DENY`
+- `Referrer-Policy: strict-origin-when-cross-origin`
+- `Permissions-Policy: camera=(), microphone=(), geolocation=()`
+
+HTML pages additionally get:
+
+```
+Content-Security-Policy: default-src 'self';
+  script-src 'self' 'unsafe-inline';
+  style-src 'self' 'unsafe-inline';
+  img-src 'self' data: https:;
+  font-src 'self' data:;
+  connect-src 'self';
+```
+
+CSP is intentionally skipped on `/api/*` routes (JSON responses don't need
+it and adding it just bloats every payload).
+
+#### Input validation
+
+`/api/license/validate` and `/api/license/heartbeat` reject malformed
+input with HTTP 400:
+
+- `licenseId` — required string, max 100 chars, regex `^[A-Za-z0-9_-]+$`
+- `licenseKey` — optional string, max 10000 chars
+- `hardwareFingerprint` — optional string, max 200 chars
+
+#### Audit log
+
+Sensitive admin actions (`REGISTER`, `REVOKE`) append to
+`data/audit-log.json` (gitignored, schema below). On read-only filesystems
+like Vercel the entry is logged to the function console as
+`[audit] {…}` instead — grep the deployment logs to retrieve.
+
+```json
+{ "ts": "2026-05-08T12:34:56.000Z", "action": "REVOKE", "licenseId": "AC-2026-001", "reason": "non-payment", "adminIp": "203.0.113.1" }
+```
