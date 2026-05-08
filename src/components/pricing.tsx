@@ -39,18 +39,35 @@ const plans = [
   {
     name: "Enterprise",
     price: "洽詢",
-    desc: "大型企業量身打造",
+    desc: "金融業推薦",
     highlighted: false,
     features: [
-      "不限使用者數量",
-      "不限 BU 數量",
-      "全部功能",
-      "客製化開發",
-      "SLA 保證",
-      "專屬客戶經理",
-      "CI/CD 整合服務",
-      "教育訓練",
+      "不限使用者 / 不限 BU",
+      "★ CBOM 加密資產盤點",
+      "★ 原生 SBOM / SCA",
+      "★ 金管會合規報告",
+      "★ ASPM 整合儀表板",
+      "客製化開發 + SSO",
+      "SLA 保證 + 專屬客戶經理",
     ],
+  },
+];
+
+const addOns = [
+  {
+    name: "Threat Intelligence",
+    price: "+ NT$15K/月",
+    desc: "每日 KEV / EPSS 同步、Email digest 推送、24h 漏洞優先通知",
+  },
+  {
+    name: "AI 自動修復",
+    price: "+ NT$10K/月",
+    desc: "平台內建 LLM 直接修復，免去複製貼上",
+  },
+  {
+    name: "White-Label",
+    price: "+ NT$30K/月",
+    desc: "換上您的品牌名稱、Logo、顏色，可轉售給終端客戶",
   },
 ];
 
@@ -139,6 +156,37 @@ export default function Pricing() {
             </motion.div>
           ))}
         </div>
+
+        {/* Add-Ons strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="mt-12"
+        >
+          <div className="text-center mb-6">
+            <span className="inline-block px-3 py-1 rounded-full bg-[#8B5CF6]/15 border border-[#8B5CF6]/30 text-[#A78BFA] text-xs font-medium">
+              加值服務 Add-Ons
+            </span>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {addOns.map((a) => (
+              <div
+                key={a.name}
+                className="bg-[#1A2332]/50 border border-[#243447] rounded-lg p-5 hover:border-[#8B5CF6]/40 transition-colors"
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <h4 className="text-sm font-semibold text-white">{a.name}</h4>
+                  <span className="text-xs font-bold text-[#A78BFA]">{a.price}</span>
+                </div>
+                <p className="text-xs text-gray-400 leading-relaxed">{a.desc}</p>
+              </div>
+            ))}
+          </div>
+          <p className="text-center text-xs text-gray-500 mt-6">
+            ✨ 30 天免費 POC · 前 10 家種子客戶享 40% 折扣（換 Logo 使用權 + Case Study 同意）
+          </p>
+        </motion.div>
       </div>
     </section>
   );
