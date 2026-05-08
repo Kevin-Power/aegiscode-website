@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { useCallback, useEffect, useMemo, useState } from "react"
 
 interface LicenseRow {
@@ -181,6 +182,12 @@ export default function AdminLicensesPage() {
           </p>
         </div>
         <div className="flex gap-2">
+          <Link
+            href="/admin/audit-log"
+            className="rounded-md border border-white/20 px-3 py-1.5 text-sm hover:bg-white/5"
+          >
+            Audit log
+          </Link>
           <button
             onClick={() => setShowRegister((v) => !v)}
             className="rounded-md border border-white/20 px-3 py-1.5 text-sm hover:bg-white/5"

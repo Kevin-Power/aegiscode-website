@@ -47,16 +47,16 @@ export default function Hero() {
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <a
-            href="#contact"
+            href="/trial"
             className="px-8 py-3.5 rounded-lg bg-[#0D9488] hover:bg-[#0F766E] text-white font-semibold text-base transition-all duration-200 hover:shadow-[0_0_30px_rgba(13,148,136,0.3)]"
           >
-            申請免費試用
+            Start Free Trial · 開始試用
           </a>
           <a
-            href="#features"
+            href="/pricing"
             className="px-8 py-3.5 rounded-lg border border-[#243447] hover:border-[#0D9488] text-gray-300 hover:text-white font-medium text-base transition-all duration-200"
           >
-            了解更多
+            View Pricing · 查看方案
           </a>
         </motion.div>
 

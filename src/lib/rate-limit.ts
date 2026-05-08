@@ -1,31 +1,20 @@
-// In-memory IP-based rate limiter (token-bucket-ish, fixed window).
+// Fixed-window IP rate limiter, backed by the unified `storage` layer.
 //
-// TODO(prod): use Vercel KV or Upstash Redis. The Map below lives inside a
-// single Node.js process — on Vercel each cold start spins up a fresh map,
-// and concurrent function instances do not share state. For low-traffic
-// license validation this is acceptable as a basic abuse deterrent (it
-// throttles a noisy attacker hitting the same warm instance), but it does
-// NOT enforce a global limit across the fleet.
+// In production with `KV_URL` configured this uses Redis-style INCR + EXPIRE
+// against Vercel KV, so the window counter is shared across cold starts and
+// concurrent function invocations — i.e. a real global limit.
+//
+// Without KV configured we fall back to the in-memory `storage` backend
+// which is process-local. That keeps `next dev` working but is NOT a
+// global limit on Vercel.
+//
+// Key scheme:
+//   ratelimit:{routeKey}:{ip}:{windowEpoch}
+// Each window gets its own key so we never need to do a GET-then-CAS dance —
+// INCR is atomic and starts at 1 on first hit, EXPIRE seals the window.
 
-interface BucketEntry {
-  count: number
-  resetAt: number // epoch ms when the window expires
-}
-
-// keyed by `${routeKey}|${ip}`
-const buckets = new Map<string, BucketEntry>()
-
-let lastSweepAt = 0
-
-function sweep(now: number, windowMs: number): void {
-  // Cheap GC: only sweep at most once per windowMs to keep this O(N) call rare.
-  if (now - lastSweepAt < windowMs) return
-  lastSweepAt = now
-  const cutoff = now - windowMs * 2
-  for (const [k, v] of buckets) {
-    if (v.resetAt < cutoff) buckets.delete(k)
-  }
-}
+import { storage } from "./storage"
+import { logger } from "./logger"
 
 /** Extract the best-effort caller IP from request headers. */
 function clientIp(req: Request): string {
@@ -57,22 +46,36 @@ export async function rateLimit(
   windowMs: number,
 ): Promise<RateLimitResult> {
   const now = Date.now()
-  sweep(now, windowMs)
+  const windowSeconds = Math.max(1, Math.ceil(windowMs / 1000))
+  const windowEpoch = Math.floor(now / windowMs)
 
   const ip = clientIp(req)
-  const bucketKey = `${key}|${ip}`
-  const existing = buckets.get(bucketKey)
+  const bucketKey = `ratelimit:${key}:${ip}:${windowEpoch}`
 
-  if (!existing || existing.resetAt <= now) {
-    buckets.set(bucketKey, { count: 1, resetAt: now + windowMs })
+  let count: number
+  try {
+    count = await storage.incr(bucketKey)
+    // First hit in this window — set the TTL so the key is auto-evicted.
+    if (count === 1) {
+      await storage.expire(bucketKey, windowSeconds)
+    }
+  } catch (err) {
+    // If the storage layer is wedged (transient KV outage), fail open
+    // rather than rejecting legitimate traffic. This is consistent with
+    // the historical behaviour when the limiter was process-local.
+    logger.warn("rate-limit storage error — failing open", {
+      error: err instanceof Error ? err.message : String(err),
+    })
     return { ok: true, remaining: limit - 1, retryAfter: 0 }
   }
 
-  if (existing.count >= limit) {
-    const retryAfter = Math.max(1, Math.ceil((existing.resetAt - now) / 1000))
+  if (count > limit) {
+    // We don't know the exact window-end without storing it separately,
+    // so estimate from the window boundary. Off by at most windowSeconds.
+    const windowEndMs = (windowEpoch + 1) * windowMs
+    const retryAfter = Math.max(1, Math.ceil((windowEndMs - now) / 1000))
     return { ok: false, remaining: 0, retryAfter }
   }
 
-  existing.count += 1
-  return { ok: true, remaining: limit - existing.count, retryAfter: 0 }
+  return { ok: true, remaining: Math.max(0, limit - count), retryAfter: 0 }
 }

@@ -1,32 +1,24 @@
-// TODO(prod): migrate to Vercel KV or Postgres for durable, multi-instance writes.
+// License record store, backed by the unified `storage` abstraction.
 //
-// PRODUCTION USAGE:
-// -----------------
-// Vercel serverless functions run on an ephemeral filesystem. Writes to
-// `data/licenses.json` will NOT persist between cold starts and are NOT
-// shared between concurrent function instances. Two production strategies:
+// In production with `KV_URL` configured this writes through to Vercel KV
+// (Redis), so revocations and heartbeat updates persist across cold starts
+// and concurrent function invocations. Without KV configured we fall back
+// to an in-memory implementation that survives only inside a single Node
+// process — useful for `next dev` and CI builds, NOT for production.
 //
-// 1. READ-ONLY REGISTRY (recommended interim):
-//    Set env var LICENSE_REGISTRY_JSON to a JSON-stringified
-//    LicenseRecord[]. The validate endpoint will read from it. Revocations
-//    only persist as long as the function instance lives — for hard
-//    revocations, redeploy with the record removed/flagged.
+// Storage key scheme:
+//   license:{licenseId}     hash of the LicenseRecord (one key per license)
+//   licenses:all            sorted set of every licenseId we know about
+//                           (score = epoch ms of issuedAt — newest last)
 //
-//    Example:
-//      vercel env add LICENSE_REGISTRY_JSON
-//      <paste: [{"licenseId":"AC-2026-001","customerName":"Acme",...}]>
-//
-// 2. KV / DB BACKED (real prod):
-//    Replace loadAll/saveAll with Vercel KV (`@vercel/kv`) or a hosted
-//    Postgres. The function signatures here are intentionally simple so
-//    swapping the backend is a one-file change.
-//
-// Local dev falls back to `data/licenses.json` (gitignored). If both the
-// file and env var are missing, an in-memory Map is used so the build /
-// admin UI still functions on a fresh checkout.
+// Migration / seed:
+//   On first read, if `licenses:all` is empty AND env var
+//   `LICENSE_REGISTRY_JSON` is set, the env array is loaded into KV. After
+//   that the env var is ignored — KV is the source of truth and the env
+//   var only exists for one-time bootstrap.
 
-import { promises as fs } from "node:fs"
-import path from "node:path"
+import { storage } from "./storage"
+import { logger } from "./logger"
 
 export type LicenseTier = "STARTER" | "PROFESSIONAL" | "ENTERPRISE"
 
@@ -46,11 +38,10 @@ export interface LicenseRecord {
   heartbeatCount: number
 }
 
-const DATA_DIR = path.join(process.cwd(), "data")
-const DATA_FILE = path.join(DATA_DIR, "licenses.json")
+const KEY_LICENSE = (id: string) => `license:${id}`
+const KEY_INDEX = "licenses:all"
 
-// In-memory fallback. Survives within a single function instance only.
-let memoryStore: LicenseRecord[] | null = null
+let seedAttempted = false
 
 function parseRegistryEnv(): LicenseRecord[] | null {
   const raw = process.env.LICENSE_REGISTRY_JSON
@@ -60,7 +51,7 @@ function parseRegistryEnv(): LicenseRecord[] | null {
     if (!Array.isArray(parsed)) return null
     return parsed.map(normalizeRecord)
   } catch (err) {
-    console.warn("[license-store] LICENSE_REGISTRY_JSON parse failed:", err)
+    logger.warn("license-store registry env parse failed", { error: err instanceof Error ? err.message : String(err) })
     return null
   }
 }
@@ -82,79 +73,65 @@ function normalizeRecord(r: Partial<LicenseRecord>): LicenseRecord {
   }
 }
 
-async function loadFromFile(): Promise<LicenseRecord[] | null> {
-  try {
-    const raw = await fs.readFile(DATA_FILE, "utf8")
-    const parsed = JSON.parse(raw)
-    if (!Array.isArray(parsed)) return []
-    return parsed.map(normalizeRecord)
-  } catch (err: unknown) {
-    const code = (err as NodeJS.ErrnoException)?.code
-    if (code === "ENOENT") return null
-    console.warn("[license-store] file read failed:", err)
-    return null
+/**
+ * One-shot seed from `LICENSE_REGISTRY_JSON` if KV is empty. Runs at most
+ * once per process; the result is intentionally not awaited from every
+ * call site — only from the public load/find paths below.
+ */
+async function maybeSeedFromEnv(): Promise<void> {
+  if (seedAttempted) return
+  seedAttempted = true
+  const ids = await storage.zrange(KEY_INDEX, 0, 0)
+  if (ids.length > 0) return // already populated
+  const fromEnv = parseRegistryEnv()
+  if (!fromEnv || fromEnv.length === 0) return
+  for (const rec of fromEnv) {
+    await writeRecord(rec)
   }
+  logger.info("license-store seeded from env", { count: fromEnv.length, backend: storage.backend })
 }
 
-async function writeToFile(records: LicenseRecord[]): Promise<boolean> {
-  try {
-    await fs.mkdir(DATA_DIR, { recursive: true })
-    await fs.writeFile(DATA_FILE, JSON.stringify(records, null, 2), "utf8")
-    return true
-  } catch (err) {
-    // Vercel runtime is read-only — silently fall back to memory.
-    console.warn("[license-store] file write failed (likely read-only fs):", err)
-    return false
-  }
+async function writeRecord(record: LicenseRecord): Promise<void> {
+  const normalized = normalizeRecord(record)
+  await storage.set(KEY_LICENSE(normalized.licenseId), normalized)
+  // sorted-set score = issuedAt epoch ms so listings have a stable order.
+  const score = Date.parse(normalized.issuedAt) || Date.now()
+  await storage.zadd(KEY_INDEX, score, normalized.licenseId)
 }
 
 /** Load every license record from the active backend. */
 export async function loadAll(): Promise<LicenseRecord[]> {
-  // 1) env-var registry takes precedence in prod (immutable view).
-  const fromEnv = parseRegistryEnv()
-  if (fromEnv) {
-    // Merge env baseline with any in-memory mutations (e.g. revocations
-    // performed since last cold start).
-    if (memoryStore) {
-      const byId = new Map<string, LicenseRecord>()
-      for (const rec of fromEnv) byId.set(rec.licenseId, rec)
-      for (const rec of memoryStore) byId.set(rec.licenseId, rec)
-      return [...byId.values()]
-    }
-    return fromEnv
+  await maybeSeedFromEnv()
+  const ids = await storage.zrange(KEY_INDEX, 0, -1)
+  if (ids.length === 0) return []
+  const out: LicenseRecord[] = []
+  for (const id of ids) {
+    const rec = await storage.get<LicenseRecord>(KEY_LICENSE(id))
+    if (rec) out.push(normalizeRecord(rec))
   }
-
-  // 2) local JSON file (dev / persistent host).
-  const fromFile = await loadFromFile()
-  if (fromFile) {
-    memoryStore = fromFile
-    return fromFile
-  }
-
-  // 3) in-memory fallback.
-  if (!memoryStore) memoryStore = []
-  return memoryStore
+  return out
 }
 
-/** Persist the full set. Falls back to memory if disk write fails. */
+/** Persist the full set. Used by admin "import all" flows; routes prefer `upsert`. */
 export async function saveAll(records: LicenseRecord[]): Promise<void> {
-  memoryStore = records.map(normalizeRecord)
-  await writeToFile(memoryStore)
+  // We don't truncate the index — caller-provided list is treated as an
+  // additive upsert. For destructive replacement, callers should explicitly
+  // delete records first (none currently do).
+  for (const rec of records) {
+    await writeRecord(rec)
+  }
 }
 
 export async function findById(id: string): Promise<LicenseRecord | null> {
-  const all = await loadAll()
-  return all.find((r) => r.licenseId === id) ?? null
+  await maybeSeedFromEnv()
+  const rec = await storage.get<LicenseRecord>(KEY_LICENSE(id))
+  return rec ? normalizeRecord(rec) : null
 }
 
 /** Insert or replace a record by licenseId. */
 export async function upsert(record: LicenseRecord): Promise<void> {
-  const all = await loadAll()
-  const next = [...all]
-  const idx = next.findIndex((r) => r.licenseId === record.licenseId)
-  if (idx >= 0) next[idx] = normalizeRecord(record)
-  else next.push(normalizeRecord(record))
-  await saveAll(next)
+  await maybeSeedFromEnv()
+  await writeRecord(record)
 }
 
 /** Returns derived status string for UI / API responses. */

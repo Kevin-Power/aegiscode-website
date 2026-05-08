@@ -2,6 +2,7 @@ import { NextRequest } from "next/server"
 import jwt, { type JwtPayload } from "jsonwebtoken"
 import { findById, deriveStatus, upsert, type LicenseRecord } from "@/lib/license-store"
 import { rateLimit } from "@/lib/rate-limit"
+import { logger } from "@/lib/logger"
 
 export const runtime = "nodejs"
 // Always run dynamic — never cache validation results.
@@ -34,10 +35,7 @@ let warnedNoKey = false
 function warnPublicKeyMissingOnce(): void {
   if (warnedNoKey) return
   warnedNoKey = true
-  console.warn(
-    "[validate] LICENSE_PUBLIC_KEY not set — JWT signature verification disabled. " +
-      "Registry lookup still applies. Set LICENSE_PUBLIC_KEY for defense-in-depth.",
-  )
+  logger.warn("validate LICENSE_PUBLIC_KEY missing — jwt signature verification disabled (registry lookup still applies)")
 }
 
 const LICENSE_ID_RE = /^[A-Za-z0-9_-]+$/
@@ -195,7 +193,8 @@ export async function POST(req: NextRequest): Promise<Response> {
     }
     await upsert(updated)
   } catch (err) {
-    console.warn("[validate] heartbeat audit write failed:", err)
+    const requestId = req.headers.get("x-request-id") || undefined
+    logger.warn("validate heartbeat audit write failed", { licenseId, requestId, error: err instanceof Error ? err.message : String(err) })
   }
 
   const res: ValidateResponse = {

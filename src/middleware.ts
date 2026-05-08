@@ -19,14 +19,35 @@ const CSP =
   "font-src 'self' data:; " +
   "connect-src 'self';"
 
+const REQUEST_ID_HEADER = "x-request-id"
+
+/**
+ * Generate or pass through a per-request correlation id. Honors an upstream
+ * x-request-id header so logs across hops stay correlated.
+ */
+function ensureRequestId(req: NextRequest): string {
+  const incoming = req.headers.get(REQUEST_ID_HEADER)
+  if (incoming && /^[A-Za-z0-9._-]{4,128}$/.test(incoming)) return incoming
+  return crypto.randomUUID()
+}
+
 export function middleware(req: NextRequest): NextResponse {
-  const res = NextResponse.next()
+  const requestId = ensureRequestId(req)
+
+  // Forward request id to downstream route handlers via request headers so
+  // route logic can call headers().get('x-request-id').
+  const forwardedHeaders = new Headers(req.headers)
+  forwardedHeaders.set(REQUEST_ID_HEADER, requestId)
+
+  const res = NextResponse.next({ request: { headers: forwardedHeaders } })
+
   for (const [k, v] of Object.entries(BASE_HEADERS)) {
     res.headers.set(k, v)
   }
   if (!req.nextUrl.pathname.startsWith("/api/")) {
     res.headers.set("Content-Security-Policy", CSP)
   }
+  res.headers.set(REQUEST_ID_HEADER, requestId)
   return res
 }
 

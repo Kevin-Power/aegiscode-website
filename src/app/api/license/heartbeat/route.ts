@@ -1,6 +1,7 @@
 import { NextRequest } from "next/server"
 import { findById, upsert } from "@/lib/license-store"
 import { rateLimit } from "@/lib/rate-limit"
+import { logger } from "@/lib/logger"
 
 export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
@@ -78,7 +79,8 @@ export async function POST(req: NextRequest): Promise<Response> {
       heartbeatCount: (record.heartbeatCount ?? 0) + 1,
     })
   } catch (err) {
-    console.warn("[heartbeat] write failed:", err)
+    const requestId = req.headers.get("x-request-id") || undefined
+    logger.warn("heartbeat write failed", { licenseId, requestId, error: err instanceof Error ? err.message : String(err) })
   }
 
   return Response.json({ ok: true })
