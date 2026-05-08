@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# license server local state (dev only — production uses LICENSE_REGISTRY_JSON or KV)
+/data/licenses.json
+
