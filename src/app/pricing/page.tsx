@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Check } from "lucide-react";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
@@ -207,12 +208,12 @@ export default function PricingPage() {
                   ) : null}
 
                   {tier.cta === "contact" ? (
-                    <a
+                    <Link
                       href="/#contact"
                       className="block text-center py-3 rounded-lg font-medium text-sm bg-[#0D9488] hover:bg-[#0F766E] text-white transition"
                     >
                       Contact Sales · 聯絡業務
-                    </a>
+                    </Link>
                   ) : null}
                 </div>
               </div>

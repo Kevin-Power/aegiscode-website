@@ -2,6 +2,7 @@ import Navbar from "@/components/navbar";
 import Hero from "@/components/hero";
 import PainPoints from "@/components/pain-points";
 import Features from "@/components/features";
+import ProductProof from "@/components/product-proof";
 import AiHealthCheck from "@/components/ai-health-check";
 import Workflow from "@/components/workflow";
 import Stats from "@/components/stats";
@@ -17,6 +18,7 @@ export default function Home() {
       <Hero />
       <PainPoints />
       <Features />
+      <ProductProof />
       <AiHealthCheck />
       <Workflow />
       <Stats />

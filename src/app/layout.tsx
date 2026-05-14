@@ -8,23 +8,26 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "AegisCode — Enterprise Code Quality & Security Platform",
+  title: "AegisCode — Code Quality, CBOM & PQC Governance Platform",
   description:
-    "AegisCode 企業級程式碼品質與安全平台。支援 30+ 語言靜態分析、AI 程式碼健檢、多 BU 管理、審核工作流，讓每一行程式碼都值得信賴。",
+    "AegisCode 企業級程式碼品質、CBOM/PQC 加密資產盤點與稽核證據平台。支援 SAST、AI 程式碼健檢、主管審核、證據匯出與金融合規 demo。",
   keywords: [
     "code quality",
     "code security",
     "SAST",
     "static analysis",
     "AI code review",
+    "CBOM",
+    "PQC",
+    "cryptographic inventory",
     "SonarQube",
     "企業資安",
     "程式碼掃描",
   ],
   openGraph: {
-    title: "AegisCode — Enterprise Code Quality & Security Platform",
+    title: "AegisCode — Code Quality, CBOM & PQC Governance Platform",
     description:
-      "讓每一行程式碼都值得信賴。Enterprise-grade code quality and security scanning.",
+      "從程式碼弱點到加密資產，一次產出可稽核的治理證據。",
     type: "website",
   },
 };

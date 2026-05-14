@@ -20,10 +20,10 @@ export default function CtaContact() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-            開始保護您的程式碼
+            用 30 天 POC 看見真實治理成果
           </h2>
           <p className="text-gray-400 text-lg mb-10">
-            Every line of code, secured.
+            從一個金融 CBOM/PQC demo 開始，延伸到 SAST、Quality Gate 與主管審核。
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
@@ -32,13 +32,13 @@ export default function CtaContact() {
               className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-[#0D9488] hover:bg-[#0F766E] text-white font-semibold transition-all duration-200 hover:shadow-[0_0_30px_rgba(13,148,136,0.3)]"
             >
               <Mail size={18} />
-              聯絡我們
+              預約展示
             </a>
             <a
-              href="#features"
+              href="#product-proof"
               className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg border border-[#243447] hover:border-[#0D9488] text-gray-300 hover:text-white font-medium transition-all duration-200"
             >
-              了解更多
+              查看產品實證
               <ArrowRight size={16} />
             </a>
           </div>

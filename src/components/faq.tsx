@@ -39,7 +39,7 @@ const faqs = [
   },
 ];
 
-function FaqItem({ faq, index }: { faq: (typeof faqs)[0]; index: number }) {
+function FaqItem({ faq }: { faq: (typeof faqs)[0] }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -97,8 +97,8 @@ export default function Faq() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="space-y-3"
         >
-          {faqs.map((faq, i) => (
-            <FaqItem key={i} faq={faq} index={i} />
+          {faqs.map((faq) => (
+            <FaqItem key={faq.q} faq={faq} />
           ))}
         </motion.div>
       </div>

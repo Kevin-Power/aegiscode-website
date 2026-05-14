@@ -1,5 +1,6 @@
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import Link from "next/link";
 
 export default function CheckoutSuccessPage() {
   return (
@@ -21,12 +22,12 @@ export default function CheckoutSuccessPage() {
             </a>
             .
           </p>
-          <a
+          <Link
             href="/"
             className="inline-block mt-6 px-6 py-3 rounded-lg bg-[#0D9488] hover:bg-[#0F766E] text-white font-medium transition"
           >
             Return home
-          </a>
+          </Link>
         </div>
       </section>
       <Footer />

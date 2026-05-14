@@ -17,20 +17,20 @@ import {
 const features = [
   {
     icon: Search,
-    title: "SAST + ASPM Hub",
-    desc: "整合 Checkmarx / Veracode / Snyk / Trivy 結果，跨工具去重 + 優先排序。30+ 語言、OWASP Top 10 完整覆蓋。",
-    badge: "v4",
+    title: "SAST 掃描與品質閘門",
+    desc: "支援 ZIP / Git 掃描、SonarQube 分析、Quality Gate 與 BU 權限控管，讓上線前風險有一致標準。",
+    badge: "Ready",
   },
   {
     icon: KeyRound,
-    title: "CBOM 加密資產盤點 ⭐",
-    desc: "業界首套針對金管會 PQC 2026/6 指引設計。12+ 偵測規則，14 欄位金管會範本一鍵 Excel 匯出。",
-    badge: "業界首創",
+    title: "CBOM / PQC 加密資產盤點",
+    desc: "盤點演算法、金鑰長度、IV、TLS 與 PQC 遷移風險，提供 portfolio、明細、生命週期決策與證據包。",
+    badge: "Demo Ready",
   },
   {
     icon: Package,
     title: "原生 SBOM / SCA",
-    desc: "解析 npm / pip / Maven / Go 依賴，輸出 CycloneDX 1.5 標準。F-ISAC 委外契約共通條款必備。",
+    desc: "規劃解析 npm / pip / Maven / Go 依賴並輸出 CycloneDX 標準，補齊委外與供應鏈安全盤點。",
     badge: "v4",
   },
   {
@@ -40,21 +40,21 @@ const features = [
   },
   {
     icon: Activity,
-    title: "Threat Intel — KEV / EPSS",
-    desc: "每日自動同步 CISA KEV、FIRST EPSS、NVD CVE。高風險漏洞自動 Email digest 推送給 CISO。",
-    badge: "v4",
+    title: "Executive Action Queue",
+    desc: "管理儀表板彙整失敗掃描、待審核專案與高風險 CBOM finding，主管一進站就知道先處理什麼。",
+    badge: "Ready",
   },
   {
     icon: Sliders,
     title: "Multi-dim Quality Gate",
-    desc: "依 BU、嚴重度、CVSS、EPSS、KEV、CWE 多維條件政策。內建金融嚴格 / 平衡 / 寬鬆三套範本。",
-    badge: "v4",
+    desc: "依 BU、嚴重度與風險門檻建立政策，讓開發、資安、主管審核使用同一套決策邏輯。",
+    badge: "Ready",
   },
   {
     icon: ShieldCheck,
-    title: "License + 硬體指紋",
-    desc: "JWT RS256 簽章 + 硬體指紋綁定 + 每日 Phone-home。授權無法盜版、無法跨機器複製。",
-    badge: "v4",
+    title: "部署安全與授權控管",
+    desc: "正式與客戶環境 seed 強制自訂管理員密碼，授權服務支援 phone-home 與硬體指紋綁定。",
+    badge: "Hardened",
   },
   {
     icon: Building2,
@@ -83,11 +83,11 @@ export default function Features() {
         >
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">核心功能</h2>
           <p className="text-gray-400 text-lg">
-            33+ 項功能 · 對應 金管會 ZTA / PQC / F-ISAC
+            可展示功能 · 對應 金管會 ZTA / PQC / F-ISAC 採購情境
           </p>
           <div className="inline-flex items-center gap-2 mt-4 px-4 py-1.5 rounded-full bg-[#F59E0B]/10 border border-[#F59E0B]/30 text-[#FBBF24] text-xs font-medium">
             <span className="w-1.5 h-1.5 rounded-full bg-[#FBBF24] animate-pulse"></span>
-            v4 NEW: CBOM · SBOM · Threat Intel · Multi-dim QG · Hardware License
+            2026 demo stack: SAST · CBOM/PQC · Evidence Export · Action Queue · License Control
           </div>
         </motion.div>
 
@@ -108,7 +108,7 @@ export default function Features() {
                   </div>
                   {f.badge && (
                     <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
-                      f.badge === "業界首創"
+                      f.badge === "Demo Ready"
                         ? "bg-[#F59E0B]/15 text-[#FBBF24] border border-[#F59E0B]/30"
                         : "bg-[#14B8A6]/15 text-[#14B8A6] border border-[#14B8A6]/30"
                     }`}>

@@ -29,6 +29,7 @@ const plans = [
       "最多 50 位使用者",
       "5 個 BU",
       "完整 SAST 掃描",
+      "CBOM/PQC portfolio 檢視",
       "AI 程式碼健檢",
       "審核工作流",
       "中英雙語介面",
@@ -45,8 +46,9 @@ const plans = [
       "不限使用者 / 不限 BU",
       "★ CBOM 加密資產盤點",
       "★ 原生 SBOM / SCA",
-      "★ 金管會合規報告",
+      "★ 金管會合規與稽核證據包",
       "★ ASPM 整合儀表板",
+      "★ Executive action queue",
       "客製化開發 + SSO",
       "SLA 保證 + 專屬客戶經理",
     ],
@@ -184,7 +186,7 @@ export default function Pricing() {
             ))}
           </div>
           <p className="text-center text-xs text-gray-500 mt-6">
-            ✨ 30 天免費 POC · 前 10 家種子客戶享 40% 折扣（換 Logo 使用權 + Case Study 同意）
+            30 天免費 POC · 建議以 CBOM/PQC 金融情境 demo 開場，前 10 家種子客戶享 40% 折扣（換 Logo 使用權 + Case Study 同意）
           </p>
         </motion.div>
       </div>

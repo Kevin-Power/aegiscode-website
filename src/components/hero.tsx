@@ -20,7 +20,7 @@ export default function Hero() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#243447] bg-[#1A2332]/60 text-xs text-gray-400 mb-8">
             <span className="w-2 h-2 rounded-full bg-[#14B8A6] animate-pulse" />
-            Enterprise Code Quality & Security Platform
+            Enterprise Code Quality, CBOM & PQC Governance Platform
           </div>
 
           {/* Main heading */}
@@ -30,12 +30,12 @@ export default function Hero() {
 
           {/* Chinese tagline */}
           <p className="text-xl sm:text-2xl md:text-3xl text-gray-200 font-medium mb-3">
-            讓每一行程式碼都值得信賴
+            從程式碼弱點到加密資產，一次產出可稽核的治理證據
           </p>
 
           {/* English tagline */}
           <p className="text-base sm:text-lg text-gray-500 mb-10">
-            Every line of code, secured.
+            SAST, AI code health, CBOM/PQC inventory, and executive-ready evidence in one platform.
           </p>
         </motion.div>
 
@@ -50,13 +50,13 @@ export default function Hero() {
             href="/trial"
             className="px-8 py-3.5 rounded-lg bg-[#0D9488] hover:bg-[#0F766E] text-white font-semibold text-base transition-all duration-200 hover:shadow-[0_0_30px_rgba(13,148,136,0.3)]"
           >
-            Start Free Trial · 開始試用
+            Book CBOM Demo · 預約展示
           </a>
           <a
-            href="/pricing"
+            href="#product-proof"
             className="px-8 py-3.5 rounded-lg border border-[#243447] hover:border-[#0D9488] text-gray-300 hover:text-white font-medium text-base transition-all duration-200"
           >
-            View Pricing · 查看方案
+            See Product Proof · 查看實證
           </a>
         </motion.div>
 
