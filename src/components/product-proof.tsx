@@ -56,7 +56,7 @@ export default function ProductProof() {
               不是簡報概念，已經有可展示、可驗證、可交付的產品證據。
             </h2>
             <p className="mt-4 text-base leading-relaxed text-gray-400">
-              AegisCode 的對外訊息現在直接連到 WT-Sonaqu 的實作進度：CBOM/PQC demo、稽核輸出、掃描可靠性與部署安全都已納入產品工作流。
+              AegisCode 的對外訊息現在直接連到產品實作進度：CBOM/PQC demo、稽核輸出、掃描可靠性與部署安全都已納入產品工作流。
             </p>
             <div className="mt-8 grid grid-cols-3 gap-4">
               {[
