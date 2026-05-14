@@ -8,26 +8,30 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "AegisCode — Code Quality, CBOM & PQC Governance Platform",
+  title: "AegisCode — SAST-in-the-Loop, CBOM & Taiwan Compliance Platform",
   description:
-    "AegisCode 企業級程式碼品質、CBOM/PQC 加密資產盤點與稽核證據平台。支援 SAST、AI 程式碼健檢、主管審核、證據匯出與金融合規 demo。",
+    "AegisCode 企業級 SAST-in-the-Loop、CBOM/PQC、SBOM/SCA 與稽核證據平台。支援 VULNFORGE AI review、主管審核、證據匯出與台灣金融合規 demo。",
   keywords: [
     "code quality",
     "code security",
     "SAST",
     "static analysis",
     "AI code review",
+    "SAST-in-the-Loop",
+    "VULNFORGE",
     "CBOM",
     "PQC",
+    "SBOM",
+    "SCA",
     "cryptographic inventory",
     "SonarQube",
     "企業資安",
     "程式碼掃描",
   ],
   openGraph: {
-    title: "AegisCode — Code Quality, CBOM & PQC Governance Platform",
+    title: "AegisCode — SAST-in-the-Loop, CBOM & Taiwan Compliance Platform",
     description:
-      "從程式碼弱點到加密資產，一次產出可稽核的治理證據。",
+      "從程式碼弱點、相依套件到加密資產，一次產出可稽核的治理證據。",
     type: "website",
   },
 };

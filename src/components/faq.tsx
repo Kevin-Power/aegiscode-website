@@ -19,7 +19,15 @@ const faqs = [
   },
   {
     q: "跟 SonarQube 社區版有什麼不同？",
-    a: "AegisCode 是基於 SonarQube 引擎打造的企業級平台，在此基礎上增加了 AI 程式碼健檢、多 BU 管理、審核工作流、中英雙語介面等企業級功能，專為台灣企業打造的一站式解決方案。",
+    a: "SonarQube 是很好的靜態分析引擎；AegisCode 的差異在企業治理層：SAST-in-the-Loop AI 審查、多 BU 權限、繁中/英文介面、主管審核、CBOM/PQC、SBOM/SCA 與可交付稽核證據。技術團隊看得到問題，管理層也拿得到決策材料。",
+  },
+  {
+    q: "SBOM / SCA 跟 GitHub Advanced Security 有什麼差別？",
+    a: "GitHub Advanced Security 強在開發平台內的程式碼與相依套件風險；AegisCode 更偏向跨 BU 治理、客戶或稽核交付。它把 SBOM/SCA、CBOM/PQC、Quality Gate、審核紀錄與報告輸出整合成同一套證據流程，適合需要金融合規、採購審查或跨部門彙整的組織。",
+  },
+  {
+    q: "為什麼不是照 per-LOC 或 per-developer 計價？",
+    a: "AegisCode 對外採固定 tier，目標是讓採購可以快速預算化。不過每個方案也揭露隱含 user/month 成本：Starter 約 NT$990/user/月，Professional 約 NT$900/user/月；Enterprise 則以不限使用者、不限 BU 與合規證據包來計價。",
   },
   {
     q: "可以整合 CI/CD 嗎？",

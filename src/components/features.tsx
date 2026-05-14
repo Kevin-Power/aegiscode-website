@@ -35,8 +35,8 @@ const features = [
   },
   {
     icon: Bot,
-    title: "AI 程式碼健檢",
-    desc: "業界首創！針對 AI 生成程式碼的 7 大問題分類分析，提供 S~D 五級評分與改善建議。",
+    title: "SAST-in-the-Loop / VULNFORGE",
+    desc: "把 SAST findings 轉成可審查、可修復、可追蹤的 AI review 工作流，這是 Professional tier 對抗傳統 SAST 的主要差異化。",
   },
   {
     icon: Activity,
@@ -83,11 +83,11 @@ export default function Features() {
         >
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">核心功能</h2>
           <p className="text-gray-400 text-lg">
-            可展示功能 · 對應 金管會 ZTA / PQC / F-ISAC 採購情境
+            可展示功能 · 對應 SonarQube / Snyk / Checkmarx 競品比較與金管會採購情境
           </p>
           <div className="inline-flex items-center gap-2 mt-4 px-4 py-1.5 rounded-full bg-[#F59E0B]/10 border border-[#F59E0B]/30 text-[#FBBF24] text-xs font-medium">
             <span className="w-1.5 h-1.5 rounded-full bg-[#FBBF24] animate-pulse"></span>
-            2026 demo stack: SAST · CBOM/PQC · Evidence Export · Action Queue · License Control
+            2026 demo stack: SAST-in-the-Loop · CBOM/PQC · SBOM/SCA · Evidence Export · Action Queue
           </div>
         </motion.div>
 

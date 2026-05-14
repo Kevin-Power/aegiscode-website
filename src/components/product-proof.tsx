@@ -29,8 +29,8 @@ const proofItems = [
   },
   {
     icon: Server,
-    title: "Production Seed Guard",
-    desc: "正式、展示或客戶環境 seed 必須指定管理員密碼，避免預設帳密流入交付環境。",
+    title: "Production Health & Seed Guard",
+    desc: "正式環境有獨立 liveness probe；展示或客戶環境 seed 必須指定管理員密碼，避免預設帳密流入交付環境。",
   },
 ];
 
@@ -60,9 +60,9 @@ export default function ProductProof() {
             </p>
             <div className="mt-8 grid grid-cols-3 gap-4">
               {[
-                ["214", "tests passing"],
+                ["217", "tests passing"],
                 ["CBOM", "demo ready"],
-                ["503", "clear queue failure"],
+                ["200", "liveness probe"],
               ].map(([value, label]) => (
                 <div key={label} className="rounded-xl border border-[#243447] bg-[#1A2332] p-4">
                   <div className="text-2xl font-bold text-[#14B8A6]">{value}</div>

@@ -26,9 +26,9 @@ const fmtK = (n: number) => {
 
 // Pricing tiers (annual, NT$)
 const PLANS = {
-  starter: { name: "Starter", annual: 120_000, maxUsers: 10 },
-  professional: { name: "Professional", annual: 390_000, maxUsers: 50 },
-  enterprise: { name: "Enterprise", annual: 990_000, maxUsers: 9999 },
+  starter: { name: "Starter", annual: 118_800, maxUsers: 10 },
+  professional: { name: "Professional", annual: 540_000, maxUsers: 50 },
+  enterprise: { name: "Enterprise", annual: 1_800_000, maxUsers: 9999 },
 };
 
 export default function RoiCalculatorPage() {

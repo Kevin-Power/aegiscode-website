@@ -10,7 +10,9 @@ interface Tier {
   id: "STARTER" | "PROFESSIONAL" | "ENTERPRISE";
   name: string;
   priceMonthly: string;
+  priceAnnual: string;
   desc: string;
+  positioning: string;
   highlighted: boolean;
   badge?: string;
   features: string[];
@@ -21,16 +23,20 @@ const tiers: Tier[] = [
   {
     id: "STARTER",
     name: "Starter",
-    priceMonthly: "NT$15,000",
-    desc: "Small dev teams getting started / 適合小型團隊起步",
+    priceMonthly: "NT$9,900",
+    priceAnnual: "NT$118,800 / year",
+    desc: "Land tier for small teams / 小型團隊獲客方案",
+    positioning: "Lower-friction entry point against SonarQube Developer-style budget anchors.",
     highlighted: false,
     features: [
       "Up to 10 users / 最多 10 位使用者",
       "1 Business Unit / 1 個 BU",
       "Core SAST scanning / 基礎 SAST 掃描",
+      "AI code health summary / AI 健檢摘要",
       "10+ language support",
+      "Implied NT$990/user/month",
       "Email support",
-      "14-day free trial",
+      "30-day POC available",
     ],
     cta: "trial",
   },
@@ -38,17 +44,21 @@ const tiers: Tier[] = [
     id: "PROFESSIONAL",
     name: "Professional",
     priceMonthly: "NT$45,000",
-    desc: "Most popular for growing engineering orgs / 最受歡迎",
+    priceAnnual: "NT$540,000 / year",
+    desc: "Mainline buying tier / 主力成交方案",
+    positioning: "Best fit when buyers compare against SonarQube Enterprise but need zh/en workflow and AI review.",
     highlighted: true,
-    badge: "Most Popular",
+    badge: "Recommended",
     features: [
       "Up to 50 users / 最多 50 位使用者",
       "5 Business Units / 5 個 BU",
-      "Full SAST + AI code review",
+      "SAST-in-the-Loop / VULNFORGE AI code review",
+      "CBOM/PQC portfolio view",
       "Bilingual zh/en interface",
       "Quality gates + workflow approval",
+      "Implied NT$900/user/month",
       "Priority technical support",
-      "14-day free trial",
+      "30-day POC available",
     ],
     cta: "trial",
   },
@@ -56,14 +66,17 @@ const tiers: Tier[] = [
     id: "ENTERPRISE",
     name: "Enterprise",
     priceMonthly: "NT$150,000",
+    priceAnnual: "NT$1,800,000 / year",
     desc: "Financial / regulated workloads / 金融業推薦",
+    positioning: "Positioned below large Data Center and Checkmarx-style deployments while adding Taiwan FSC evidence.",
     highlighted: false,
     features: [
       "Unlimited users / 不限使用者",
       "★ CBOM cryptographic asset inventory",
       "★ Native SBOM / SCA",
-      "★ Taiwan FSC compliance reports",
+      "★ Taiwan FSC compliance evidence pack",
       "★ ASPM dashboard integration",
+      "★ Executive action queue",
       "Custom development + SSO",
       "SLA guarantee + dedicated CSM",
     ],
@@ -120,11 +133,10 @@ export default function PricingPage() {
               Pricing / 授權方案
             </h1>
             <p className="text-gray-400 text-lg">
-              Self-service trial · Self-checkout for Starter &amp; Professional ·
-              Enterprise contracted via sales
+              Transparent monthly anchors for procurement. Starter lands, Professional converts, Enterprise expands.
             </p>
             <p className="text-gray-500 text-sm mt-2">
-              月繳價格未稅，年繳享 17% 折扣（聯絡業務開立年約）
+              Prices exclude tax. Annual contracts, PO, security review, and pilot scope are handled through sales.
             </p>
           </div>
 
@@ -162,7 +174,14 @@ export default function PricingPage() {
                     {tier.priceMonthly}
                   </span>
                   <span className="text-gray-500 text-sm"> / month</span>
+                  <div className="mt-1 text-xs text-gray-500">
+                    {tier.priceAnnual}
+                  </div>
                 </div>
+
+                <p className="mb-6 rounded-lg border border-[#243447] bg-[#0D1521]/70 p-3 text-xs leading-relaxed text-gray-400">
+                  {tier.positioning}
+                </p>
 
                 <ul className="space-y-3 mb-8 flex-1">
                   {tier.features.map((f) => (
@@ -218,6 +237,28 @@ export default function PricingPage() {
                 </div>
               </div>
             ))}
+          </div>
+
+          <div className="mt-10 rounded-xl border border-[#8B5CF6]/30 bg-[#8B5CF6]/10 p-6">
+            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+              <div>
+                <h2 className="text-xl font-bold text-white">
+                  Compliance Pack Add-on
+                </h2>
+                <p className="mt-2 max-w-3xl text-sm leading-relaxed text-gray-300">
+                  NT$80,000 / month for SBOM, SCA, ASPM workflow, and audit evidence
+                  without the full Taiwan FSC report package. This bridges 60-80 person
+                  non-financial teams that need compliance posture but are not ready for
+                  Enterprise.
+                </p>
+              </div>
+              <Link
+                href="/#contact"
+                className="shrink-0 rounded-lg border border-[#A78BFA]/50 px-5 py-3 text-center text-sm font-semibold text-[#C4B5FD] hover:bg-[#8B5CF6]/15"
+              >
+                Discuss add-on
+              </Link>
+            </div>
           </div>
 
           <p className="text-center text-xs text-gray-500 mt-12">

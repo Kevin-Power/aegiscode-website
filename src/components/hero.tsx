@@ -20,7 +20,7 @@ export default function Hero() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#243447] bg-[#1A2332]/60 text-xs text-gray-400 mb-8">
             <span className="w-2 h-2 rounded-full bg-[#14B8A6] animate-pulse" />
-            Enterprise Code Quality, CBOM & PQC Governance Platform
+            SAST-in-the-Loop, CBOM & Taiwan Compliance Evidence
           </div>
 
           {/* Main heading */}
@@ -35,7 +35,7 @@ export default function Hero() {
 
           {/* English tagline */}
           <p className="text-base sm:text-lg text-gray-500 mb-10">
-            SAST, AI code health, CBOM/PQC inventory, and executive-ready evidence in one platform.
+            SAST, VULNFORGE AI review, CBOM/PQC inventory, SBOM/SCA, and executive-ready evidence in one platform.
           </p>
         </motion.div>
 

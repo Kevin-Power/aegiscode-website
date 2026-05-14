@@ -7,40 +7,41 @@ import { Check } from "lucide-react";
 const plans = [
   {
     name: "Starter",
-    price: "洽詢",
-    desc: "適合小型團隊起步",
+    price: "NT$9,900/月",
+    desc: "獲客導入方案，適合先 land 的小型團隊",
     highlighted: false,
     features: [
       "最多 10 位使用者",
       "1 個 BU",
-      "基礎 SAST 掃描",
+      "基礎 SAST 掃描與品質報告",
+      "AI code health 摘要",
       "10+ 程式語言支援",
-      "基礎報告",
+      "隱含 NT$990/user/月",
       "Email 支援",
     ],
   },
   {
     name: "Professional",
-    price: "洽詢",
-    desc: "最受歡迎的企業方案",
+    price: "NT$45,000/月",
+    desc: "主力甜蜜點，對齊企業 SAST 預算",
     highlighted: true,
-    badge: "最受歡迎",
+    badge: "主力推薦",
     features: [
       "最多 50 位使用者",
       "5 個 BU",
-      "完整 SAST 掃描",
+      "SAST-in-the-Loop / VULNFORGE AI review",
       "CBOM/PQC portfolio 檢視",
-      "AI 程式碼健檢",
+      "AI 程式碼健檢與修復建議",
       "審核工作流",
       "中英雙語介面",
       "品質閘門",
-      "優先技術支援",
+      "隱含 NT$900/user/月",
     ],
   },
   {
     name: "Enterprise",
-    price: "洽詢",
-    desc: "金融業推薦",
+    price: "NT$150,000/月",
+    desc: "金融業與高法遵組織推薦",
     highlighted: false,
     features: [
       "不限使用者 / 不限 BU",
@@ -57,14 +58,14 @@ const plans = [
 
 const addOns = [
   {
+    name: "Compliance Pack",
+    price: "+ NT$80K/月",
+    desc: "SBOM / SCA / ASPM 與合規證據工作流，不含完整 FSC 報告，承接 60-80 人非金融中型客戶",
+  },
+  {
     name: "Threat Intelligence",
     price: "+ NT$15K/月",
     desc: "每日 KEV / EPSS 同步、Email digest 推送、24h 漏洞優先通知",
-  },
-  {
-    name: "AI 自動修復",
-    price: "+ NT$10K/月",
-    desc: "平台內建 LLM 直接修復，免去複製貼上",
   },
   {
     name: "White-Label",
@@ -87,16 +88,16 @@ export default function Pricing() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            靈活的授權方案
+            對齊市場採購邏輯的授權方案
           </h2>
           <p className="text-gray-400 text-lg mb-6">
-            Choose the plan that fits your organization
+            Starter 用來導入，Professional 用來成交，Enterprise 用 FSC / CBOM 拉開差異。
           </p>
           <a
             href="/roi"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-[#14B8A6]/50 text-[#14B8A6] hover:bg-[#14B8A6]/10 text-sm font-medium transition-colors"
           >
-            🧮 算看看能省多少 → ROI 計算器
+            算看看能省多少 → ROI 計算器
           </a>
         </motion.div>
 
@@ -158,6 +159,17 @@ export default function Pricing() {
             </motion.div>
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.45 }}
+          className="mt-8 rounded-xl border border-[#14B8A6]/25 bg-[#14B8A6]/10 p-5"
+        >
+          <p className="text-sm leading-relaxed text-gray-300">
+            定位策略：Starter 壓低門檻避免被 SonarQube 入門價秒砍；Professional 主打 SAST-in-the-Loop 與繁中治理工作流；Enterprise 以 Taiwan FSC、CBOM/PQC、SBOM/SCA 與主管證據包切入金融業採購。
+          </p>
+        </motion.div>
 
         {/* Add-Ons strip */}
         <motion.div
