@@ -8,9 +8,10 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "AegisCode — SAST-in-the-Loop, CBOM & Taiwan Compliance Platform",
+  metadataBase: new URL("https://aegiscode.yilutek.com"),
+  title: "AegisCode - SAST、CBOM 與台灣合規證據平台",
   description:
-    "AegisCode 企業級 SAST-in-the-Loop、CBOM/PQC、SBOM/SCA 與稽核證據平台。支援 VULNFORGE AI review、主管審核、證據匯出與台灣金融合規 demo。",
+    "AegisCode 為台灣金融與高法遵組織提供 SAST 弱點掃描、CBOM/PQC 加密資產盤點、SBOM/SCA 與可稽核的合規證據包。",
   keywords: [
     "code quality",
     "code security",
@@ -25,14 +26,31 @@ export const metadata: Metadata = {
     "SCA",
     "cryptographic inventory",
     "SonarQube",
-    "企業資安",
-    "程式碼掃描",
+    "程式碼治理",
+    "台灣金融合規",
   ],
   openGraph: {
-    title: "AegisCode — SAST-in-the-Loop, CBOM & Taiwan Compliance Platform",
+    title: "AegisCode - SAST、CBOM 與台灣合規證據平台",
     description:
-      "從程式碼弱點、相依套件到加密資產，一次產出可稽核的治理證據。",
+      "SAST 弱點掃描、CBOM 加密資產盤點、合規證據包，一站完成。",
+    url: "https://aegiscode.yilutek.com",
+    siteName: "AegisCode",
+    images: [
+      {
+        url: "/og-aegiscode.svg",
+        width: 1200,
+        height: 630,
+        alt: "AegisCode - SAST、CBOM 與台灣合規證據平台",
+      },
+    ],
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AegisCode - SAST、CBOM 與台灣合規證據平台",
+    description:
+      "SAST 弱點掃描、CBOM 加密資產盤點、合規證據包，一站完成。",
+    images: ["/og-aegiscode.svg"],
   },
 };
 

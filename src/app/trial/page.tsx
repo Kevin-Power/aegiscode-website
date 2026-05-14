@@ -15,7 +15,7 @@ function TrialForm() {
   const [contactPhone, setContactPhone] = useState("");
   const [tier, setTier] = useState<"STARTER" | "PROFESSIONAL">(initialTier);
   const [teamSize, setTeamSize] = useState("");
-  const [website, setWebsite] = useState(""); // honeypot — must stay empty
+  const [website, setWebsite] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState<
     | null
@@ -72,7 +72,7 @@ function TrialForm() {
     return (
       <div className="max-w-xl mx-auto bg-[#1A2332] border border-[#0D9488] rounded-xl p-8">
         <h2 className="text-2xl font-bold mb-3 text-[#14B8A6]">
-          Trial issued
+          POC 申請已建立
         </h2>
         <p className="text-gray-300 mb-4">{result.instructions}</p>
         <dl className="text-sm grid grid-cols-[120px_1fr] gap-y-2 mb-4">
@@ -88,9 +88,9 @@ function TrialForm() {
         {result.jwt ? (
           <div>
             <p className="text-xs text-yellow-400 mb-2">
-              Email service was not configured — copy this JWT and store it as{" "}
-              <code>AegisCode/config/license.jwt</code> on the machine running
-              AegisCode.
+              Email service 尚未設定，請將下方 JWT 放入{" "}
+              <code>AegisCode/config/license.jwt</code>，或聯絡
+              sales@aegiscode.com 協助啟用。
             </p>
             <pre className="bg-[#0D1521] border border-[#243447] rounded p-3 text-xs text-emerald-300 break-all whitespace-pre-wrap">
               {result.jwt}
@@ -113,21 +113,21 @@ function TrialForm() {
       ) : null}
 
       <Field
-        label="Company name / 公司名稱"
+        label="公司名稱 / Company name"
         value={companyName}
         onChange={setCompanyName}
         required
         maxLength={200}
       />
       <Field
-        label="Work email / 公司 email"
+        label="公司信箱 / Work email"
         type="email"
         value={contactEmail}
         onChange={setContactEmail}
         required
       />
       <Field
-        label="Phone (optional) / 電話"
+        label="聯絡電話 / Phone (optional)"
         type="tel"
         value={contactPhone}
         onChange={setContactPhone}
@@ -135,7 +135,7 @@ function TrialForm() {
 
       <div>
         <label className="block text-sm text-gray-300 mb-1">
-          Tier / 方案
+          方案 / Tier
         </label>
         <select
           value={tier}
@@ -146,19 +146,18 @@ function TrialForm() {
         >
           <option value="STARTER">Starter (NT$9.9K/mo)</option>
           <option value="PROFESSIONAL">
-            Professional (NT$45K/mo) — recommended
+            Professional (NT$45K/mo) - recommended
           </option>
         </select>
       </div>
 
       <Field
-        label="Team size estimate / 團隊規模"
+        label="團隊規模 / Team size estimate"
         value={teamSize}
         onChange={setTeamSize}
-        placeholder="e.g. 25 developers"
+        placeholder="例如：25 developers"
       />
 
-      {/* Honeypot — kept off-screen so bots happily fill it. */}
       <div
         aria-hidden="true"
         style={{ position: "absolute", left: "-9999px" }}
@@ -179,12 +178,11 @@ function TrialForm() {
         disabled={submitting}
         className="w-full py-3 rounded-lg bg-[#0D9488] hover:bg-[#0F766E] text-white font-semibold transition disabled:opacity-50"
       >
-        {submitting ? "Submitting..." : "Start 14-day trial · 開始試用"}
+        {submitting ? "送出中..." : "送出 30 天 POC 申請"}
       </button>
 
       <p className="text-xs text-gray-500 text-center">
-        By submitting, you agree to receive activation emails from AegisCode.
-        We never share your email.
+        送出後，AegisCode 團隊會寄送啟用資訊與 POC 評估建議。我們不會出售或轉交您的聯絡資料。
       </p>
     </form>
   );
@@ -231,10 +229,10 @@ export default function TrialPage() {
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-10">
             <h1 className="text-4xl sm:text-5xl font-bold mb-3 gradient-text glow-teal">
-              Start your free trial
+              預約 CBOM Demo
             </h1>
             <p className="text-gray-400 text-lg">
-              30-day POC · No credit card · Start with Starter or Professional
+              30 天 POC，免信用卡，從 Starter 或 Professional 工作流開始驗證。
             </p>
           </div>
           <Suspense fallback={<div className="text-gray-500">Loading...</div>}>

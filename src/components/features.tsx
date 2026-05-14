@@ -19,7 +19,7 @@ const features = [
     icon: Search,
     title: "SAST 掃描與品質閘門",
     desc: "支援 ZIP / Git 掃描、SonarQube 分析、Quality Gate 與 BU 權限控管，讓上線前風險有一致標準。",
-    badge: "Ready",
+    badge: "Production",
   },
   {
     icon: KeyRound,
@@ -31,30 +31,31 @@ const features = [
     icon: Package,
     title: "原生 SBOM / SCA",
     desc: "規劃解析 npm / pip / Maven / Go 依賴並輸出 CycloneDX 標準，補齊委外與供應鏈安全盤點。",
-    badge: "v4",
+    badge: "Roadmap Q3 2026",
   },
   {
     icon: Bot,
     title: "SAST-in-the-Loop / VULNFORGE",
     desc: "把 SAST findings 轉成可審查、可修復、可追蹤的 AI review 工作流，這是 Professional tier 對抗傳統 SAST 的主要差異化。",
+    badge: "Demo Ready",
   },
   {
     icon: Activity,
     title: "Executive Action Queue",
     desc: "管理儀表板彙整失敗掃描、待審核專案與高風險 CBOM finding，主管一進站就知道先處理什麼。",
-    badge: "Ready",
+    badge: "Production",
   },
   {
     icon: Sliders,
     title: "Multi-dim Quality Gate",
     desc: "依 BU、嚴重度與風險門檻建立政策，讓開發、資安、主管審核使用同一套決策邏輯。",
-    badge: "Ready",
+    badge: "Production",
   },
   {
     icon: ShieldCheck,
     title: "部署安全與授權控管",
     desc: "正式與客戶環境 seed 強制自訂管理員密碼，授權服務支援 phone-home 與硬體指紋綁定。",
-    badge: "Hardened",
+    badge: "Production",
   },
   {
     icon: Building2,
@@ -110,6 +111,8 @@ export default function Features() {
                     <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
                       f.badge === "Demo Ready"
                         ? "bg-[#F59E0B]/15 text-[#FBBF24] border border-[#F59E0B]/30"
+                        : f.badge === "Roadmap Q3 2026"
+                          ? "bg-[#8B5CF6]/15 text-[#C4B5FD] border border-[#8B5CF6]/30"
                         : "bg-[#14B8A6]/15 text-[#14B8A6] border border-[#14B8A6]/30"
                     }`}>
                       {f.badge}

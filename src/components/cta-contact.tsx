@@ -28,11 +28,11 @@ export default function CtaContact() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
             <a
-              href="mailto:kevin@aegiscode.com"
+              href="mailto:sales@aegiscode.com"
               className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-[#0D9488] hover:bg-[#0F766E] text-white font-semibold transition-all duration-200 hover:shadow-[0_0_30px_rgba(13,148,136,0.3)]"
             >
               <Mail size={18} />
-              預約展示
+              預約 CBOM Demo
             </a>
             <a
               href="#product-proof"
@@ -44,7 +44,7 @@ export default function CtaContact() {
           </div>
 
           <p className="text-gray-600 text-sm">
-            Crafted by Kevin Hsieh
+            AegisCode 由宜路科技股份有限公司開發與營運
           </p>
         </motion.div>
       </div>

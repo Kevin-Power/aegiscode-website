@@ -1,23 +1,41 @@
+const legalLinks = [
+  { label: "隱私權政策", href: "/privacy" },
+  { label: "服務條款", href: "/terms" },
+  { label: "資料處理協議 DPA", href: "/dpa" },
+];
+
 export default function Footer() {
   return (
-    <footer className="py-8 bg-[#0A0F18] border-t border-[#243447]/50">
-      <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p className="text-gray-500 text-sm">
-          &copy; 2026 AegisCode by Kevin Hsieh. All rights reserved.
-        </p>
-        <div className="flex items-center gap-6">
-          <a
-            href="#"
-            className="text-gray-500 hover:text-gray-300 text-sm transition-colors"
-          >
-            Privacy
-          </a>
-          <a
-            href="#"
-            className="text-gray-500 hover:text-gray-300 text-sm transition-colors"
-          >
-            Terms
-          </a>
+    <footer className="border-t border-[#243447]/50 bg-[#0A0F18] py-10">
+      <div className="mx-auto flex max-w-6xl flex-col gap-6 px-6 md:flex-row md:items-end md:justify-between">
+        <div className="space-y-2 text-sm text-gray-500">
+          <p className="font-medium text-gray-300">
+            AegisCode 由宜路科技股份有限公司開發與營運
+          </p>
+          <p>Yilutek Co., Ltd.</p>
+          <p>統一編號與登記地址：採購建檔時提供</p>
+          <p>
+            聯絡信箱：
+            <a href="mailto:sales@aegiscode.com" className="text-[#14B8A6] hover:underline">
+              sales@aegiscode.com
+            </a>
+          </p>
+          <p>業務電話：採購建檔時提供</p>
+          <p className="pt-2">
+            © 2026 宜路科技股份有限公司 Yilutek Co., Ltd. All rights reserved.
+          </p>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-5">
+          {legalLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="text-sm text-gray-500 transition-colors hover:text-gray-300"
+            >
+              {link.label}
+            </a>
+          ))}
         </div>
       </div>
     </footer>

@@ -241,7 +241,7 @@ export interface LicenseActivationEmailArgs {
 export function licenseActivationEmail(
   a: LicenseActivationEmailArgs,
 ): { subject: string; html: string; text: string } {
-  const trialBadge = a.isTrial ? " (14-day trial)" : ""
+  const trialBadge = a.isTrial ? " (30-day POC)" : ""
   const subject = `Your AegisCode license${trialBadge} — ${a.licenseId}`
   const tierLine = a.tier ? `Tier: ${a.tier}\n` : ""
   const exp = new Date(a.expiresAt).toUTCString()

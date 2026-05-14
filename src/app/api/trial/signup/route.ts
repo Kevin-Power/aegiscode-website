@@ -20,7 +20,7 @@ interface TrialSignupBody {
 }
 
 const EMAIL_RE = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/
-const TRIAL_DAYS = 14
+const TRIAL_DAYS = 30
 
 function rateLimitResponse(retryAfter: number): Response {
   return Response.json(
@@ -143,7 +143,7 @@ export async function POST(req: NextRequest): Promise<Response> {
     tier,
     isTrial: true,
     instructions:
-      "This is a 14-day evaluation license. Email sales@aegiscode.com before it expires to convert to a paid plan.",
+      "This is a 30-day POC license. Email sales@aegiscode.com before it expires to convert to a paid plan.",
   })
   const mail = await sendEmail({
     to: contactEmail,

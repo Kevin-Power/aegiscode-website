@@ -25,18 +25,18 @@ const tiers: Tier[] = [
     name: "Starter",
     priceMonthly: "NT$9,900",
     priceAnnual: "NT$118,800 / year",
-    desc: "Land tier for small teams / 小型團隊獲客方案",
-    positioning: "Lower-friction entry point against SonarQube Developer-style budget anchors.",
+    desc: "10 人以下開發團隊 / SAST 工作流與 AI 健檢",
+    positioning: "適合用 30 天 POC 驗證基本掃描、AI 健檢與授權流程。",
     highlighted: false,
     features: [
       "Up to 10 users / 最多 10 位使用者",
       "1 Business Unit / 1 個 BU",
-      "Core SAST scanning / 基礎 SAST 掃描",
-      "AI code health summary / AI 健檢摘要",
-      "10+ language support",
-      "Implied NT$990/user/month",
-      "Email support",
-      "30-day POC available",
+      "Core SAST scanning / 核心 SAST 掃描",
+      "AI code health summary / AI 程式碼健檢摘要",
+      "12 language support / 12 種程式語言支援",
+      "約 NT$990 / user / month",
+      "Email support / Email 支援",
+      "30-day POC available / 可申請 30 天 POC",
     ],
     cta: "trial",
   },
@@ -45,20 +45,20 @@ const tiers: Tier[] = [
     name: "Professional",
     priceMonthly: "NT$45,000",
     priceAnnual: "NT$540,000 / year",
-    desc: "Mainline buying tier / 主力成交方案",
-    positioning: "Best fit when buyers compare against SonarQube Enterprise but need zh/en workflow and AI review.",
+    desc: "50 人研發組織 / SAST-in-the-Loop 與繁中治理工作流",
+    positioning: "提供 SAST-in-the-Loop AI 審查、多 BU 控管與主管審核紀錄。",
     highlighted: true,
     badge: "Recommended",
     features: [
       "Up to 50 users / 最多 50 位使用者",
       "5 Business Units / 5 個 BU",
-      "SAST-in-the-Loop / VULNFORGE AI code review",
-      "CBOM/PQC portfolio view",
-      "Bilingual zh/en interface",
-      "Quality gates + workflow approval",
-      "Implied NT$900/user/month",
-      "Priority technical support",
-      "30-day POC available",
+      "SAST-in-the-Loop / VULNFORGE AI 審查",
+      "CBOM/PQC portfolio view / 加密資產盤點",
+      "Bilingual zh/en interface / 中英文介面",
+      "Quality gates + workflow approval / 品質閘門與簽核",
+      "約 NT$900 / user / month",
+      "Priority technical support / 優先技術支援",
+      "30-day POC available / 可申請 30 天 POC",
     ],
     cta: "trial",
   },
@@ -67,18 +67,19 @@ const tiers: Tier[] = [
     name: "Enterprise",
     priceMonthly: "NT$150,000",
     priceAnnual: "NT$1,800,000 / year",
-    desc: "Financial / regulated workloads / 金融業推薦",
-    positioning: "Positioned below large Data Center and Checkmarx-style deployments while adding Taiwan FSC evidence.",
+    desc: "金融業與高法遵組織 / CBOM、SBOM/SCA、稽核證據包",
+    positioning:
+      "提供 CBOM/PQC 加密資產盤點、原生 SBOM/SCA、金管會稽核證據包與專屬客戶經理。",
     highlighted: false,
     features: [
       "Unlimited users / 不限使用者",
-      "★ CBOM cryptographic asset inventory",
-      "★ Native SBOM / SCA",
-      "★ Taiwan FSC compliance evidence pack",
-      "★ ASPM dashboard integration",
-      "★ Executive action queue",
-      "Custom development + SSO",
-      "SLA guarantee + dedicated CSM",
+      "CBOM cryptographic asset inventory / 加密資產盤點",
+      "Native SBOM / SCA / 原生軟體組成分析",
+      "Taiwan FSC compliance evidence pack / 金管會稽核證據包",
+      "ASPM dashboard integration / ASPM 儀表板整合",
+      "Executive action queue / 主管行動佇列",
+      "Custom development + SSO / 客製整合與 SSO",
+      "SLA guarantee + dedicated CSM / SLA 與專屬客戶經理",
     ],
     cta: "contact",
   },
@@ -95,13 +96,11 @@ export default function PricingPage() {
     setError(null);
     const customerEmail =
       typeof window !== "undefined"
-        ? window.prompt("Enter your work email to start checkout:")
+        ? window.prompt("請輸入公司 Email：")
         : null;
     if (!customerEmail) return;
     const companyName =
-      typeof window !== "undefined"
-        ? window.prompt("Company name:")
-        : null;
+      typeof window !== "undefined" ? window.prompt("請輸入公司名稱：") : null;
     if (!companyName) return;
     setBusy(tier);
     try {
@@ -130,13 +129,14 @@ export default function PricingPage() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-14">
             <h1 className="text-4xl sm:text-5xl font-bold mb-3 gradient-text glow-teal">
-              Pricing / 授權方案
+              授權方案 / Pricing
             </h1>
             <p className="text-gray-400 text-lg">
-              Transparent monthly anchors for procurement. Starter lands, Professional converts, Enterprise expands.
+              選擇適合您組織規模的方案。Starter 驗證流程，Professional
+              擴大治理，Enterprise 支援金融業採購與合規交付。
             </p>
             <p className="text-gray-500 text-sm mt-2">
-              Prices exclude tax. Annual contracts, PO, security review, and pilot scope are handled through sales.
+              價格未稅。年度合約、PO、資安審查與 POC 範圍由業務協助。
             </p>
           </div>
 
@@ -205,11 +205,12 @@ export default function PricingPage() {
                           : "border border-[#243447] hover:border-[#0D9488] text-gray-300 hover:text-white"
                       }`}
                     >
-                      Start Free Trial · 開始試用
+                      開始 30 天 POC
                     </a>
                   ) : null}
 
-                  {stripeEnabled && (tier.id === "STARTER" || tier.id === "PROFESSIONAL") ? (
+                  {stripeEnabled &&
+                  (tier.id === "STARTER" || tier.id === "PROFESSIONAL") ? (
                     <button
                       type="button"
                       onClick={() =>
@@ -220,9 +221,7 @@ export default function PricingPage() {
                       disabled={busy === tier.id}
                       className="block text-center py-3 rounded-lg font-medium text-sm border border-[#0D9488]/60 text-[#14B8A6] hover:bg-[#0D9488]/10 transition disabled:opacity-50"
                     >
-                      {busy === tier.id
-                        ? "Redirecting..."
-                        : "Buy now · Stripe checkout"}
+                      {busy === tier.id ? "導向付款中..." : "自助刷卡啟用"}
                     </button>
                   ) : null}
 
@@ -231,7 +230,7 @@ export default function PricingPage() {
                       href="/#contact"
                       className="block text-center py-3 rounded-lg font-medium text-sm bg-[#0D9488] hover:bg-[#0F766E] text-white transition"
                     >
-                      Contact Sales · 聯絡業務
+                      預約 CBOM Demo
                     </Link>
                   ) : null}
                 </div>
@@ -243,30 +242,29 @@ export default function PricingPage() {
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
               <div>
                 <h2 className="text-xl font-bold text-white">
-                  Compliance Pack Add-on
+                  Compliance Pack 加值方案
                 </h2>
                 <p className="mt-2 max-w-3xl text-sm leading-relaxed text-gray-300">
-                  NT$80,000 / month for SBOM, SCA, ASPM workflow, and audit evidence
-                  without the full Taiwan FSC report package. This bridges 60-80 person
-                  non-financial teams that need compliance posture but are not ready for
-                  Enterprise.
+                  NT$80,000 / month，提供 SBOM、SCA、ASPM 工作流與稽核證據，
+                  但不含完整金管會報告包。適合 60-80 人、需要合規治理但尚未進入
+                  Enterprise 採購流程的中型團隊。
                 </p>
               </div>
               <Link
                 href="/#contact"
                 className="shrink-0 rounded-lg border border-[#A78BFA]/50 px-5 py-3 text-center text-sm font-semibold text-[#C4B5FD] hover:bg-[#8B5CF6]/15"
               >
-                Discuss add-on
+                洽詢加值方案
               </Link>
             </div>
           </div>
 
           <p className="text-center text-xs text-gray-500 mt-12">
-            Need invoicing, PO, or annual prepayment? Email{" "}
+            需要報價單、PO 或年度預付？請聯絡{" "}
             <a className="underline" href="mailto:sales@aegiscode.com">
               sales@aegiscode.com
             </a>
-            .
+            。
           </p>
         </div>
       </section>

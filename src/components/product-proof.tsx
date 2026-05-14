@@ -50,7 +50,7 @@ export default function ProductProof() {
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-[#14B8A6]/30 bg-[#14B8A6]/10 px-4 py-1.5 text-xs font-medium text-[#5EEAD4]">
               <ShieldCheck size={14} />
-              Product readiness update
+              產品準備度更新 / Product Readiness
             </div>
             <h2 className="mt-5 text-3xl font-bold tracking-tight sm:text-4xl">
               不是簡報概念，已經有可展示、可驗證、可交付的產品證據。
@@ -62,7 +62,7 @@ export default function ProductProof() {
               {[
                 ["217", "tests passing"],
                 ["CBOM", "demo ready"],
-                ["200", "liveness probe"],
+                ["<100ms", "健康檢查回應"],
               ].map(([value, label]) => (
                 <div key={label} className="rounded-xl border border-[#243447] bg-[#1A2332] p-4">
                   <div className="text-2xl font-bold text-[#14B8A6]">{value}</div>

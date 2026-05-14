@@ -1,74 +1,143 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ArrowRight, CheckCircle2, KeyRound, ShieldCheck } from "lucide-react";
+
+const trustItems = [
+  { label: "研發里程碑", value: "2026 Q1 SAST 整合釋出" },
+  { label: "支援語言", value: "12 種，含 Python、Go、Rust" },
+  { label: "POC 期程", value: "30 天，開放申請中" },
+  { label: "研發團隊", value: "CISSP x PhD 資安研究背景" },
+];
+
+const dashboardRows = [
+  ["Core Banking API", "CBOM/PQC", "High"],
+  ["Mobile Banking", "SAST", "Medium"],
+  ["Payment Gateway", "SBOM/SCA", "Critical"],
+];
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-grid">
-      {/* Radial gradient overlay */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(13,148,136,0.12)_0%,transparent_70%)]" />
+    <section className="relative min-h-screen overflow-hidden bg-[#0D1521] pt-24">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(20,184,166,0.14)_0%,transparent_55%)]" />
+      <div className="absolute inset-0 bg-dots opacity-30" />
 
-      {/* Animated dots/particles */}
-      <div className="absolute inset-0 bg-dots opacity-40" />
-
-      <div className="relative z-10 max-w-4xl mx-auto px-6 text-center pt-20">
+      <div className="relative z-10 mx-auto grid min-h-[calc(100vh-6rem)] max-w-6xl items-center gap-12 px-6 py-16 lg:grid-cols-[0.94fr_1.06fr]">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#243447] bg-[#1A2332]/60 text-xs text-gray-400 mb-8">
-            <span className="w-2 h-2 rounded-full bg-[#14B8A6] animate-pulse" />
-            SAST-in-the-Loop, CBOM & Taiwan Compliance Evidence
+          <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-[#243447] bg-[#1A2332]/80 px-4 py-1.5 text-xs font-medium text-gray-300">
+            <ShieldCheck size={14} className="text-[#14B8A6]" />
+            為台灣金融與高法遵組織打造
           </div>
 
-          {/* Main heading */}
-          <h1 className="text-6xl sm:text-7xl md:text-8xl font-bold tracking-tight mb-6 gradient-text glow-teal">
+          <h1 className="gradient-text glow-teal mb-5 text-6xl font-bold tracking-tight sm:text-7xl md:text-8xl">
             AegisCode
           </h1>
 
-          {/* Chinese tagline */}
-          <p className="text-xl sm:text-2xl md:text-3xl text-gray-200 font-medium mb-3">
-            從程式碼弱點到加密資產，一次產出可稽核的治理證據
+          <p className="mb-5 max-w-2xl text-[19px] font-medium leading-relaxed text-gray-100 sm:text-2xl">
+            SAST 弱點掃描、CBOM 加密資產盤點、合規證據包，一站完成
           </p>
 
-          {/* English tagline */}
-          <p className="text-base sm:text-lg text-gray-500 mb-10">
-            SAST, VULNFORGE AI review, CBOM/PQC inventory, SBOM/SCA, and executive-ready evidence in one platform.
+          <p className="mb-10 max-w-2xl text-base leading-8 text-gray-400 sm:text-lg">
+            從 OWASP Top 10 到 PQC 遷移、從開發風險到金管會稽核，AegisCode
+            把分散的程式碼治理工作收斂成一個可驗證、可審核、可交付的工作流。
           </p>
+
+          <div className="flex flex-col gap-4 sm:flex-row">
+            <a
+              href="/trial"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-8 py-3.5 text-base font-semibold text-[#0D1521] transition hover:bg-gray-200"
+            >
+              預約 CBOM Demo
+              <ArrowRight size={18} />
+            </a>
+            <a
+              href="#product-proof"
+              className="inline-flex items-center justify-center rounded-lg border border-[#243447] px-8 py-3.5 text-base font-medium text-gray-300 transition hover:border-[#14B8A6] hover:text-white"
+            >
+              查看產品實證
+            </a>
+          </div>
         </motion.div>
 
-        {/* CTAs */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          initial={{ opacity: 0, scale: 0.96, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.18, ease: "easeOut" }}
+          className="relative"
         >
-          <a
-            href="/trial"
-            className="px-8 py-3.5 rounded-lg bg-[#0D9488] hover:bg-[#0F766E] text-white font-semibold text-base transition-all duration-200 hover:shadow-[0_0_30px_rgba(13,148,136,0.3)]"
-          >
-            Book CBOM Demo · 預約展示
-          </a>
-          <a
-            href="#product-proof"
-            className="px-8 py-3.5 rounded-lg border border-[#243447] hover:border-[#0D9488] text-gray-300 hover:text-white font-medium text-base transition-all duration-200"
-          >
-            See Product Proof · 查看實證
-          </a>
-        </motion.div>
+          <div className="rounded-2xl border border-[#243447] bg-[#0F1923]/95 p-4 shadow-2xl shadow-black/30">
+            <div className="mb-4 flex items-center justify-between border-b border-[#243447] pb-3">
+              <div>
+                <div className="text-sm font-semibold text-white">CBOM Portfolio</div>
+                <div className="text-xs text-gray-500">Financial governance workspace</div>
+              </div>
+              <div className="rounded-full border border-[#14B8A6]/30 bg-[#14B8A6]/10 px-3 py-1 text-xs text-[#5EEAD4]">
+                Demo Ready
+              </div>
+            </div>
 
-        {/* Bottom fade gradient */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.5, delay: 0.6 }}
-          className="mt-20 flex justify-center"
-        >
-          <div className="w-px h-20 bg-gradient-to-b from-[#0D9488]/50 to-transparent" />
+            <div className="grid gap-3 sm:grid-cols-3">
+              {[
+                ["42", "Open Findings"],
+                ["8", "PQC Risks"],
+                ["3", "Evidence Packs"],
+              ].map(([value, label]) => (
+                <div key={label} className="rounded-lg border border-[#243447] bg-[#1A2332] p-4">
+                  <div className="text-2xl font-bold text-[#14B8A6]">{value}</div>
+                  <div className="mt-1 text-xs text-gray-500">{label}</div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-4 overflow-hidden rounded-lg border border-[#243447]">
+              {dashboardRows.map(([system, type, risk]) => (
+                <div
+                  key={system}
+                  className="grid grid-cols-[1.3fr_0.8fr_0.6fr] items-center gap-3 border-b border-[#243447] bg-[#1A2332]/70 px-4 py-3 last:border-b-0"
+                >
+                  <div className="truncate text-sm text-gray-200">{system}</div>
+                  <div className="text-xs text-gray-500">{type}</div>
+                  <div
+                    className={`rounded-full px-2 py-1 text-center text-[11px] font-semibold ${
+                      risk === "Critical"
+                        ? "bg-red-500/15 text-red-300"
+                        : risk === "High"
+                          ? "bg-amber-500/15 text-amber-300"
+                          : "bg-cyan-500/15 text-cyan-300"
+                    }`}
+                  >
+                    {risk}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-4 flex items-start gap-3 rounded-lg border border-[#14B8A6]/25 bg-[#14B8A6]/10 p-4">
+              <KeyRound className="mt-0.5 h-5 w-5 shrink-0 text-[#14B8A6]" />
+              <p className="text-sm leading-relaxed text-gray-300">
+                RSA、MD5、硬編 IV、短金鑰與 PQC 遷移風險，全部進入同一份可審核證據鏈。
+              </p>
+            </div>
+          </div>
         </motion.div>
+      </div>
+
+      <div className="relative z-10 border-y border-[#243447]/80 bg-[#0A0F18]/90">
+        <div className="mx-auto grid max-w-6xl gap-4 px-6 py-5 sm:grid-cols-2 lg:grid-cols-4">
+          {trustItems.map((item) => (
+            <div key={item.label} className="flex items-start gap-3">
+              <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#14B8A6]" />
+              <div>
+                <div className="text-xs text-gray-500">{item.label}</div>
+                <div className="mt-1 text-sm font-medium text-gray-200">{item.value}</div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

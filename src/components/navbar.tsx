@@ -4,10 +4,10 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { label: "Features", href: "/#features" },
-  { label: "Product Proof", href: "/#product-proof" },
-  { label: "Pricing", href: "/pricing" },
-  { label: "ROI Calculator", href: "/roi" },
+  { label: "功能", href: "/#features" },
+  { label: "產品實證", href: "/#product-proof" },
+  { label: "方案", href: "/pricing" },
+  { label: "ROI", href: "/roi" },
   { label: "FAQ", href: "/#faq" },
 ];
 
@@ -50,7 +50,7 @@ export default function Navbar() {
             href="/trial"
             className="text-sm px-5 py-2 rounded-lg bg-[#0D9488] hover:bg-[#0F766E] text-white font-medium transition-colors duration-200"
           >
-            Start Free Trial
+            預約 CBOM Demo
           </a>
         </div>
 
@@ -83,7 +83,7 @@ export default function Navbar() {
               onClick={() => setMobileOpen(false)}
               className="text-sm px-5 py-2 rounded-lg bg-[#0D9488] hover:bg-[#0F766E] text-white font-medium transition-colors text-center"
             >
-              Start Free Trial
+              預約 CBOM Demo
             </a>
           </div>
         </div>

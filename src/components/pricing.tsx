@@ -8,14 +8,14 @@ const plans = [
   {
     name: "Starter",
     price: "NT$9,900/月",
-    desc: "獲客導入方案，適合先 land 的小型團隊",
+    desc: "適合 10 人以下開發團隊驗證 SAST 工作流與 AI 健檢",
     highlighted: false,
     features: [
       "最多 10 位使用者",
       "1 個 BU",
       "基礎 SAST 掃描與品質報告",
       "AI code health 摘要",
-      "10+ 程式語言支援",
+      "12 種程式語言支援",
       "隱含 NT$990/user/月",
       "Email 支援",
     ],
@@ -23,13 +23,13 @@ const plans = [
   {
     name: "Professional",
     price: "NT$45,000/月",
-    desc: "主力甜蜜點，對齊企業 SAST 預算",
+    desc: "為 50 人研發組織提供繁中治理工作流",
     highlighted: true,
     badge: "主力推薦",
     features: [
       "最多 50 位使用者",
       "5 個 BU",
-      "SAST-in-the-Loop / VULNFORGE AI review",
+      "SAST-in-the-Loop / VULNFORGE AI 審查",
       "CBOM/PQC portfolio 檢視",
       "AI 程式碼健檢與修復建議",
       "審核工作流",
@@ -49,7 +49,7 @@ const plans = [
       "★ 原生 SBOM / SCA",
       "★ 金管會合規與稽核證據包",
       "★ ASPM 整合儀表板",
-      "★ Executive action queue",
+      "★ Executive Action Queue",
       "客製化開發 + SSO",
       "SLA 保證 + 專屬客戶經理",
     ],
@@ -88,16 +88,16 @@ export default function Pricing() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            對齊市場採購邏輯的授權方案
+            選擇適合您組織規模的方案
           </h2>
           <p className="text-gray-400 text-lg mb-6">
-            Starter 用來導入，Professional 用來成交，Enterprise 用 FSC / CBOM 拉開差異。
+            從小型研發團隊到金融業合規採購，AegisCode 提供可驗證、可審核、可交付的治理方案。
           </p>
           <a
             href="/roi"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-[#14B8A6]/50 text-[#14B8A6] hover:bg-[#14B8A6]/10 text-sm font-medium transition-colors"
           >
-            算看看能省多少 → ROI 計算器
+            下載 ROI 計算範本
           </a>
         </motion.div>
 
@@ -147,14 +147,14 @@ export default function Pricing() {
               </ul>
 
               <a
-                href="#contact"
+                href={plan.name === "Starter" ? "/trial?tier=STARTER" : "/trial"}
                 className={`block text-center py-3 rounded-lg font-medium text-sm transition-all duration-200 ${
                   plan.highlighted
                     ? "bg-[#0D9488] hover:bg-[#0F766E] text-white"
                     : "border border-[#243447] hover:border-[#0D9488] text-gray-300 hover:text-white"
                 }`}
               >
-                聯絡我們
+                {plan.name === "Starter" ? "開始 30 天 POC" : "預約 CBOM Demo"}
               </a>
             </motion.div>
           ))}
@@ -167,7 +167,7 @@ export default function Pricing() {
           className="mt-8 rounded-xl border border-[#14B8A6]/25 bg-[#14B8A6]/10 p-5"
         >
           <p className="text-sm leading-relaxed text-gray-300">
-            定位策略：Starter 壓低門檻避免被 SonarQube 入門價秒砍；Professional 主打 SAST-in-the-Loop 與繁中治理工作流；Enterprise 以 Taiwan FSC、CBOM/PQC、SBOM/SCA 與主管證據包切入金融業採購。
+            Starter 驗證 SAST 工作流與 AI 健檢；Professional 提供 SAST-in-the-Loop AI 審查、多 BU 控管與繁中治理工作流；Enterprise 提供 CBOM/PQC 加密資產盤點、原生 SBOM/SCA、金管會稽核證據包與專屬客戶經理。
           </p>
         </motion.div>
 

@@ -1,0 +1,16 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#0D1521"/>
+  <rect x="72" y="72" width="1056" height="486" rx="32" fill="#111C2B" stroke="#243447" stroke-width="2"/>
+  <circle cx="964" cy="160" r="148" fill="#0D9488" opacity=".18"/>
+  <circle cx="1018" cy="430" r="104" fill="#8B5CF6" opacity=".14"/>
+  <path d="M168 178c0-10 8-18 18-18h74c10 0 18 8 18 18v58c0 72-42 137-107 166-6 3-13 3-19 0-65-29-107-94-107-166v-58c0-10 8-18 18-18h74l31-28 31 28z" transform="translate(40 30)" fill="#0D9488"/>
+  <path d="M196 244l38 38 78-86" stroke="white" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="344" y="210" fill="#5EEAD4" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="700">為台灣金融與高法遵組織打造</text>
+  <text x="344" y="306" fill="white" font-family="Inter, Arial, sans-serif" font-size="86" font-weight="800">AegisCode</text>
+  <text x="344" y="368" fill="#E5E7EB" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="600">SAST 弱點掃描、CBOM 加密資產盤點、合規證據包</text>
+  <text x="344" y="428" fill="#94A3B8" font-family="Inter, Arial, sans-serif" font-size="24">一站完成可驗證、可審核、可交付的程式碼治理工作流</text>
+  <rect x="344" y="468" width="190" height="48" rx="12" fill="white"/>
+  <text x="376" y="500" fill="#0D1521" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700">預約 CBOM Demo</text>
+  <rect x="558" y="468" width="196" height="48" rx="12" fill="#0D1521" stroke="#334155"/>
+  <text x="590" y="500" fill="#E2E8F0" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700">查看產品實證</text>
+</svg>
