@@ -34,6 +34,8 @@ const painPoints = [
   "SBOM、CBOM、PQC、Quality Gate 與稽核附件散落在不同工具",
   "多 BU 權限、主管審核與證據留存難以符合金融業採購要求",
   "委外與內部專案都需要同一套可交付、可追溯的治理語言",
+  "外部曝險每月不知道有沒有下降，SecurityScorecard 或 BitSight 評分上下，卻沒有可呈交董事會的趨勢報告",
+  "內部弱點、外部評分與供應鏈各自為政，管理層想看一份「整體資安狀態」永遠拼不出來",
 ];
 
 export default function PainPoints() {
