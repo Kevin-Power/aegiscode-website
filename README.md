@@ -13,6 +13,16 @@ The check fails on missing durable storage (`KV_REST_API_URL` plus
 production site URL, and email delivery. Use
 `npm run readiness:report` when you want a non-blocking report for local review.
 
+After a production deploy, run:
+
+```bash
+npm run smoke:production
+```
+
+The smoke checks public pages for hidden pricing/branding regressions,
+verifies `/api/health`, and confirms self-service checkout is still paused by
+default.
+
 Self-service checkout is intentionally ignored unless
 `SELF_SERVICE_CHECKOUT_ENABLED` or `NEXT_PUBLIC_SELF_SERVICE_CHECKOUT_ENABLED`
 is enabled.
