@@ -92,10 +92,11 @@ function TrialForm() {
   }
 
   if (result?.ok) {
+    const isAdvisory = !result.licenseId;
     return (
       <div className="max-w-xl mx-auto bg-[#1A2332] border border-[#0D9488] rounded-xl p-8">
         <h2 className="text-2xl font-bold mb-3 text-[#14B8A6]">
-          POC 申請已建立
+          {isAdvisory ? "諮詢申請已建立" : "POC 申請已建立"}
         </h2>
         <p className="text-gray-300 mb-4">{result.instructions}</p>
         {result.licenseId && result.expiresAt ? (
@@ -111,14 +112,24 @@ function TrialForm() {
           </dl>
         ) : (
           <div className="mb-4 rounded-lg border border-[#243447] bg-[#0D1521]/70 p-4 text-sm text-gray-300">
-            我們已收到申請，顧問會先確認 Demo 情境、部署條件與資料留存需求，再提供評估授權。
+            {isAdvisory
+              ? "我們已收到您的需求。在此期間,您可以先在資源中心下載服務說明書與 CISO 月報 sample,讓內部相關人員先建立共識。"
+              : "我們已收到申請,顧問會先確認 Demo 情境、部署條件與資料留存需求,再提供評估授權。"}
           </div>
         )}
+        {isAdvisory ? (
+          <a
+            href="/resources"
+            className="inline-flex items-center justify-center rounded-lg bg-[#0D9488] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#0F766E]"
+          >
+            順手下載服務說明書 →
+          </a>
+        ) : null}
         {result.jwt ? (
-          <div>
+          <div className="mt-4">
             <p className="text-xs text-yellow-400 mb-2">
-              Email service 尚未設定，請將下方 JWT 放入{" "}
-              <code>AegisCode/config/license.jwt</code>，或聯絡
+              Email service 尚未設定,請將下方 JWT 放入{" "}
+              <code>AegisCode/config/license.jwt</code>,或聯絡
               sales@aegiscode.com 協助啟用。
             </p>
             <pre className="bg-[#0D1521] border border-[#243447] rounded p-3 text-xs text-emerald-300 break-all whitespace-pre-wrap">
