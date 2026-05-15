@@ -30,11 +30,12 @@ export function GET(): NextResponse {
       storage: {
         backend: storage.backend,
         durable: durableStorage,
+        requiredEnv: ["KV_REST_API_URL", "KV_REST_API_TOKEN"],
       },
       warnings: durableStorage
         ? []
         : [
-            "License records, rate limits, and audit logs are using in-memory storage. Configure Vercel KV before production sales usage.",
+            "License records, rate limits, and audit logs are using in-memory storage. Configure both KV_REST_API_URL and KV_REST_API_TOKEN before production sales usage.",
           ],
     },
     {

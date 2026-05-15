@@ -4,13 +4,14 @@
 // counters and audit-log entries survive serverless cold starts and are
 // shared across concurrent function invocations.
 //
-// In local dev — when no `KV_URL` / `KV_REST_API_URL` is set — we fall back
+// In local dev ??when no complete `KV_REST_API_URL` / `KV_REST_API_TOKEN`
+// pair is set ??we fall back
 // to a process-local in-memory implementation that mirrors the Redis-style
 // API (hashes, sorted sets, lists, TTLs). That keeps `npm run dev` and the
 // build green on a fresh checkout, with a one-time warning so it is obvious
 // the data will not persist.
 //
-// Calling code only ever depends on the `Storage` interface — swapping the
+// Calling code only ever depends on the `Storage` interface ??swapping the
 // backend stays a one-file change.
 
 import { kv } from "@vercel/kv"
@@ -62,7 +63,7 @@ function isKvConfigured(): boolean {
 
 function createKvStorage(): Storage {
   // @vercel/kv accepts most Redis-style ops directly. Some methods (zadd,
-  // hset) take object-shaped args — we adapt at the boundary so the rest
+  // hset) take object-shaped args ??we adapt at the boundary so the rest
   // of the codebase only ever sees the simple positional form.
   return {
     backend: "kv",
@@ -204,7 +205,7 @@ function createMemoryStorage(): Storage {
   }
 
   function clone<T>(v: T): T {
-    // Cheap deep clone — license records are small and JSON-safe.
+    // Cheap deep clone ??license records are small and JSON-safe.
     if (v === null || v === undefined) return v
     return JSON.parse(JSON.stringify(v)) as T
   }
@@ -310,7 +311,7 @@ function createMemoryStorage(): Storage {
       return lists.get(key)?.length ?? 0
     },
     pipeline(): StoragePipeline {
-      // Naive sequential implementation. Fine for dev — we never rely on
+      // Naive sequential implementation. Fine for dev ??we never rely on
       // pipeline() for atomicity, only for round-trip reduction in prod.
       const ops: Array<() => Promise<unknown>> = []
       const self = createMemoryStorageRefThunk()
@@ -375,7 +376,7 @@ function warnNoKvOnce(): void {
   if (warnedNoKv) return
   warnedNoKv = true
   logger.warn(
-    "Using in-memory storage — data will not persist across cold starts. Set KV_URL for production.",
+    "Using in-memory storage - data will not persist across cold starts. Set KV_REST_API_URL and KV_REST_API_TOKEN for production.",
     { component: "storage" },
   )
 }
@@ -389,7 +390,7 @@ function createStorage(): Storage {
 }
 
 // We need a singleton handle for the in-memory pipeline thunk above. The
-// module-level `storage` export below is that singleton — we resolve the
+// module-level `storage` export below is that singleton ??we resolve the
 // circular reference by holding a `let` binding and assigning it before
 // any call site can reach it (top-level `createStorage()`).
 let memorySingleton: Storage

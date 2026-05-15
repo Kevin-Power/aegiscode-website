@@ -99,10 +99,9 @@ to issue and revoke licenses.
 | Var                     | Required | Purpose                                                                                          |
 |-------------------------|----------|--------------------------------------------------------------------------------------------------|
 | `ADMIN_TOKEN`           | yes      | Shared secret for the admin API and `/admin/licenses` UI. Sent as `x-admin-token` header.        |
-| `KV_URL`                | prod     | Vercel KV (Redis) connection URL. Backs the license registry, rate-limit counters and audit log. |
-| `KV_REST_API_URL`       | prod     | Auto-populated when you connect a KV/Upstash store in the Vercel dashboard.                       |
-| `KV_REST_API_TOKEN`     | prod     | Auto-populated by the Vercel KV integration.                                                      |
-| `KV_REST_API_READ_ONLY_TOKEN` | prod | Auto-populated by the Vercel KV integration.                                                  |
+| `KV_REST_API_URL`       | prod     | Required Vercel KV / Upstash REST endpoint. Backs the license registry, rate-limit counters and audit log. |
+| `KV_REST_API_TOKEN`     | prod     | Required Vercel KV / Upstash REST token. Must be configured with `KV_REST_API_URL`.              |
+| `KV_REST_API_READ_ONLY_TOKEN` | optional | Auto-populated by the Vercel KV integration; not used by the server write paths.            |
 | `LICENSE_PUBLIC_KEY`    | recommended | RSA PEM public key (RS256) used to verify the `licenseKey` JWT. See "JWT verification" below. |
 | `LICENSE_REGISTRY_JSON` | optional | One-time seed for migrating the legacy env-var registry into KV. See "Migration" below.          |
 
@@ -121,7 +120,7 @@ LICENSE_PUBLIC_KEY="-----BEGIN PUBLIC KEY-----\nMIIBIjANBgk...\n...\n-----END PU
 
 The validate route un-escapes `\n` back to real newlines at startup. If
 `LICENSE_PUBLIC_KEY` is unset the server logs a warning ONCE per cold start
-and skips the JWT signature check — the registry lookup still runs, so
+and skips the JWT signature check ??the registry lookup still runs, so
 revocations remain enforced (graceful degradation).
 
 ### Endpoints
@@ -145,14 +144,14 @@ On first visit it prompts for the admin token and stores it in
 The license registry, rate-limit counters and audit log are all backed by
 Vercel KV in production. Set up:
 
-1. In the Vercel dashboard for the project: **Storage → Create Database →
-   KV** (or **Marketplace → Upstash Redis** if KV is not available — the
+1. In the Vercel dashboard for the project: **Storage ??Create Database ??
+   KV** (or **Marketplace ??Upstash Redis** if KV is not available ??the
    integration exposes the same `KV_*` env vars and is API-compatible with
    `@vercel/kv`).
 2. Click **Connect to project** and select all three environments
    (Production / Preview / Development if you want preview deploys to
    share state). Vercel writes the four `KV_*` env vars into the project.
-3. Redeploy. The app picks KV up automatically — no code changes.
+3. Redeploy. The app picks KV up automatically ??no code changes.
 
 Storage key scheme:
 
@@ -165,25 +164,22 @@ Storage key scheme:
 
 #### Local dev
 
-Without `KV_URL` set, `src/lib/storage.ts` falls back to a process-local
+Without both `KV_REST_API_URL` and `KV_REST_API_TOKEN` set,
+`src/lib/storage.ts` falls back to a process-local
 in-memory backend that mirrors the same Redis-style API. The app logs:
 
 ```
-[storage] Using in-memory storage — data will not persist across cold starts. Set KV_URL for production.
+[storage] Using in-memory storage ??data will not persist across cold starts. Set KV_REST_API_URL and KV_REST_API_TOKEN for production.
 ```
 
-once per process. This is fine for `next dev` and the build — but be
+once per process. This is fine for `next dev` and the build ??but be
 aware that revocations, rate-limit state and audit entries vanish when the
-dev server restarts (and on every Vercel cold start if you forget to set
-`KV_URL` in production).
+dev server restarts (and on every Vercel cold start if you forget to set the
+full KV REST URL/token pair in production).
 
-A persistent dev option: point `KV_URL` at a local Redis container:
-
-```bash
-docker run -p 6379:6379 redis:7
-# .env.local:
-# KV_URL=redis://localhost:6379
-```
+A persistent dev option is to provision a development Vercel KV / Upstash
+database and place its `KV_REST_API_URL` plus `KV_REST_API_TOKEN` in
+`.env.local`.
 
 #### Migration from `LICENSE_REGISTRY_JSON`
 
@@ -192,7 +188,7 @@ registry can migrate without touching their JSON: keep the env var in
 place AND connect a KV store. On the first request after deploy, the
 license-store seeds KV from `LICENSE_REGISTRY_JSON` (only when KV is
 empty). After confirming the data shows up in `/admin/licenses`, you can
-remove `LICENSE_REGISTRY_JSON` from the deployment — KV is now the source
+remove `LICENSE_REGISTRY_JSON` from the deployment ??KV is now the source
 of truth.
 
 ### Register a license
@@ -216,7 +212,7 @@ curl -X POST https://<host>/api/license/validate \
   -H "Content-Type: application/json" \
   -d '{
     "licenseId": "AC-2026-001",
-    "hardwareFingerprint": "abc123…"
+    "hardwareFingerprint": "abc123??
   }'
 ```
 
@@ -240,7 +236,7 @@ curl -X POST https://<host>/api/admin/licenses/AC-2026-001/revoke \
 ```
 
 After revocation the validate endpoint returns
-`{ valid: false, revoked: true, message: "License revoked: …" }` and the
+`{ valid: false, revoked: true, message: "License revoked: ?? }` and the
 client transitions into degraded mode within one phone-home cycle.
 
 ### Security hardening
@@ -265,8 +261,8 @@ Excess requests get HTTP `429 Rate limit exceeded` with a `Retry-After`
 header. Caller IP is read from `x-forwarded-for` (first hop), fallback
 `x-real-ip`, fallback `"unknown"`.
 
-When `KV_URL` is set the counter is shared across cold starts and
-concurrent function instances — i.e. a real global limit. Without KV the
+When Vercel KV REST credentials are set the counter is shared across cold starts and
+concurrent function instances ??i.e. a real global limit. Without KV the
 limiter falls back to the in-memory backend, which is process-local and
 adequate only as an abuse deterrent.
 
@@ -312,16 +308,16 @@ it and adding it just bloats every payload).
 `/api/license/validate` and `/api/license/heartbeat` reject malformed
 input with HTTP 400:
 
-- `licenseId` — required string, max 100 chars, regex `^[A-Za-z0-9_-]+$`
-- `licenseKey` — optional string, max 10000 chars
-- `hardwareFingerprint` — optional string, max 200 chars
+- `licenseId` ??required string, max 100 chars, regex `^[A-Za-z0-9_-]+$`
+- `licenseKey` ??optional string, max 10000 chars
+- `hardwareFingerprint` ??optional string, max 200 chars
 
 #### Audit log
 
 Sensitive admin actions (`REGISTER`, `REVOKE`, plus future
 `TRIAL_SIGNUP` / `STRIPE_CHECKOUT`) append to a Redis list at
 `audit:log` (LTRIMmed to the most recent 10000 entries). View them in
-the admin UI at `/admin/audit-log` — token-gated, filterable by action,
+the admin UI at `/admin/audit-log` ??token-gated, filterable by action,
 paginated 100 at a time.
 
 Entry schema:
@@ -333,7 +329,7 @@ Entry schema:
 Without KV configured, the audit log falls back to (a) `data/audit-log.json`
 on writable hosts, (b) `[audit] {...}` console one-liners on read-only
 hosts. The `/admin/audit-log` UI still works against an in-memory backend
-in dev — it just won't survive a server restart.
+in dev ??it just won't survive a server restart.
 
 ---
 
@@ -364,7 +360,7 @@ Rate limits: trial signup `3/hour/IP`; checkout `10/hour/IP`.
 
 ### Enabling trial signups
 
-The website does **not** hold the master license signing key — that key
+The website does **not** hold the master license signing key ??that key
 stays on the air-gapped issuance laptop. To enable self-service trials,
 generate a separate **trial-grade** RSA keypair and paste the private key
 into the deployment:
@@ -383,26 +379,26 @@ vercel env add LICENSE_PUBLIC_KEY  # paste trial-public-key.pem
 ```
 
 If `LICENSE_SIGNING_PRIVATE_KEY` is unset, the trial signup endpoint
-returns HTTP 503 with `"Trial signup not configured — please contact
+returns HTTP 503 with `"Trial signup not configured ??please contact
 sales@aegiscode.com."` so the flow fails closed.
 
 ### Configuring Stripe
 
-1. **Create products** in the Stripe dashboard (`Products → Add product`),
+1. **Create products** in the Stripe dashboard (`Products ??Add product`),
    one per tier. For each, create a **monthly recurring price** at the
    right amount (e.g. NT$15,000/mo for Starter, NT$45,000/mo for
-   Professional). Copy the `price_…` IDs.
+   Professional). Copy the `price_?�` IDs.
 
 2. **Set env vars** on Vercel:
 
    ```
-   STRIPE_SECRET_KEY=sk_live_…
-   STRIPE_PRICE_ID_STARTER=price_…
-   STRIPE_PRICE_ID_PROFESSIONAL=price_…
+   STRIPE_SECRET_KEY=sk_live_??
+   STRIPE_PRICE_ID_STARTER=price_??
+   STRIPE_PRICE_ID_PROFESSIONAL=price_??
    NEXT_PUBLIC_STRIPE_ENABLED=1
    ```
 
-3. **Register the webhook** in Stripe Dashboard → Developers → Webhooks:
+3. **Register the webhook** in Stripe Dashboard ??Developers ??Webhooks:
    - Endpoint URL: `https://aegiscode.com/api/stripe/webhook`
    - Events: `checkout.session.completed`, `customer.subscription.deleted`,
      `invoice.payment_failed`
@@ -417,14 +413,14 @@ The webhook handler:
 | `invoice.payment_failed`           | Annotates the license; ops gets a `STRIPE_PAYMENT_FAILED` notify-ops ping. No auto-revoke (Stripe retries). |
 
 If `LICENSE_SIGNING_PRIVATE_KEY` is unset when a checkout completes, the
-license is **not** auto-issued — ops gets a `STRIPE_CHECKOUT` notification
+license is **not** auto-issued ??ops gets a `STRIPE_CHECKOUT` notification
 flagged `MANUAL ACTION REQUIRED` so the master-key laptop can mint it.
 
 ### Email backend
 
-Resolution order: `RESEND_API_KEY` → SMTP (`SMTP_HOST` / `SMTP_USER` /
-`SMTP_PASS`) → console fallback. The console fallback always reports
-"ok" so the API flow doesn't fail closed in dev — make sure ops watches
+Resolution order: `RESEND_API_KEY` ??SMTP (`SMTP_HOST` / `SMTP_USER` /
+`SMTP_PASS`) ??console fallback. The console fallback always reports
+"ok" so the API flow doesn't fail closed in dev ??make sure ops watches
 the function logs until a real backend is configured.
 
 ### Pricing tiers
@@ -432,7 +428,7 @@ the function logs until a real backend is configured.
 The default tier amounts in `src/app/pricing/page.tsx` are the **public
 list price**. To change, edit the `priceMonthly` strings; the actual
 Stripe charge comes from `STRIPE_PRICE_ID_*`. Keep page copy and Stripe
-prices in sync manually — the page does not call Stripe at render time
+prices in sync manually ??the page does not call Stripe at render time
 on purpose (avoids exposing price IDs in the client bundle).
 
 ### Sample curl: trial signup

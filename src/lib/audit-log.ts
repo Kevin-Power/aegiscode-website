@@ -1,6 +1,6 @@
 // Append-only audit log for sensitive admin actions.
 //
-// In production with `KV_URL` configured we LPUSH each entry into a Redis
+// In production with Vercel KV credentials configured we LPUSH each entry into a Redis
 // list (`audit:log`) and LTRIM to the most recent 10000 entries — durable
 // across cold starts, query-able from the admin UI.
 //

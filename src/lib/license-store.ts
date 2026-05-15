@@ -1,6 +1,6 @@
 // License record store, backed by the unified `storage` abstraction.
 //
-// In production with `KV_URL` configured this writes through to Vercel KV
+// In production with Vercel KV credentials configured this writes through to Vercel KV
 // (Redis), so revocations and heartbeat updates persist across cold starts
 // and concurrent function invocations. Without KV configured we fall back
 // to an in-memory implementation that survives only inside a single Node

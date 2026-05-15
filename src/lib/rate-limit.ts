@@ -1,6 +1,6 @@
 // Fixed-window IP rate limiter, backed by the unified `storage` layer.
 //
-// In production with `KV_URL` configured this uses Redis-style INCR + EXPIRE
+// In production with Vercel KV credentials configured this uses Redis-style INCR + EXPIRE
 // against Vercel KV, so the window counter is shared across cold starts and
 // concurrent function invocations — i.e. a real global limit.
 //
