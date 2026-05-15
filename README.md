@@ -384,10 +384,10 @@ sales@aegiscode.com."` so the flow fails closed.
 
 ### Configuring Stripe
 
-1. **Create products** in the Stripe dashboard (`Products ??Add product`),
-   one per tier. For each, create a **monthly recurring price** at the
-   right amount (e.g. NT$15,000/mo for Starter, NT$45,000/mo for
-   Professional). Copy the `price_?¦` IDs.
+1. **Create products** in the Stripe dashboard (`Products > Add product`),
+   one per tier. For each, create a **monthly recurring price** using the
+   internal quote sheet. Do not publish tier prices in this repository.
+   Copy the `price_` IDs.
 
 2. **Set env vars** on Vercel:
 
