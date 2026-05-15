@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "guard:public-branding": "node scripts/check-public-branding.mjs",
     "guard:public-pricing": "node scripts/check-public-pricing-hidden.mjs",
     "readiness": "node scripts/check-production-readiness.mjs",
     "readiness:report": "node scripts/check-production-readiness.mjs --report"

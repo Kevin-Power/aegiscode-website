@@ -28,6 +28,9 @@ jobs:
       - name: Guard public pricing
         run: npm run guard:public-pricing
 
+      - name: Guard public branding
+        run: npm run guard:public-branding
+
       - name: Build
         run: npm run build
 
