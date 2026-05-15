@@ -11,7 +11,8 @@
     "guard:public-pricing": "node scripts/check-public-pricing-hidden.mjs",
     "readiness": "node scripts/check-production-readiness.mjs",
     "readiness:report": "node scripts/check-production-readiness.mjs --report",
-    "smoke:production": "node scripts/smoke-production.mjs"
+    "smoke:production": "node scripts/smoke-production.mjs",
+    "test:lib": "node --import tsx --test tests/**/*.test.mjs"
   },
   "dependencies": {
     "@sentry/nextjs": "^10.52.0",
@@ -33,6 +34,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.3",
     "tailwindcss": "^4",
+    "tsx": "^4.22.0",
     "typescript": "^5"
   }
 }
