@@ -17,7 +17,7 @@ const signals = [
   {
     icon: Radar,
     label: "外部曝險評分",
-    text: "可匯入 SecurityScorecard、BitSight 或客戶既有 EASM 評分，補齊外部可觀測風險。",
+    text: "可搭配 SecurityScorecard、BitSight 或客戶既有 EASM 評分，補齊外部可觀測風險。",
   },
   {
     icon: Building2,
@@ -27,7 +27,7 @@ const signals = [
   {
     icon: FileCheck2,
     label: "主管證據包",
-    text: "把 SAST、SBOM、CBOM 與外部 rating 放進同一份治理摘要，方便稽核與董事會溝通。",
+    text: "把 SAST、SBOM、CBOM 與外部評分放進同一份治理摘要，方便稽核與董事會溝通。",
   },
 ];
 
@@ -62,7 +62,7 @@ export default function ExternalRisk() {
           <div>
             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-sky-400/25 bg-sky-400/10 px-4 py-1.5 text-xs font-medium text-sky-200">
               <Globe2 className="h-4 w-4" />
-              外部風險資料整合 / Connector-ready
+              外部風險治理包 / Sales-ready
             </div>
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
               從程式碼治理，延伸到外部曝險與供應商風險。
@@ -95,7 +95,7 @@ export default function ExternalRisk() {
                 href="/external-risk"
                 className="inline-flex items-center gap-2 rounded-lg border border-sky-400/30 px-5 py-3 text-sm font-semibold text-sky-100 transition hover:border-sky-300 hover:bg-sky-400/10"
               >
-                查看外部風險整合規格
+                查看外部風險銷售方案
                 <ArrowUpRight className="h-4 w-4" />
               </Link>
             </div>
@@ -112,7 +112,7 @@ export default function ExternalRisk() {
                 <p className="text-xs uppercase tracking-[0.18em] text-gray-500">
                   Executive Risk View
                 </p>
-                <h3 className="mt-1 text-xl font-bold text-white">AegisCode Evidence Pack</h3>
+                <h3 className="mt-1 text-xl font-bold text-white">AegisCode Governance Pack</h3>
               </div>
               <div className="rounded-lg border border-[#14B8A6]/30 bg-[#14B8A6]/10 px-3 py-2 text-xs font-semibold text-[#5EEAD4]">
                 POC-ready
@@ -155,7 +155,7 @@ export default function ExternalRisk() {
             <div className="mt-5 flex items-start gap-3 rounded-xl border border-sky-400/20 bg-sky-400/10 p-4">
               <ShieldAlert className="mt-0.5 h-5 w-5 shrink-0 text-sky-200" />
               <p className="text-sm leading-6 text-sky-100">
-                Connector-ready 表示可於 Enterprise POC 匯入 API 或 CSV 資料；正式串接範圍依客戶授權、資料來源與合約確認。
+                對外只呈現治理成果、交付範圍與導入條件；正式整合方式、資料留存與服務邊界會在 Enterprise POC 與合約階段確認。
               </p>
             </div>
 

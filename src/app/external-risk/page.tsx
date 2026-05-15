@@ -14,34 +14,30 @@ import Footer from "@/components/footer";
 const sources = [
   {
     title: "Security rating",
-    desc: "SecurityScorecard、BitSight 或客戶既有評分資料，用來補足 outside-in 風險視角。",
+    desc: "可搭配 SecurityScorecard、BitSight 或客戶既有評分，補足外部可觀測風險視角。",
   },
   {
     title: "Attack surface",
-    desc: "網域、子網域、憑證、暴露服務與 EASM findings，對應外部可觀測曝險。",
+    desc: "將網域、憑證、暴露服務與 EASM 訊號收斂成主管可讀的曝險摘要。",
   },
   {
     title: "Third-party context",
-    desc: "供應商、BU、系統、repo 與資料處理角色，建立採購與稽核可追蹤關聯。",
+    desc: "把供應商、BU、系統與責任窗口放進同一個治理脈絡，方便採購與稽核追蹤。",
   },
 ];
 
-const fields = [
-  ["vendor_name", "供應商或外部服務名稱"],
-  ["domain", "主要網域或受評估資產"],
-  ["business_unit", "對應 BU 或系統 owner"],
-  ["score_source", "SecurityScorecard / BitSight / EASM / CSV"],
-  ["rating", "外部評分或風險等級"],
-  ["factor", "弱點、DNS、patching、application security 等 factor"],
-  ["repo_or_system", "對應內部 repo、服務或系統代號"],
-  ["evidence_owner", "負責補件或回覆稽核的人員角色"],
+const salesPlays = [
+  ["內外風險同頁", "把內部程式碼弱點、SBOM/SCA、CBOM 與外部曝險摘要放在同一個主管視圖。"],
+  ["供應商治理包", "協助業務說清楚第三方風險如何被追蹤、分派、修復與留痕。"],
+  ["金融稽核證據包", "把技術 findings 轉成可交付的治理摘要、責任歸屬與改善狀態。"],
+  ["30 天 POC 劇本", "用既有評分資料與 AegisCode 掃描結果，快速做出可展示的管理報表。"],
 ];
 
 const deliverables = [
-  "外部評分與 AegisCode SAST findings 的同頁摘要",
-  "供應商 domain 到 BU / system / repo 的 mapping table",
-  "CBOM、SBOM/SCA、外部 rating 的主管證據包草稿",
-  "POC 後可交付的 CSV / API connector 欄位規格",
+  "主管版風險總覽：外部曝險、程式碼弱點、供應鏈與加密資產風險",
+  "供應商治理摘要：責任歸屬、風險等級、修復狀態與稽核留痕",
+  "AegisCode Evidence Pack：可用於 POC、內部簡報與採購評估",
+  "整合評估報告：說明可串接資料來源、授權需求與正式導入範圍",
 ];
 
 export const metadata = {
@@ -60,13 +56,13 @@ export default function ExternalRiskPage() {
             <div>
               <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-sky-400/25 bg-sky-400/10 px-4 py-1.5 text-xs font-medium text-sky-200">
                 <Globe2 className="h-4 w-4" />
-                Enterprise connector-ready
+                Enterprise sales-ready
               </div>
               <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-                把外部風險評分，接進 AegisCode 治理證據包。
+                把外部風險評分，變成 AegisCode 可銷售的治理證據包。
               </h1>
               <p className="mt-5 max-w-2xl text-lg leading-8 text-gray-400">
-                SecurityScorecard、BitSight 或 EASM 工具擅長從外部看企業與供應商風險；AegisCode 則補上內部程式碼、SBOM、CBOM 與合規審核證據。兩者整合後，主管看到的不再是分散報表，而是一份能追蹤責任、系統與修復狀態的治理視圖。
+                SecurityScorecard、BitSight 或 EASM 工具擅長從外部看企業與供應商風險；AegisCode 則補上內部程式碼、SBOM、CBOM 與合規審核證據。對客戶呈現時，我們不揭露內部技術細節，而是交付一份能追蹤責任、改善狀態與稽核證據的治理視圖。
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Link
@@ -89,9 +85,9 @@ export default function ExternalRiskPage() {
               <div className="mb-5 flex items-center justify-between border-b border-[#243447] pb-4">
                 <div>
                   <p className="text-xs uppercase tracking-[0.18em] text-gray-500">
-                    Connector Model
+                    Sales Positioning
                   </p>
-                  <h2 className="mt-1 text-xl font-bold">Outside-in + inside-out</h2>
+                  <h2 className="mt-1 text-xl font-bold">外部評分 + 內部證據</h2>
                 </div>
                 <ShieldCheck className="h-6 w-6 text-[#14B8A6]" />
               </div>
@@ -113,15 +109,15 @@ export default function ExternalRiskPage() {
             <section className="rounded-2xl border border-[#243447] bg-[#0F1923] p-6">
               <div className="mb-5 flex items-center gap-3">
                 <Radar className="h-5 w-5 text-sky-300" />
-                <h2 className="text-2xl font-bold">匯入欄位建議</h2>
+                <h2 className="text-2xl font-bold">業務可賣的四個場景</h2>
               </div>
               <div className="grid gap-3 sm:grid-cols-2">
-                {fields.map(([field, meaning]) => (
+                {salesPlays.map(([title, meaning]) => (
                   <div
-                    key={field}
+                    key={title}
                     className="rounded-xl border border-[#243447] bg-[#0D1521] p-4"
                   >
-                    <code className="text-sm font-semibold text-[#5EEAD4]">{field}</code>
+                    <h3 className="text-sm font-semibold text-[#5EEAD4]">{title}</h3>
                     <p className="mt-2 text-sm leading-6 text-gray-400">{meaning}</p>
                   </div>
                 ))}
@@ -147,7 +143,7 @@ export default function ExternalRiskPage() {
                   採購與稽核定位
                 </div>
                 <p className="text-sm leading-7 text-sky-100">
-                  AegisCode 不取代外部評分平台，而是把評分、供應商、系統與內部程式碼證據收斂到同一個可稽核工作流。正式 API 串接、資料留存與報表格式會在 Enterprise POC 階段確認。
+                  AegisCode 不取代外部評分平台，也不在對外頁面揭露內部規則、流程或實作細節。銷售重點是把外部評分、供應商、系統與內部程式碼證據收斂成可稽核工作流；正式整合範圍、資料留存與報表格式會在 Enterprise POC 階段確認。
                 </p>
               </div>
             </section>
