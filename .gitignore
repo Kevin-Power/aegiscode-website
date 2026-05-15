@@ -45,3 +45,5 @@ next-env.d.ts
 /data/licenses.json
 /data/audit-log.json
 
+# Lead-gated PDFs are deployed by ops, not committed
+public/downloads/*.pdf
