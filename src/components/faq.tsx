@@ -57,6 +57,26 @@ const faqs = [
     q: "AI 程式碼健檢是什麼？",
     a: "AegisCode 會把 SAST findings 與 LLM 上下文審查結合，針對 Copilot、Claude、ChatGPT 等工具產生的程式碼提供繁中修復建議與主管可審核的紀錄。",
   },
+  {
+    q: "AegisCode Surface 跟 SecurityScorecard 原生 dashboard 差在哪？",
+    a: "Surface 提供中文化治理工作流、修補優先順序、台灣法規對應、風險量化與顧問交付報告；原生 dashboard 是原始評分視圖。",
+  },
+  {
+    q: "Surface 需要客戶自備 SecurityScorecard 授權嗎？",
+    a: "是，客戶提供 API token。Surface 也支援 BitSight 或客戶既有 EASM 工具的訊號整合。",
+  },
+  {
+    q: "CISO 月報長什麼樣？可以看 sample 嗎？",
+    a: "可以，到資源中心 /resources 下載匿名化的 sample PDF。",
+  },
+  {
+    q: "AegisCode Surface 是訂閱還是專案？",
+    a: "Surface 是年度顧問訂閱，含平台、每週差異追蹤、每月治理報告、季度治理檢討與顧問解讀會議。",
+  },
+  {
+    q: "Code 跟 Surface 可以單買嗎？",
+    a: "可單買，合購有 bundle 折讓。實際數字會在 POC 後依範圍報價。",
+  },
 ];
 
 function FaqItem({ faq }: { faq: (typeof faqs)[0] }) {
