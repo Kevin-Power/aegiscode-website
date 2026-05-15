@@ -9,6 +9,7 @@ export type SalesEvent =
   | "STRIPE_CHECKOUT"
   | "STRIPE_CANCEL"
   | "STRIPE_PAYMENT_FAILED"
+  | "RESOURCE_DOWNLOAD"
 
 export async function notifyOps(
   event: SalesEvent,
