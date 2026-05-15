@@ -7,6 +7,13 @@ import Footer from "@/components/footer";
 
 function TrialForm() {
   const params = useSearchParams();
+  const initialTrack: "CODE" | "SURFACE" | "BOTH" = (() => {
+    const p = params.get("track");
+    if (p === "SURFACE") return "SURFACE";
+    if (p === "BOTH") return "BOTH";
+    return "CODE";
+  })();
+
   const initialTier =
     params.get("tier") === "STARTER" ? "STARTER" : "PROFESSIONAL";
 
@@ -17,6 +24,11 @@ function TrialForm() {
   const [teamSize, setTeamSize] = useState("");
   const [website, setWebsite] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [track, setTrack] = useState<"CODE" | "SURFACE" | "BOTH">(initialTrack);
+  const [domainCount, setDomainCount] = useState("");
+  const [hasExternalRating, setHasExternalRating] = useState<"yes" | "no" | "">("");
+  const [monthlyReportEta, setMonthlyReportEta] = useState<"2-weeks" | "4-weeks" | "8-weeks" | "">("");
+  const [decisionMaker, setDecisionMaker] = useState<"management" | "engineering" | "procurement" | "">("");
   const [result, setResult] = useState<
     | null
     | {
@@ -26,6 +38,7 @@ function TrialForm() {
         instructions: string;
         manualReview?: boolean;
         jwt?: string;
+        track?: "CODE" | "SURFACE" | "BOTH";
       }
     | { ok: false; error: string }
   >(null);
@@ -45,6 +58,13 @@ function TrialForm() {
           tier,
           teamSize,
           website,
+          track,
+          domainCount: track !== "CODE" ? domainCount : undefined,
+          hasExternalRating:
+            track !== "CODE" ? hasExternalRating === "yes" : undefined,
+          monthlyReportEta:
+            track !== "CODE" ? monthlyReportEta || undefined : undefined,
+          decisionMaker: track === "BOTH" ? decisionMaker || undefined : undefined,
         }),
       });
       const data = (await r.json()) as Record<string, unknown>;
@@ -61,6 +81,7 @@ function TrialForm() {
           instructions: data.instructions as string,
           manualReview: data.manualReview as boolean | undefined,
           jwt: data.jwt as string | undefined,
+          track: data.track as "CODE" | "SURFACE" | "BOTH" | undefined,
         });
       }
     } catch (err) {
@@ -120,6 +141,35 @@ function TrialForm() {
         </div>
       ) : null}
 
+      <div>
+        <label className="mb-2 block text-sm font-semibold text-gray-200">
+          評估方向 / Evaluation track
+        </label>
+        <div className="grid gap-2 sm:grid-cols-3">
+          {(
+            [
+              ["CODE", "AegisCode Code", "程式碼 / SAST / CBOM"],
+              ["SURFACE", "AegisCode Surface", "外部攻擊面 / CISO 月報"],
+              ["BOTH", "兩者都評估", "完整治理閉環"],
+            ] as const
+          ).map(([value, title, hint]) => (
+            <button
+              type="button"
+              key={value}
+              onClick={() => setTrack(value)}
+              className={`rounded-lg border p-3 text-left transition ${
+                track === value
+                  ? "border-[#14B8A6] bg-[#14B8A6]/10 text-white"
+                  : "border-[#243447] bg-[#0D1521] text-gray-300 hover:border-[#14B8A6]/50"
+              }`}
+            >
+              <div className="text-sm font-semibold">{title}</div>
+              <div className="mt-1 text-xs text-gray-500">{hint}</div>
+            </button>
+          ))}
+        </div>
+      </div>
+
       <Field
         label="公司名稱 / Company name"
         value={companyName}
@@ -141,30 +191,103 @@ function TrialForm() {
         onChange={setContactPhone}
       />
 
-      <div>
-        <label className="block text-sm text-gray-300 mb-1">
-          評估方向 / Evaluation track
-        </label>
-        <select
-          value={tier}
-          onChange={(e) =>
-            setTier(e.target.value as "STARTER" | "PROFESSIONAL")
-          }
-          className="w-full bg-[#0D1521] border border-[#243447] rounded-lg px-3 py-2 text-gray-100 focus:border-[#0D9488] outline-none"
-        >
-          <option value="STARTER">Starter track - 小型團隊工作流驗證</option>
-          <option value="PROFESSIONAL">
-            Professional track - 多 BU 治理與合規評估
-          </option>
-        </select>
-      </div>
+      {track === "CODE" || track === "BOTH" ? (
+        <div>
+          <label className="block text-sm text-gray-300 mb-1">
+            Code Tier
+          </label>
+          <select
+            value={tier}
+            onChange={(e) =>
+              setTier(e.target.value as "STARTER" | "PROFESSIONAL")
+            }
+            className="w-full bg-[#0D1521] border border-[#243447] rounded-lg px-3 py-2 text-gray-100 focus:border-[#0D9488] outline-none"
+          >
+            <option value="STARTER">Starter track - 小型團隊工作流驗證</option>
+            <option value="PROFESSIONAL">
+              Professional track - 多 BU 治理與合規評估
+            </option>
+          </select>
+        </div>
+      ) : null}
 
-      <Field
-        label="團隊規模 / Team size estimate"
-        value={teamSize}
-        onChange={setTeamSize}
-        placeholder="例如：25 developers"
-      />
+      {track === "CODE" || track === "BOTH" ? (
+        <Field
+          label="團隊規模 / Team size estimate"
+          value={teamSize}
+          onChange={setTeamSize}
+          placeholder="例如：25 developers"
+        />
+      ) : null}
+
+      {track === "SURFACE" || track === "BOTH" ? (
+        <>
+          <Field
+            label="管理的 Domain / Portfolio 規模"
+            value={domainCount}
+            onChange={setDomainCount}
+            placeholder="例如：50 個 domain"
+          />
+          <div>
+            <label className="block text-sm text-gray-300 mb-1">
+              是否已有 SecurityScorecard / BitSight 授權?
+            </label>
+            <select
+              value={hasExternalRating}
+              onChange={(e) =>
+                setHasExternalRating(e.target.value as "yes" | "no" | "")
+              }
+              className="w-full bg-[#0D1521] border border-[#243447] rounded-lg px-3 py-2 text-gray-100 focus:border-[#0D9488] outline-none"
+            >
+              <option value="">未選擇</option>
+              <option value="yes">是</option>
+              <option value="no">否</option>
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm text-gray-300 mb-1">
+              希望首份 CISO 月報的時程
+            </label>
+            <select
+              value={monthlyReportEta}
+              onChange={(e) =>
+                setMonthlyReportEta(
+                  e.target.value as "2-weeks" | "4-weeks" | "8-weeks" | "",
+                )
+              }
+              className="w-full bg-[#0D1521] border border-[#243447] rounded-lg px-3 py-2 text-gray-100 focus:border-[#0D9488] outline-none"
+            >
+              <option value="">未選擇</option>
+              <option value="2-weeks">2 週內</option>
+              <option value="4-weeks">4 週內</option>
+              <option value="8-weeks">8 週內</option>
+            </select>
+          </div>
+        </>
+      ) : null}
+
+      {track === "BOTH" ? (
+        <div>
+          <label className="block text-sm text-gray-300 mb-1">
+            主要驅動方
+          </label>
+          <select
+            value={decisionMaker}
+            onChange={(e) =>
+              setDecisionMaker(
+                e.target.value as "management" | "engineering" | "procurement" | "",
+              )
+            }
+            required
+            className="w-full bg-[#0D1521] border border-[#243447] rounded-lg px-3 py-2 text-gray-100 focus:border-[#0D9488] outline-none"
+          >
+            <option value="">請選擇</option>
+            <option value="management">管理層 / CISO</option>
+            <option value="engineering">開發團隊</option>
+            <option value="procurement">採購 / 稽核</option>
+          </select>
+        </div>
+      ) : null}
 
       <div
         aria-hidden="true"
@@ -186,7 +309,13 @@ function TrialForm() {
         disabled={submitting}
         className="w-full py-3 rounded-lg bg-[#0D9488] hover:bg-[#0F766E] text-white font-semibold transition disabled:opacity-50"
       >
-        {submitting ? "送出中..." : "送出 30 天 POC 申請"}
+        {submitting
+          ? "送出中..."
+          : track === "SURFACE"
+            ? "送出 Surface 諮詢申請"
+            : track === "BOTH"
+              ? "送出雙產品評估申請"
+              : "送出 30 天 POC 申請"}
       </button>
 
       <p className="text-xs text-gray-500 text-center">
