@@ -29,9 +29,26 @@ function siteOrigin(req: NextRequest): string {
   return `${proto}://${host}`
 }
 
+function selfServiceCheckoutEnabled(): boolean {
+  return process.env.NEXT_PUBLIC_SELF_SERVICE_CHECKOUT_ENABLED === "1" ||
+    process.env.NEXT_PUBLIC_SELF_SERVICE_CHECKOUT_ENABLED === "true" ||
+    process.env.SELF_SERVICE_CHECKOUT_ENABLED === "1" ||
+    process.env.SELF_SERVICE_CHECKOUT_ENABLED === "true"
+}
+
 export async function POST(req: NextRequest): Promise<Response> {
   const rl = await rateLimit(req, "checkout", 10, 60 * 60 * 1000)
   if (!rl.ok) return rateLimitResponse(rl.retryAfter)
+
+  if (!selfServiceCheckoutEnabled()) {
+    return Response.json(
+      {
+        error:
+          "Self-service checkout is currently paused. Please contact sales@aegiscode.com for a POC-based quote.",
+      },
+      { status: 503 },
+    )
+  }
 
   if (!stripeEnabled()) {
     return Response.json(

@@ -5,6 +5,7 @@ import { loadAll, upsert, type LicenseRecord } from "@/lib/license-store"
 import { issueLicenseJwt, signingConfigured } from "@/lib/license-sign"
 import { sendEmail, licenseActivationEmail } from "@/lib/email"
 import { notifyOps } from "@/lib/notify-sales"
+import { storage } from "@/lib/storage"
 
 export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
@@ -21,6 +22,12 @@ interface TrialSignupBody {
 
 const EMAIL_RE = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/
 const TRIAL_DAYS = 30
+
+function canAutoIssueTrialLicense(): boolean {
+  if (storage.backend === "kv") return true
+  if (process.env.NODE_ENV !== "production") return true
+  return process.env.ALLOW_EPHEMERAL_TRIAL_ISSUANCE === "1"
+}
 
 function rateLimitResponse(retryAfter: number): Response {
   return Response.json(
@@ -62,6 +69,37 @@ export async function POST(req: NextRequest): Promise<Response> {
     return Response.json(
       { error: "Valid contactEmail required" },
       { status: 400 },
+    )
+  }
+
+  if (!canAutoIssueTrialLicense()) {
+    await notifyOps("TRIAL_SIGNUP", {
+      companyName,
+      customerEmail: contactEmail,
+      contactPhone: body.contactPhone,
+      teamSize: body.teamSize,
+      tier,
+      fulfillment: "manual",
+      storageBackend: storage.backend,
+      reason: "Durable storage is not configured; auto license issuance paused.",
+    })
+    await recordAudit({
+      action: "TRIAL_SIGNUP",
+      customerName: companyName,
+      customerEmail: contactEmail,
+      tier,
+      fulfillment: "manual",
+      storageBackend: storage.backend,
+      adminIp: adminCallerIp(req),
+    })
+    return Response.json(
+      {
+        ok: true,
+        manualReview: true,
+        instructions:
+          "POC request received. AegisCode sales will contact you to schedule the demo and issue an evaluation license after environment readiness is confirmed.",
+      },
+      { status: 202 },
     )
   }
 

@@ -21,9 +21,10 @@ function TrialForm() {
     | null
     | {
         ok: true;
-        licenseId: string;
-        expiresAt: string;
+        licenseId?: string;
+        expiresAt?: string;
         instructions: string;
+        manualReview?: boolean;
         jwt?: string;
       }
     | { ok: false; error: string }
@@ -55,9 +56,10 @@ function TrialForm() {
       } else {
         setResult({
           ok: true,
-          licenseId: data.licenseId as string,
-          expiresAt: data.expiresAt as string,
+          licenseId: data.licenseId as string | undefined,
+          expiresAt: data.expiresAt as string | undefined,
           instructions: data.instructions as string,
+          manualReview: data.manualReview as boolean | undefined,
           jwt: data.jwt as string | undefined,
         });
       }
@@ -75,16 +77,22 @@ function TrialForm() {
           POC 申請已建立
         </h2>
         <p className="text-gray-300 mb-4">{result.instructions}</p>
-        <dl className="text-sm grid grid-cols-[120px_1fr] gap-y-2 mb-4">
-          <dt className="text-gray-500">License ID</dt>
-          <dd className="font-mono text-gray-200 break-all">
-            {result.licenseId}
-          </dd>
-          <dt className="text-gray-500">Expires</dt>
-          <dd className="text-gray-200">
-            {new Date(result.expiresAt).toUTCString()}
-          </dd>
-        </dl>
+        {result.licenseId && result.expiresAt ? (
+          <dl className="text-sm grid grid-cols-[120px_1fr] gap-y-2 mb-4">
+            <dt className="text-gray-500">License ID</dt>
+            <dd className="font-mono text-gray-200 break-all">
+              {result.licenseId}
+            </dd>
+            <dt className="text-gray-500">Expires</dt>
+            <dd className="text-gray-200">
+              {new Date(result.expiresAt).toUTCString()}
+            </dd>
+          </dl>
+        ) : (
+          <div className="mb-4 rounded-lg border border-[#243447] bg-[#0D1521]/70 p-4 text-sm text-gray-300">
+            我們已收到申請，顧問會先確認 Demo 情境、部署條件與資料留存需求，再提供評估授權。
+          </div>
+        )}
         {result.jwt ? (
           <div>
             <p className="text-xs text-yellow-400 mb-2">
