@@ -333,18 +333,18 @@ in dev ??it just won't survive a server restart.
 
 ---
 
-## Self-service trial + Stripe checkout
+## POC request + controlled checkout
 
-The site also hosts a **self-service trial** and (optionally) a **Stripe**
-self-checkout flow for Starter and Professional tiers. Enterprise stays
-contracted via sales.
+The site currently prioritizes **30-day POC requests**. Public pricing is
+hidden, self-service checkout is paused by default, and every commercial
+quote is confirmed through sales before payment or license fulfillment.
 
 ### New pages
 
 | Path                  | Purpose                                                  |
 |-----------------------|----------------------------------------------------------|
-| `/pricing`            | Three-tier pricing page with trial CTAs and (optional) Stripe buttons. |
-| `/trial`              | 14-day trial signup form (auto-issues a license JWT).    |
+| `/pricing`            | Hidden-pricing explanation with POC CTAs; no public amounts. |
+| `/trial`              | 30-day POC request form; auto-issues only after readiness is configured. |
 | `/checkout/success`   | Post-Stripe-checkout confirmation.                       |
 | `/checkout/cancel`    | Post-Stripe-cancel confirmation.                         |
 
@@ -352,16 +352,16 @@ contracted via sales.
 
 | Method | Path                          | Auth          | Purpose                                                    |
 |--------|-------------------------------|---------------|------------------------------------------------------------|
-| POST   | `/api/trial/signup`           | RL only       | Issues a 14-day trial license, emails it to the prospect.  |
+| POST   | `/api/trial/signup`           | RL only       | Records a 30-day POC request; can issue only with durable storage and signing keys. |
 | POST   | `/api/checkout`               | RL only       | Creates a Stripe Checkout session.                         |
 | POST   | `/api/stripe/webhook`         | Stripe sig    | Handles `checkout.session.completed`, `customer.subscription.deleted`, `invoice.payment_failed`. |
 
 Rate limits: trial signup `3/hour/IP`; checkout `10/hour/IP`.
 
-### Enabling trial signups
+### Enabling controlled POC issuance
 
 The website does **not** hold the master license signing key ??that key
-stays on the air-gapped issuance laptop. To enable self-service trials,
+stays on the air-gapped issuance laptop. To enable controlled POC issuance,
 generate a separate **trial-grade** RSA keypair and paste the private key
 into the deployment:
 
@@ -395,7 +395,8 @@ sales@aegiscode.com."` so the flow fails closed.
    STRIPE_SECRET_KEY=sk_live_??
    STRIPE_PRICE_ID_STARTER=price_??
    STRIPE_PRICE_ID_PROFESSIONAL=price_??
-   NEXT_PUBLIC_STRIPE_ENABLED=1
+   SELF_SERVICE_CHECKOUT_ENABLED=1
+   NEXT_PUBLIC_SELF_SERVICE_CHECKOUT_ENABLED=1
    ```
 
 3. **Register the webhook** in Stripe Dashboard ??Developers ??Webhooks:
@@ -423,13 +424,12 @@ Resolution order: `RESEND_API_KEY` ??SMTP (`SMTP_HOST` / `SMTP_USER` /
 "ok" so the API flow doesn't fail closed in dev ??make sure ops watches
 the function logs until a real backend is configured.
 
-### Pricing tiers
+### Pricing policy
 
-The default tier amounts in `src/app/pricing/page.tsx` are the **public
-list price**. To change, edit the `priceMonthly` strings; the actual
-Stripe charge comes from `STRIPE_PRICE_ID_*`. Keep page copy and Stripe
-prices in sync manually ??the page does not call Stripe at render time
-on purpose (avoids exposing price IDs in the client bundle).
+Do not publish tier amounts in the repository or public site. Use the
+internal quote sheet for sales-approved offers, then map approved Stripe
+prices through `STRIPE_PRICE_ID_*` only when self-service checkout is
+explicitly re-enabled.
 
 ### Sample curl: trial signup
 

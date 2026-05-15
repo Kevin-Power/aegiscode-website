@@ -4,6 +4,7 @@ import { readdirSync, readFileSync, statSync } from "node:fs"
 import { join } from "node:path"
 
 const roots = ["src/app", "src/components", "public"]
+const standaloneFiles = ["README.md"]
 const extensions = new Set([".ts", ".tsx", ".js", ".jsx", ".json", ".md", ".svg"])
 
 const forbidden = [
@@ -20,6 +21,10 @@ const forbidden = [
   /user\/month/i,
   /隱含/,
   /#pricing/i,
+  /public list price/i,
+  /NEXT_PUBLIC_STRIPE_ENABLED/,
+  /14-day trial/i,
+  /14 day trial/i,
 ]
 
 function extname(path) {
@@ -58,6 +63,21 @@ for (const root of roots) {
       }
     })
   }
+}
+for (const file of standaloneFiles) {
+  const text = readFileSync(file, "utf8")
+  const lines = text.split(/\r?\n/)
+  lines.forEach((line, index) => {
+    const hit = forbidden.find((pattern) => pattern.test(line))
+    if (hit) {
+      matches.push({
+        file,
+        line: index + 1,
+        pattern: String(hit),
+        text: line.trim(),
+      })
+    }
+  })
 }
 
 if (matches.length > 0) {
