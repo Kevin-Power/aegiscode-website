@@ -8,7 +8,7 @@ const expectCheckoutPaused =
   process.env.SMOKE_EXPECT_CHECKOUT_PAUSED !== "0" &&
   process.env.SMOKE_EXPECT_CHECKOUT_PAUSED !== "false"
 
-const pagePaths = ["/", "/pricing", "/trial"]
+const pagePaths = ["/", "/pricing", "/trial", "/external-risk"]
 const forbidden = [
   { pattern: /NT\$/i, reason: "public price currency" },
   { pattern: /\b9,?900\b/, reason: "legacy Starter amount" },

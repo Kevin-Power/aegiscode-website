@@ -1,8 +1,10 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
+import Link from "next/link";
 import {
   ArrowRightLeft,
+  ArrowUpRight,
   Building2,
   FileCheck2,
   Globe2,
@@ -87,6 +89,15 @@ export default function ExternalRisk() {
                   </div>
                 );
               })}
+            </div>
+            <div className="mt-7">
+              <Link
+                href="/external-risk"
+                className="inline-flex items-center gap-2 rounded-lg border border-sky-400/30 px-5 py-3 text-sm font-semibold text-sky-100 transition hover:border-sky-300 hover:bg-sky-400/10"
+              >
+                查看外部風險整合規格
+                <ArrowUpRight className="h-4 w-4" />
+              </Link>
             </div>
           </div>
 
