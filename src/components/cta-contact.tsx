@@ -1,8 +1,8 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
+import Link from "next/link";
 import { useRef } from "react";
-import { Mail, ArrowRight } from "lucide-react";
 
 export default function CtaContact() {
   const ref = useRef(null);
@@ -26,21 +26,19 @@ export default function CtaContact() {
             從一個金融 CBOM/PQC demo 開始，延伸到 SAST、Quality Gate 與主管審核。
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-            <a
-              href="mailto:sales@aegiscode.com"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-[#0D9488] hover:bg-[#0F766E] text-white font-semibold transition-all duration-200 hover:shadow-[0_0_30px_rgba(13,148,136,0.3)]"
+          <div className="flex flex-col gap-3 sm:flex-row sm:justify-center mb-12">
+            <Link
+              href="/trial?track=CODE"
+              className="inline-flex items-center justify-center rounded-lg bg-[#0D9488] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#0F766E]"
             >
-              <Mail size={18} />
-              預約 CBOM Demo
-            </a>
-            <a
-              href="#product-proof"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg border border-[#243447] hover:border-[#0D9488] text-gray-300 hover:text-white font-medium transition-all duration-200"
+              申請 Code POC
+            </Link>
+            <Link
+              href="/trial?track=SURFACE"
+              className="inline-flex items-center justify-center rounded-lg border border-sky-400/40 px-6 py-3 text-sm font-semibold text-sky-100 transition hover:bg-sky-400/10"
             >
-              查看產品實證
-              <ArrowRight size={16} />
-            </a>
+              預約 Surface 諮詢
+            </Link>
           </div>
 
           <p className="text-gray-600 text-sm">
