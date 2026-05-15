@@ -3,7 +3,11 @@ import { rateLimit } from "@/lib/rate-limit"
 import { recordAudit, adminCallerIp } from "@/lib/audit-log"
 import { loadAll, upsert, type LicenseRecord } from "@/lib/license-store"
 import { issueLicenseJwt, signingConfigured } from "@/lib/license-sign"
-import { sendEmail, licenseActivationEmail } from "@/lib/email"
+import {
+  sendEmail,
+  licenseActivationEmail,
+  pocRequestReceivedEmail,
+} from "@/lib/email"
 import { notifyOps } from "@/lib/notify-sales"
 import { storage } from "@/lib/storage"
 
@@ -73,6 +77,17 @@ export async function POST(req: NextRequest): Promise<Response> {
   }
 
   if (!canAutoIssueTrialLicense()) {
+    const ack = pocRequestReceivedEmail({
+      customerName: companyName,
+      tier,
+      teamSize: body.teamSize,
+    })
+    await sendEmail({
+      to: contactEmail,
+      subject: ack.subject,
+      html: ack.html,
+      text: ack.text,
+    })
     await notifyOps("TRIAL_SIGNUP", {
       companyName,
       customerEmail: contactEmail,

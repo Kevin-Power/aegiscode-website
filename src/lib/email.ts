@@ -238,6 +238,50 @@ export interface LicenseActivationEmailArgs {
   isTrial?: boolean
 }
 
+export interface PocRequestReceivedEmailArgs {
+  customerName: string
+  tier?: string
+  teamSize?: string | number
+}
+
+export function pocRequestReceivedEmail(
+  a: PocRequestReceivedEmailArgs,
+): { subject: string; html: string; text: string } {
+  const subject = "AegisCode 已收到您的 30 天 POC 申請"
+  const tierLine = a.tier ? `評估方向：${a.tier}` : "評估方向：待確認"
+  const teamLine = a.teamSize ? `團隊規模：${a.teamSize}` : "團隊規模：待確認"
+  const text = [
+    `${a.customerName} 您好，`,
+    "",
+    "我們已收到您的 AegisCode 30 天 POC 申請。",
+    "",
+    tierLine,
+    teamLine,
+    "",
+    "接下來 AegisCode 顧問會協助確認 Demo 情境、部署條件、資料留存、SSO 與合規證據包需求，再安排 CBOM / SAST-in-the-Loop 展示。",
+    "",
+    "如果您想先補充需求，可直接回覆此信或寄到 sales@aegiscode.com。",
+    "",
+    "-- AegisCode",
+  ].join("\n")
+
+  const html = `
+    <div style="font-family:system-ui,-apple-system,Segoe UI,sans-serif;max-width:560px;margin:auto;padding:24px;color:#0F172A;">
+      <h2 style="margin:0 0 12px;color:#0D9488;">已收到您的 30 天 POC 申請</h2>
+      <p>${escapeHtml(a.customerName)} 您好，</p>
+      <p>我們已收到您的 AegisCode 30 天 POC 申請。</p>
+      <table style="border-collapse:collapse;margin:12px 0;font-size:13px;">
+        <tr><td style="padding:4px 12px 4px 0;color:#64748B;">評估方向</td><td>${escapeHtml(a.tier || "待確認")}</td></tr>
+        <tr><td style="padding:4px 12px 4px 0;color:#64748B;">團隊規模</td><td>${escapeHtml(String(a.teamSize || "待確認"))}</td></tr>
+      </table>
+      <p style="line-height:1.6;">接下來 AegisCode 顧問會協助確認 Demo 情境、部署條件、資料留存、SSO 與合規證據包需求，再安排 CBOM / SAST-in-the-Loop 展示。</p>
+      <p style="color:#64748B;font-size:13px;">如需先補充需求，可直接回覆此信或寄到 <a href="mailto:sales@aegiscode.com">sales@aegiscode.com</a>。</p>
+      <p style="color:#94A3B8;font-size:12px;margin-top:24px;">-- AegisCode</p>
+    </div>
+  `
+  return { subject, html, text }
+}
+
 export function licenseActivationEmail(
   a: LicenseActivationEmailArgs,
 ): { subject: string; html: string; text: string } {

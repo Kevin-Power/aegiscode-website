@@ -1,6 +1,6 @@
 // Sales notification helper. Pings ops on key revenue events. Backed by
-// the same email infrastructure as customer-facing mail; falls back to a
-// structured console log when SALES_NOTIFY_EMAIL is unset.
+// the same email infrastructure as customer-facing mail; if no email backend
+// is configured, sendEmail falls back to a structured console log.
 
 import { sendEmail } from "./email"
 
@@ -16,13 +16,9 @@ export async function notifyOps(
 ): Promise<void> {
   const ts = new Date().toISOString()
   const payload = { ts, event, ...data }
-  const to = process.env.SALES_NOTIFY_EMAIL?.trim()
-  if (!to) {
-    console.log(`[notify-sales] ${JSON.stringify(payload)}`)
-    return
-  }
+  const to = process.env.SALES_NOTIFY_EMAIL?.trim() || "sales@aegiscode.com"
 
-  const subject = `[AegisCode] ${event} — ${
+  const subject = `[AegisCode] ${event} - ${
     (data.customerName as string) || (data.customerEmail as string) || "(no name)"
   }`
   const text = Object.entries(payload)
