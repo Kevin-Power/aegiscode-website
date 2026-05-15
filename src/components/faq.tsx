@@ -1,69 +1,57 @@
 "use client";
 
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion, useInView } from "framer-motion";
+import { Minus, Plus } from "lucide-react";
 import { useRef, useState } from "react";
-import { Plus, Minus } from "lucide-react";
 
 const faqs = [
   {
     q: "AegisCode 支援哪些程式語言？",
-    a: "AegisCode 目前以 12 種常見企業語言為主，包括 Java、Python、JavaScript/TypeScript、Go、C#、PHP、Ruby、Rust 等，後續依 POC 範圍擴充。",
+    a: "目前規劃支援 12 種常見企業開發語言，包含 Java、Python、JavaScript/TypeScript、Go、C#、PHP、Ruby、Rust 等。POC 階段會依您的 repo 語言組成確認掃描範圍。",
   },
   {
-    q: "掃描一個專案需要多久？",
-    a: "依專案大小與掃描模式而定。建議規格是增量掃描 < 30 秒、全量掃描 100K LOC < 5 分鐘；正式 POC 會以您的實際 repo 做基準量測。",
-  },
-  {
-    q: "程式碼會不會外洩？",
-    a: "絕對不會。AegisCode 支援私有部署（On-Premise），所有程式碼與掃描結果都在您的內部網路環境中處理，不會離開您的伺服器。資料安全是我們的最高優先。",
+    q: "掃描速度大概需要多久？",
+    a: "依專案大小與掃描類型而定。目標規格為增量掃描小於 30 秒、全量掃描 100K LOC 小於 5 分鐘，POC 會以您的實際 repo 校準。",
   },
   {
     q: "是否支援地端或 Air-gapped 部署？",
-    a: "支援。Enterprise 可規劃地端、私有網路或 Air-gapped 部署，搭配離線授權、內部映像檔 registry 與客戶指定的稽核留存政策。",
+    a: "Enterprise 評估可納入地端、私有雲或 Air-gapped 部署。POC 前會先確認網路邊界、授權更新、套件 registry、稽核留存與維運責任。",
   },
   {
-    q: "資料留存政策與 ZDR 選項如何處理？",
-    a: "POC 預設採最小化留存，只保留授權、審核與掃描必要資料。金融業可要求 Zero Data Retention 選項，將原始碼與掃描暫存限制在客戶環境內。",
+    q: "資料留存政策與 ZDR 選項是什麼？",
+    a: "資料留存週期、刪除流程與 Zero Data Retention 選項可依合約與 DPA 定義。高法遵客戶可在 POC 前先指定資料邊界與遮罩規則。",
   },
   {
-    q: "跟 SonarQube 社區版有什麼不同？",
-    a: "SonarQube 是很好的靜態分析引擎；AegisCode 的差異在企業治理層：SAST-in-the-Loop AI 審查、多 BU 權限、繁中/英文介面、主管審核、CBOM/PQC、SBOM/SCA 與可交付稽核證據。技術團隊看得到問題，管理層也拿得到決策材料。",
+    q: "AegisCode 和 SonarQube Enterprise 差異在哪？",
+    a: "SonarQube Enterprise 偏向成熟的程式碼品質與 SAST 掃描。AegisCode 聚焦台灣金融與繁中治理工作流，包含 SAST-in-the-Loop AI 審查、CBOM/PQC、SBOM/SCA、主管審核紀錄與合規證據包。",
   },
   {
-    q: "SBOM / SCA 跟 GitHub Advanced Security 有什麼差別？",
-    a: "GitHub Advanced Security 強在開發平台內的程式碼與相依套件風險；AegisCode 更偏向跨 BU 治理、客戶或稽核交付。它把 SBOM/SCA、CBOM/PQC、Quality Gate、審核紀錄與報告輸出整合成同一套證據流程，適合需要金融合規、採購審查或跨部門彙整的組織。",
+    q: "SBOM / SCA 和 GitHub Advanced Security 有什麼差別？",
+    a: "GitHub Advanced Security 很適合 GitHub 原生開發流程。AegisCode 則把 SBOM/SCA、CBOM/PQC、Quality Gate、主管證據包與多 BU 治理收斂成一套採購與稽核能理解的工作流。",
   },
   {
-    q: "跟 SonarQube Enterprise 的 feature 對照是什麼？",
-    a: "SonarQube Enterprise 偏向程式碼品質與安全掃描引擎；AegisCode 會保留 SAST 治理能力，並加上繁中工作流、多 BU 審核、CBOM/PQC、SBOM/SCA、金管會證據包與可交付報告。",
+    q: "公開價格在哪裡？",
+    a: "目前價格暫不公開。AegisCode 會依團隊規模、部署方式、資料留存、SSO、DPA 與稽核需求，在 30 天 POC 後提供正式方案建議。",
   },
   {
-    q: "為什麼不是照 per-LOC 或 per-developer 計價？",
-    a: "AegisCode 對外採固定 tier，目標是讓採購可以快速預算化。不過每個方案也揭露隱含 user/month 成本：Starter 約 NT$990/user/月，Professional 約 NT$900/user/月；Enterprise 則以不限使用者、不限 BU 與合規證據包來計價。",
-  },
-  {
-    q: "可以整合 CI/CD 嗎？",
-    a: "可以。AegisCode 支援與 Jenkins、GitLab CI、GitHub Actions、Azure DevOps 等主流 CI/CD 工具整合，可在建構流程中自動觸發程式碼掃描，實現真正的 DevSecOps。",
-  },
-  {
-    q: "部署需要多久？",
-    a: "標準部署只需 1-2 個工作天。我們提供 Docker 容器化部署方式，包含完整的安裝指南與技術支援，確保快速上線。",
+    q: "可以整合既有 CI/CD 嗎？",
+    a: "可以。AegisCode 可評估接入 Jenkins、GitLab CI、GitHub Actions、Azure DevOps 等流程，並依 findings 嚴重度設計 Quality Gate 與審核規則。",
   },
   {
     q: "是否支援 SSO / SAML / OIDC？",
-    a: "Enterprise 支援 SSO 規劃，可依客戶既有 IdP 導入 SAML 或 OIDC。POC 階段可先使用隔離帳號，正式導入時再接企業身份系統。",
+    a: "Enterprise 導入可規劃 SSO，並依客戶 IdP 環境評估 SAML 或 OIDC。POC 階段會先確認使用者角色、權限模型與稽核紀錄需求。",
   },
   {
-    q: "合約最短綁約期與退場條款？",
-    a: "Starter 可自助試用；Professional 與 Enterprise 以年度合約為主。退場時可匯出報告、審核紀錄與客戶資料，並依 DPA 完成刪除或留存程序。",
+    q: "合約、退場與資料匯出怎麼處理？",
+    a: "正式導入會在合約與 DPA 中定義資料匯出、留存、刪除與退場流程。報告、審核紀錄與客戶資料可依約定格式匯出。",
   },
   {
-    q: "有免費試用嗎？",
-    a: "有的！我們提供 30 天免費 POC（概念驗證）試用，讓您可以用實際專案進行測試，充分體驗所有功能後再決定是否採用。",
+    q: "可以先試用嗎？",
+    a: "可以先申請 30 天 POC。團隊會協助確認掃描範圍、Demo 情境與合規交付需求，再提供導入建議。",
   },
   {
     q: "AI 程式碼健檢是什麼？",
-    a: "AegisCode 會把 SAST findings 與 LLM 上下文審查整合，對 Copilot、Claude、ChatGPT 生成的程式碼提供繁中修復建議與審核紀錄，重點是治理流程，不是宣稱取代所有 AI review 工具。",
+    a: "AegisCode 會把 SAST findings 與 LLM 上下文審查結合，針對 Copilot、Claude、ChatGPT 等工具產生的程式碼提供繁中修復建議與主管可審核的紀錄。",
   },
 ];
 
@@ -84,7 +72,7 @@ function FaqItem({ faq }: { faq: (typeof faqs)[0] }) {
         </span>
       </button>
       <AnimatePresence>
-        {open && (
+        {open ? (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
@@ -96,7 +84,7 @@ function FaqItem({ faq }: { faq: (typeof faqs)[0] }) {
               <p className="text-sm text-gray-400 leading-relaxed">{faq.a}</p>
             </div>
           </motion.div>
-        )}
+        ) : null}
       </AnimatePresence>
     </div>
   );

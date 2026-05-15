@@ -135,7 +135,7 @@ function TrialForm() {
 
       <div>
         <label className="block text-sm text-gray-300 mb-1">
-          方案 / Tier
+          評估方向 / Evaluation track
         </label>
         <select
           value={tier}
@@ -144,9 +144,9 @@ function TrialForm() {
           }
           className="w-full bg-[#0D1521] border border-[#243447] rounded-lg px-3 py-2 text-gray-100 focus:border-[#0D9488] outline-none"
         >
-          <option value="STARTER">Starter (NT$9.9K/mo)</option>
+          <option value="STARTER">Starter track - 小型團隊工作流驗證</option>
           <option value="PROFESSIONAL">
-            Professional (NT$45K/mo) - recommended
+            Professional track - 多 BU 治理與合規評估
           </option>
         </select>
       </div>
@@ -232,7 +232,7 @@ export default function TrialPage() {
               預約 CBOM Demo
             </h1>
             <p className="text-gray-400 text-lg">
-              30 天 POC，免信用卡，從 Starter 或 Professional 工作流開始驗證。
+              30 天 POC，免信用卡，先確認治理工作流、部署條件與合規交付範圍。
             </p>
           </div>
           <Suspense fallback={<div className="text-gray-500">Loading...</div>}>

@@ -6,7 +6,6 @@ import ProductProof from "@/components/product-proof";
 import AiHealthCheck from "@/components/ai-health-check";
 import Workflow from "@/components/workflow";
 import Stats from "@/components/stats";
-import Pricing from "@/components/pricing";
 import Faq from "@/components/faq";
 import CtaContact from "@/components/cta-contact";
 import Footer from "@/components/footer";
@@ -23,13 +22,6 @@ const productJsonLd = {
     "SAST 弱點掃描、CBOM 加密資產盤點、SBOM/SCA 與台灣合規證據包平台。",
   category: "Application Security Testing",
   url: "https://aegiscode.yilutek.com",
-  offers: {
-    "@type": "AggregateOffer",
-    priceCurrency: "TWD",
-    lowPrice: "9900",
-    highPrice: "150000",
-    offerCount: "3",
-  },
 };
 
 const faqJsonLd = {
@@ -90,7 +82,6 @@ export default function Home() {
       <AiHealthCheck />
       <Workflow />
       <Stats />
-      <Pricing />
       <Faq />
       <CtaContact />
       <Footer />

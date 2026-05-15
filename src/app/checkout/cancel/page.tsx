@@ -11,21 +11,21 @@ export default function CheckoutCancelPage() {
             付款流程已取消
           </h1>
           <p className="text-gray-400 mb-6">
-            尚未產生扣款。您可以回到方案頁重新啟用，或先申請 30 天 POC
-            評估 AegisCode。
+            尚未產生扣款。公開價格目前已暫時收起，請先申請 30 天 POC，
+            由方案顧問協助評估導入範圍。
           </p>
           <div className="flex gap-3 justify-center">
             <a
-              href="/pricing"
+              href="/trial"
               className="px-6 py-3 rounded-lg bg-[#0D9488] hover:bg-[#0F766E] text-white font-medium transition"
             >
-              返回方案
+              申請 30 天 POC
             </a>
             <a
-              href="/trial"
+              href="mailto:sales@aegiscode.com"
               className="px-6 py-3 rounded-lg border border-[#243447] hover:border-[#0D9488] text-gray-300 hover:text-white font-medium transition"
             >
-              申請 30 天 POC
+              聯絡方案顧問
             </a>
           </div>
         </div>

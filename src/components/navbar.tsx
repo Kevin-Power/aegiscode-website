@@ -1,13 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { label: "功能", href: "/#features" },
   { label: "產品實證", href: "/#product-proof" },
-  { label: "方案", href: "/pricing" },
-  { label: "ROI", href: "/roi" },
   { label: "FAQ", href: "/#faq" },
 ];
 
@@ -30,12 +29,10 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        {/* Logo */}
-        <a href="#" className="text-xl font-bold tracking-tight text-white">
+        <Link href="/" className="text-xl font-bold tracking-tight text-white">
           Aegis<span className="text-[#14B8A6]">Code</span>
-        </a>
+        </Link>
 
-        {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <a
@@ -54,7 +51,6 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* Mobile hamburger */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
           className="md:hidden text-gray-400 hover:text-white"
@@ -64,8 +60,7 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile menu */}
-      {mobileOpen && (
+      {mobileOpen ? (
         <div className="md:hidden bg-[#0D1521]/95 backdrop-blur-md border-b border-[#243447]/50">
           <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-4">
             {navLinks.map((link) => (
@@ -87,7 +82,7 @@ export default function Navbar() {
             </a>
           </div>
         </div>
-      )}
+      ) : null}
     </nav>
   );
 }
