@@ -20,6 +20,15 @@ interface TrialSignupBody {
   contactPhone?: string
   tier?: "STARTER" | "PROFESSIONAL"
   teamSize?: string | number
+  // New: which AegisCode product line the lead is evaluating.
+  // CODE = SAST/CBOM platform (the legacy default). SURFACE/BOTH go to
+  // sales for manual handling — Surface is annual consulting, not a JWT.
+  track?: "CODE" | "SURFACE" | "BOTH"
+  // Surface-specific fields (optional, but expected when track !== CODE)
+  domainCount?: string | number
+  hasExternalRating?: boolean
+  monthlyReportEta?: string
+  decisionMaker?: string
   // Honeypot — must be empty.
   website?: string
 }
@@ -76,7 +85,18 @@ export async function POST(req: NextRequest): Promise<Response> {
     )
   }
 
-  if (!canAutoIssueTrialLicense()) {
+  const track: "CODE" | "SURFACE" | "BOTH" =
+    body.track === "SURFACE"
+      ? "SURFACE"
+      : body.track === "BOTH"
+        ? "BOTH"
+        : "CODE"
+
+  // Surface and Both are advisory subscriptions — they never get an
+  // auto-issued JWT, regardless of storage backend. CODE keeps the
+  // existing auto-issue behavior when durable storage is configured.
+  const forceManual = track !== "CODE"
+  if (forceManual || !canAutoIssueTrialLicense()) {
     const ack = pocRequestReceivedEmail({
       customerName: companyName,
       tier,
@@ -94,15 +114,26 @@ export async function POST(req: NextRequest): Promise<Response> {
       contactPhone: body.contactPhone,
       teamSize: body.teamSize,
       tier,
+      track,
+      domainCount: body.domainCount,
+      hasExternalRating: body.hasExternalRating,
+      monthlyReportEta: body.monthlyReportEta,
+      decisionMaker: body.decisionMaker,
       fulfillment: "manual",
       storageBackend: storage.backend,
-      reason: "Durable storage is not configured; auto license issuance paused.",
+      reason:
+        track === "CODE"
+          ? "Durable storage is not configured; auto license issuance paused."
+          : track === "SURFACE"
+            ? "Surface is an advisory subscription; sales must qualify before issuing access."
+            : "Both Code and Surface evaluation; sales must qualify and scope before issuance.",
     })
     await recordAudit({
       action: "TRIAL_SIGNUP",
       customerName: companyName,
       customerEmail: contactEmail,
       tier,
+      track,
       fulfillment: "manual",
       storageBackend: storage.backend,
       adminIp: adminCallerIp(req),
@@ -111,8 +142,13 @@ export async function POST(req: NextRequest): Promise<Response> {
       {
         ok: true,
         manualReview: true,
+        track,
         instructions:
-          "POC request received. AegisCode sales will contact you to schedule the demo and issue an evaluation license after environment readiness is confirmed.",
+          track === "CODE"
+            ? "POC request received. AegisCode sales will contact you to schedule the demo and issue an evaluation license after environment readiness is confirmed."
+            : track === "SURFACE"
+              ? "Surface 諮詢申請已建立。顧問會在 1-2 個工作天內聯繫,先確認 Domain 規模、現有評分授權與時程。"
+              : "已收到 Code + Surface 雙產品評估申請。顧問會聯繫您安排合併評估流程。",
       },
       { status: 202 },
     )
@@ -183,6 +219,7 @@ export async function POST(req: NextRequest): Promise<Response> {
     customerName: companyName,
     customerEmail: contactEmail,
     tier,
+    track,
     expiresAt: record.expiresAt,
     adminIp: adminCallerIp(req),
   })
@@ -212,6 +249,7 @@ export async function POST(req: NextRequest): Promise<Response> {
     contactPhone: body.contactPhone,
     teamSize: body.teamSize,
     tier,
+    track,
     expiresAt: record.expiresAt,
   })
 
