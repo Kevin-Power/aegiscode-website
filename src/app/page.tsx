@@ -3,6 +3,7 @@ import Hero from "@/components/hero";
 import PainPoints from "@/components/pain-points";
 import Features from "@/components/features";
 import ProductProof from "@/components/product-proof";
+import ExternalRisk from "@/components/external-risk";
 import AiHealthCheck from "@/components/ai-health-check";
 import Workflow from "@/components/workflow";
 import Stats from "@/components/stats";
@@ -19,7 +20,7 @@ const productJsonLd = {
     name: "AegisCode",
   },
   description:
-    "SAST 弱點掃描、CBOM 加密資產盤點、SBOM/SCA 與台灣合規證據包平台。",
+    "SAST 弱點掃描、CBOM 加密資產盤點、SBOM/SCA、外部風險資料整合與台灣合規證據包平台。",
   category: "Application Security Testing",
   url: "https://aegiscode.yilutek.com",
 };
@@ -79,6 +80,7 @@ export default function Home() {
       <PainPoints />
       <Features />
       <ProductProof />
+      <ExternalRisk />
       <AiHealthCheck />
       <Workflow />
       <Stats />

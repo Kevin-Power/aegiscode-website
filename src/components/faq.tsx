@@ -30,6 +30,10 @@ const faqs = [
     a: "GitHub Advanced Security 很適合 GitHub 原生開發流程。AegisCode 則把 SBOM/SCA、CBOM/PQC、Quality Gate、主管證據包與多 BU 治理收斂成一套採購與稽核能理解的工作流。",
   },
   {
+    q: "可以搭配 SecurityScorecard 或其他外部風險評分嗎？",
+    a: "可以作為 Enterprise POC 的 connector-ready 評估項目。AegisCode 可匯入 SecurityScorecard、BitSight 或客戶既有 EASM/TPRM 資料，將外部曝險、供應商 domain、內部 SAST、SBOM 與 CBOM 證據整合成主管治理視圖；正式串接範圍會依 API 授權與合約確認。",
+  },
+  {
     q: "公開價格在哪裡？",
     a: "目前價格暫不公開。AegisCode 會依團隊規模、部署方式、資料留存、SSO、DPA 與稽核需求，在 30 天 POC 後提供正式方案建議。",
   },

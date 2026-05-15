@@ -7,6 +7,7 @@ import { Menu, X } from "lucide-react";
 const navLinks = [
   { label: "功能", href: "/#features" },
   { label: "產品實證", href: "/#product-proof" },
+  { label: "外部風險", href: "/#external-risk" },
   { label: "FAQ", href: "/#faq" },
 ];
 
