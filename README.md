@@ -1,5 +1,21 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Production readiness
+
+Before treating the site as sellable production, run:
+
+```bash
+npm run readiness
+```
+
+The check fails on missing durable storage, license signing/validation keys,
+admin token, production site URL, and email delivery. Use
+`npm run readiness:report` when you want a non-blocking report for local review.
+
+Self-service checkout is intentionally ignored unless
+`SELF_SERVICE_CHECKOUT_ENABLED` or `NEXT_PUBLIC_SELF_SERVICE_CHECKOUT_ENABLED`
+is enabled.
+
 ## Getting Started
 
 First, run the development server:
