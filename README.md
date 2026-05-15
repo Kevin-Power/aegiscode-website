@@ -27,6 +27,32 @@ Self-service checkout is intentionally ignored unless
 `SELF_SERVICE_CHECKOUT_ENABLED` or `NEXT_PUBLIC_SELF_SERVICE_CHECKOUT_ENABLED`
 is enabled.
 
+## Dual Product Structure (since 2026-05-15)
+
+The site sells two AegisCode product lines:
+
+- **AegisCode Code** — internal code security platform (`/code`). 30-day POC, Stripe-capable license model.
+- **AegisCode Surface** — external attack surface annual advisory subscription (`/surface`). Sourced from the SGW Python pipeline (separate repo); the website hosts pre-produced PDFs but does not invoke the pipeline at runtime.
+
+### New routes
+- `/code` — Code product depth page
+- `/surface` — Surface product depth page (replaces `/external-risk` via 308 redirect)
+- `/resources` — Lead-gated PDF downloads
+- `/api/resources/download` — POST: lead capture, returns 5-min signed URL
+- `/api/resources/file/[assetId]` — GET: HMAC-verifies token and streams PDF from `public/downloads/`
+
+### Trial form tracks
+`/trial?track=CODE` (default) / `?track=SURFACE` / `?track=BOTH`. Surface and Both always go to manual review (no auto-JWT), per the advisory subscription model.
+
+### Required env vars (new)
+- `DOWNLOAD_SIGNING_SECRET` (or falls back to `ADMIN_TOKEN`) — HMAC key for resource download URLs
+
+### One-time SGW-side work
+Three PDFs in `public/downloads/` must be produced by ops from the SGW pipeline. See [docs/SGW_ASSET_PRODUCTION.md](docs/SGW_ASSET_PRODUCTION.md).
+
+### Sales runthrough
+See [docs/SALES_RUNTHROUGH.md](docs/SALES_RUNTHROUGH.md) for the customer-facing demo flow.
+
 ## Getting Started
 
 First, run the development server:
