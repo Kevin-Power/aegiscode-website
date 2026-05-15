@@ -24,8 +24,8 @@ const checks = [
   {
     level: "critical",
     name: "Durable storage",
-    ok: any(["KV_URL", "KV_REST_API_URL"]),
-    fix: "Provision Vercel KV and expose KV_URL or KV_REST_API_URL.",
+    ok: all(["KV_REST_API_URL", "KV_REST_API_TOKEN"]),
+    fix: "Provision Vercel KV and expose both KV_REST_API_URL and KV_REST_API_TOKEN.",
   },
   {
     level: "critical",

@@ -57,7 +57,7 @@ export interface Storage {
 // ---- KV (production) backend -----------------------------------------
 
 function isKvConfigured(): boolean {
-  return Boolean(process.env.KV_URL || process.env.KV_REST_API_URL)
+  return Boolean(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN)
 }
 
 function createKvStorage(): Storage {

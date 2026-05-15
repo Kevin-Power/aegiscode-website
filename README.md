@@ -8,8 +8,9 @@ Before treating the site as sellable production, run:
 npm run readiness
 ```
 
-The check fails on missing durable storage, license signing/validation keys,
-admin token, production site URL, and email delivery. Use
+The check fails on missing durable storage (`KV_REST_API_URL` plus
+`KV_REST_API_TOKEN`), license signing/validation keys, admin token,
+production site URL, and email delivery. Use
 `npm run readiness:report` when you want a non-blocking report for local review.
 
 Self-service checkout is intentionally ignored unless
