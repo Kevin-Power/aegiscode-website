@@ -15,6 +15,16 @@ const forbidden = [
   /\b118,?800\b/,
   /\b540,?000\b/,
   /\b1,?800,?000\b/,
+  // Surface annual subscription concrete amounts must not appear in public
+  // site copy. NOTE: `\b40W\b` would technically also flag "40W power
+  // supply" — that's acceptable for a security marketing site (no hardware
+  // pages planned). If hardware content is ever added, narrow the rule.
+  /\b40W\b/i,
+  /40\s*萬/,
+  /四十萬/,
+  /\b400,?000\b/,
+  /NT\$?\s*400,?000/i,
+  /NTD\s*400,?000/i,
   /\bAggregateOffer\b/,
   /\blowPrice\b/,
   /\bhighPrice\b/,
