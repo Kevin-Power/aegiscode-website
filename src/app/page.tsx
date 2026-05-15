@@ -3,7 +3,7 @@ import Hero from "@/components/hero";
 import PainPoints from "@/components/pain-points";
 import Features from "@/components/features";
 import ProductProof from "@/components/product-proof";
-import ExternalRisk from "@/components/external-risk";
+import SurfaceSpotlight from "@/components/surface-spotlight";
 import AiHealthCheck from "@/components/ai-health-check";
 import Workflow from "@/components/workflow";
 import Stats from "@/components/stats";
@@ -80,7 +80,7 @@ export default function Home() {
       <PainPoints />
       <Features />
       <ProductProof />
-      <ExternalRisk />
+      <SurfaceSpotlight />
       <AiHealthCheck />
       <Workflow />
       <Stats />
