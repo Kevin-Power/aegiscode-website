@@ -14,6 +14,15 @@ export default function ReportFlip() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement | null
+      if (
+        target?.tagName === "INPUT" ||
+        target?.tagName === "TEXTAREA" ||
+        target?.tagName === "SELECT" ||
+        target?.isContentEditable
+      ) {
+        return
+      }
       if (e.key === "ArrowLeft") prev()
       else if (e.key === "ArrowRight") next()
     }
@@ -30,7 +39,12 @@ export default function ReportFlip() {
         </p>
 
         <div className="relative rounded-2xl border border-[#243447] bg-[#0F1923] p-6 sm:p-10">
-          <div className="aspect-[4/5] sm:aspect-[16/10]">
+          <div
+            className="aspect-[4/5] overflow-hidden sm:aspect-[16/10]"
+            role="region"
+            aria-label={`月報預覽 第 ${page + 1} 頁,共 ${PAGES} 頁`}
+            aria-live="polite"
+          >
             {page === 0 && <ReportPage1 />}
             {page === 1 && <ReportPage2 />}
             {page === 2 && <ReportPage3 />}
