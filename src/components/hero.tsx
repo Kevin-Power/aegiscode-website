@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2, KeyRound, ShieldCheck } from "lucide-react";
 
 const trustItems = [
-  { label: "研發里程碑", value: "2026 Q1 SAST 整合釋出" },
-  { label: "支援語言", value: "12 種，含 Python、Go、Rust" },
-  { label: "POC 期程", value: "30 天，開放申請中" },
-  { label: "研發團隊", value: "CISSP x PhD 資安研究背景" },
+  { label: "Code 產品線", value: "SAST + CBOM/PQC + SBOM/SCA" },
+  { label: "Surface 產品線", value: "外部評分整合 + CISO 月報" },
+  { label: "POC 期程", value: "30 天 Code POC 開放中" },
+  { label: "對象", value: "金融、政府與高法遵 CISO" },
 ];
 
 const dashboardRows = [
@@ -38,27 +38,26 @@ export default function Hero() {
           </h1>
 
           <p className="mb-5 max-w-2xl text-[19px] font-medium leading-relaxed text-gray-100 sm:text-2xl">
-            SAST 弱點掃描、CBOM 加密資產盤點、合規證據包，一站完成
+            從內部程式碼到外部攻擊面 — 一份報告,兩面風險。
           </p>
 
           <p className="mb-10 max-w-2xl text-base leading-8 text-gray-400 sm:text-lg">
-            從 OWASP Top 10 到 PQC 遷移、從開發風險到金管會稽核，AegisCode
-            把分散的程式碼治理工作收斂成一個可驗證、可審核、可交付的工作流。
+            AegisCode 把內部 SAST、CBOM 與外部攻擊面評分、CISO 月報、台灣法規對應收斂成一個治理閉環。Code 服務開發團隊與 BU 管理者,Surface 服務 CISO 與管理層。
           </p>
 
           <div className="flex flex-col gap-4 sm:flex-row">
             <a
-              href="/trial"
+              href="/code"
               className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-8 py-3.5 text-base font-semibold text-[#0D1521] transition hover:bg-gray-200"
             >
-              預約 CBOM Demo
+              了解 AegisCode Code
               <ArrowRight size={18} />
             </a>
             <a
-              href="#product-proof"
-              className="inline-flex items-center justify-center rounded-lg border border-[#243447] px-8 py-3.5 text-base font-medium text-gray-300 transition hover:border-[#14B8A6] hover:text-white"
+              href="/surface"
+              className="inline-flex items-center justify-center rounded-lg border border-sky-400/40 px-8 py-3.5 text-base font-medium text-sky-100 transition hover:bg-sky-400/10"
             >
-              查看產品實證
+              了解 AegisCode Surface
             </a>
           </div>
         </motion.div>
