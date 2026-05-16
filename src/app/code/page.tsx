@@ -1,9 +1,12 @@
 import Link from "next/link"
 import {
   ArrowRight,
+  Briefcase,
+  Building2,
   CheckCircle2,
   CloudOff,
   Code2,
+  Cpu,
   FileCheck2,
   KeySquare,
   Layers,
@@ -12,17 +15,27 @@ import {
 } from "lucide-react"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
+import CodeProofStrip from "@/components/code-proof-strip"
+import OutcomeVignette from "@/components/outcome-vignette"
+import CodeTour from "@/components/code-tour"
+import RoiMini from "@/components/roi-mini"
+import ProductFaq from "@/components/product-faq"
 
 const capabilities = [
+  {
+    icon: KeySquare,
+    title: "CBOM / PQC 加密資產",
+    desc: "盤點程式碼中的加密用法,評估後量子遷移與長期資料保護風險。矛尖能力。",
+  },
   {
     icon: ShieldCheck,
     title: "SAST 弱點掃描",
     desc: "覆蓋 12 種常見企業開發語言,弱點可直接進入主管審核工作流。",
   },
   {
-    icon: KeySquare,
-    title: "CBOM / PQC 加密資產",
-    desc: "盤點程式碼中的加密用法,評估後量子遷移與長期資料保護風險。",
+    icon: WorkflowIcon,
+    title: "SAST-in-the-Loop / VULNFORGE",
+    desc: "把 SAST findings 轉成可審查、可修復、可追蹤的 AI review 工作流。",
   },
   {
     icon: Layers,
@@ -30,14 +43,54 @@ const capabilities = [
     desc: "建立依賴清單與第三方元件風險視圖,支援採購與稽核情境。",
   },
   {
-    icon: WorkflowIcon,
+    icon: FileCheck2,
     title: "Quality Gate + 主管審核",
-    desc: "依 findings 嚴重度設計可配置的閘門規則,審核紀錄完整留痕,可作為金融合規證據。",
+    desc: "依 findings 嚴重度設計閘門規則,主管審核留痕完整,可作為金融合規證據。",
   },
   {
-    icon: FileCheck2,
+    icon: Code2,
     title: "繁中合規證據包",
     desc: "報告、修補建議、稽核紀錄全繁中化,可直接用於 POC 與客戶內部簡報。",
+  },
+]
+
+const outcomeCards = [
+  {
+    icon: Building2,
+    scenario: "某金控 BU 評估 CBOM 法遵",
+    pain: "加密資產散落在 Excel 與口耳相傳,稽核時無法即時提證",
+    outcome: "統一 CBOM portfolio + Evidence Pack,30 天 POC 即可呈交主管",
+  },
+  {
+    icon: Briefcase,
+    scenario: "某政府機關 air-gapped SAST 需求",
+    pain: "外送黑盒掃描,結果延遲且不能離站",
+    outcome: "地端封閉部署,SAST + CBOM 報告直接在內網產出",
+  },
+  {
+    icon: Cpu,
+    scenario: "某製造/IoT 廠多語言治理",
+    pain: "依賴工具拼接,每個語言各管各的,主管審核斷裂",
+    outcome: "單一 Quality Gate 整合 12 種開發語言,主管審核留痕一致",
+  },
+]
+
+const productFaqItems = [
+  {
+    q: "AegisCode Code 跟既有的 SAST 工具(如 Snyk / Veracode / Checkmarx)有什麼差別?",
+    a: "我們的差異化在 CBOM/PQC 加密資產盤點、繁中治理工作流與主管審核留痕。這三項是金融、政府客戶的核心稽核訴求,通用國際 SAST 工具不會原生支援。",
+  },
+  {
+    q: "CBOM / PQC 的盤點真的能當合規證據用嗎?",
+    a: "可以。CBOM portfolio 與 Evidence Pack 是依金融資安主管的稽核情境設計,涵蓋演算法、金鑰長度、IV、TLS、PQC 遷移風險。30 天 POC 階段我們會根據您的環境校準輸出。",
+  },
+  {
+    q: "Air-gapped / 地端部署的複雜度如何?",
+    a: "Air-gapped 是我們支援的部署模式之一。POC 階段會評估網路隔離、SSO 整合與資料留存要求,正式環境條件會在 POC 結束前釐清。",
+  },
+  {
+    q: "30 天 POC 可以評估到什麼程度?",
+    a: "POC 涵蓋 SAST findings 展示、CBOM/PQC 盤點 demo、SBOM/SCA 報告樣本、Quality Gate 試跑,以及部署與稽核需求盤點。POC 結束時您能拿到一份完整的 Evidence Pack 樣本與導入建議。",
   },
 ]
 
@@ -81,13 +134,12 @@ export default function CodePage() {
             AegisCode Code · 平台授權
           </div>
           <h1 className="max-w-full text-3xl font-bold leading-tight tracking-tight sm:text-5xl sm:break-words">
-            <span className="block">一站式內部程式碼</span>
-            <span className="block">資安治理</span>
-            <span className="block">SAST + CBOM + SBOM</span>
-            <span className="block">主管審核閉環。</span>
+            <span className="block">以 CBOM/PQC 為矛尖</span>
+            <span className="block">的內部程式碼治理</span>
+            <span className="block">SAST + 主管審核閉環</span>
           </h1>
           <p className="mt-5 max-w-3xl text-base leading-8 text-gray-400 sm:text-lg">
-            AegisCode Code 整合 SAST、CBOM、SBOM 與主管審核留痕。它服務開發團隊與資安 BU 管理者,讓程式碼治理能直接進入繁中合規工作流。
+            AegisCode Code 以 CBOM/PQC 加密資產盤點為矛尖,搭配 SAST 弱點掃描、VULNFORGE 修補工作流與主管審核留痕。專為金融、政府與高法遵組織的繁中合規場景設計。
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
@@ -107,9 +159,17 @@ export default function CodePage() {
         </div>
       </section>
 
+      <CodeProofStrip />
+
+      <OutcomeVignette
+        title="3 個典型客戶情境"
+        subtitle="不具名情境示意,僅代表常見企業類型。實際 POC 會依您的環境校準。"
+        cards={outcomeCards}
+      />
+
       <section className="px-6 py-16">
         <div className="mx-auto max-w-6xl">
-          <h2 className="mb-10 text-3xl font-bold">五個核心能力</h2>
+          <h2 className="mb-10 text-3xl font-bold">六個核心能力</h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {capabilities.map((cap) => {
               const Icon = cap.icon
@@ -131,6 +191,8 @@ export default function CodePage() {
           </div>
         </div>
       </section>
+
+      <CodeTour />
 
       <section className="px-6 py-16">
         <div className="mx-auto max-w-5xl">
@@ -174,6 +236,10 @@ export default function CodePage() {
         </div>
       </section>
 
+      <RoiMini />
+
+      <ProductFaq items={productFaqItems} />
+
       <section className="px-6 py-16">
         <div className="mx-auto max-w-4xl rounded-2xl border border-[#243447] bg-[#0F1923] p-8">
           <h2 className="mb-6 text-2xl font-bold">30 天 POC 評估內容</h2>
@@ -192,13 +258,19 @@ export default function CodePage() {
             >
               申請 30 天 POC
             </Link>
-            <a
-              href="mailto:sales@aegiscode.com"
+            <Link
+              href="/resources"
               className="inline-flex items-center justify-center rounded-lg border border-[#243447] px-6 py-3 text-sm font-semibold text-gray-300 transition hover:border-[#14B8A6] hover:text-white"
             >
-              聯絡顧問
-            </a>
+              下載合規證據包樣本
+            </Link>
           </div>
+          <p className="mt-4 text-center text-xs text-gray-500 sm:text-left">
+            或直接寄信:{" "}
+            <a href="mailto:sales@aegiscode.com" className="underline hover:text-gray-300">
+              sales@aegiscode.com
+            </a>
+          </p>
         </div>
       </section>
 
