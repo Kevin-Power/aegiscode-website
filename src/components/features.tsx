@@ -82,6 +82,9 @@ export default function Features() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
+          <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-full bg-[#14B8A6]/10 border border-[#14B8A6]/30 text-[#5EEAD4] text-xs font-semibold">
+            AegisCode Code
+          </div>
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">核心功能</h2>
           <p className="text-gray-400 text-lg">
             可展示功能 · 對應 SonarQube / Snyk / Checkmarx 競品比較與金管會採購情境

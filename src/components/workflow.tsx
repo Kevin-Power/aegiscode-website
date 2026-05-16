@@ -31,6 +31,9 @@ export default function Workflow() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
+          <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-full bg-[#14B8A6]/10 border border-[#14B8A6]/30 text-[#5EEAD4] text-xs font-semibold">
+            AegisCode Code · 工作流
+          </div>
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
             從掃描到稽核交付的治理工作流
           </h2>

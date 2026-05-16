@@ -36,7 +36,7 @@ export default function AiHealthCheck() {
           className="mb-12 text-center"
         >
           <span className="mb-6 inline-block rounded-full border border-purple-500/30 bg-purple-500/15 px-4 py-1.5 text-xs font-medium text-purple-300">
-            為繁體中文研發團隊設計
+            AegisCode Code · 為繁體中文研發團隊設計
           </span>
           <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
             AI 程式碼健檢與 SAST-in-the-Loop 審查
