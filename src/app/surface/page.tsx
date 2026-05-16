@@ -1,15 +1,22 @@
 import Link from "next/link"
 import {
   ArrowRight,
-  CheckCircle2,
+  Briefcase,
+  Building2,
   FileText,
   Gauge,
+  Globe,
   Globe2,
   Scale,
   Sparkles,
 } from "lucide-react"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
+import SurfaceProofStrip from "@/components/surface-proof-strip"
+import OutcomeVignette from "@/components/outcome-vignette"
+import ReportFlip from "@/components/report-flip"
+import ServiceCadence from "@/components/service-cadence"
+import ProductFaq from "@/components/product-faq"
 
 const capabilities = [
   {
@@ -42,12 +49,44 @@ const versusRows: Array<[string, string, string]> = [
   ["外部視角", "外部 + 內部 + 供應商整合視圖", "Surface 補上"],
 ]
 
-const serviceScope = [
-  "平台存取 — 治理工作台、Domain 深入分析、修補任務追蹤",
-  "每週差異追蹤 — 偵測新風險、追蹤已修風險",
-  "每月正式治理報告 — CISO 月報 PDF,可呈交董事會",
-  "季度治理檢討 — 平均分數趨勢、P0/P1 任務、修補 ROI",
-  "顧問解讀會議 — 每月 60–90 分鐘,協助管理層理解",
+const outcomeCards = [
+  {
+    icon: Building2,
+    scenario: "某金控供應商風險治理",
+    pain: "供應商資安狀況散落在 Excel,無法即時通報董事會",
+    outcome: "統一供應商 portfolio + 月報視圖,管理層每月掌握",
+  },
+  {
+    icon: Briefcase,
+    scenario: "某政府機關外部曝險合規申報",
+    pain: "原生評分 dashboard 是英文,無法直接對應台灣法規申報",
+    outcome: "中文化治理視圖 + 法規對應 evidence,稽核可直接引用",
+  },
+  {
+    icon: Globe,
+    scenario: "某跨國 SaaS 子公司 Portfolio 治理",
+    pain: "多 Domain 分散在地區,風險視圖無法整併",
+    outcome: "統一 Portfolio 月報,跨子公司風險可量化比較",
+  },
+]
+
+const productFaqItems = [
+  {
+    q: "SecurityScorecard / BitSight 本來就有 dashboard,為什麼還需要 Surface?",
+    a: "原生 dashboard 提供的是原始視圖。Surface 提供的是中文化治理平台、修補優先順序、法規對應、風險量化與顧問交付月報——這些才是管理層真正會閱讀的內容。Surface 不取代外部評分平台,它把評分轉成董事會看得懂的治理結論。",
+  },
+  {
+    q: "為什麼是年度訂閱不是一次買斷?",
+    a: "外部攻擊面是持續變動的。重要的不是今天掃到什麼,而是未來 12 個月風險能不能持續下降。所以這更適合年度治理服務,而非一次性專案。",
+  },
+  {
+    q: "報價怎麼算?",
+    a: "依 Domain / Portfolio 數量、會議頻率與顧問參與深度而定。我們會在諮詢階段釐清您的範圍後提供正式報價,不在公開頁面揭露絕對金額。",
+  },
+  {
+    q: "首次月報多久能交付?",
+    a: "簽約後 30 天內交付首份正式 CISO 月報,涵蓋 Top 風險、Domain backlog、法規對應與 ROI 試算。",
+  },
 ]
 
 export const metadata = {
@@ -75,7 +114,7 @@ export default function SurfacePage() {
             <span className="block">董事會看得懂的報告。</span>
           </h1>
           <p className="mt-5 max-w-3xl text-base leading-8 text-gray-400 sm:text-lg">
-            AegisCode Surface 不取代外部評分平台。它把外部評分、供應商風險、修補優先順序、台灣法規對應與顧問月報整合,成為 CISO 每月可向管理層交代的治理視圖。
+            AegisCode Surface 是外部攻擊面年度治理服務。它把外部評分、供應商風險、修補優先順序、台灣法規對應與顧問月報整合,成為 CISO 每月可向管理層交代的治理視圖。
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
@@ -94,6 +133,15 @@ export default function SurfacePage() {
           </div>
         </div>
       </section>
+
+      <SurfaceProofStrip />
+
+      <OutcomeVignette
+        title="3 個典型客戶情境"
+        subtitle="不具名情境示意。實際範圍與輸出在諮詢階段釐清。"
+        cards={outcomeCards}
+        accentClass="text-sky-300"
+      />
 
       {/* Capabilities */}
       <section className="px-6 py-16">
@@ -120,6 +168,8 @@ export default function SurfacePage() {
           </div>
         </div>
       </section>
+
+      <ReportFlip />
 
       {/* Versus table */}
       <section className="px-6 py-16">
@@ -152,26 +202,9 @@ export default function SurfacePage() {
         </div>
       </section>
 
-      {/* Service scope */}
-      <section className="px-6 py-16">
-        <div className="mx-auto max-w-4xl">
-          <h2 className="mb-8 text-3xl font-bold">年度服務範圍</h2>
-          <div className="space-y-3">
-            {serviceScope.map((item) => (
-              <div
-                key={item}
-                className="flex gap-3 rounded-xl border border-[#243447] bg-[#101B28] p-4"
-              >
-                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#14B8A6]" />
-                <p className="text-sm leading-7 text-gray-300">{item}</p>
-              </div>
-            ))}
-          </div>
-          <p className="mt-6 text-sm leading-7 text-gray-500">
-            報價依 Domain / Portfolio 數量、會議頻率與顧問參與深度而定。Surface 為年度訂閱模式,合約簽訂後啟動。
-          </p>
-        </div>
-      </section>
+      <ServiceCadence />
+
+      <ProductFaq items={productFaqItems} />
 
       {/* CTA */}
       <section className="px-6 py-20">
