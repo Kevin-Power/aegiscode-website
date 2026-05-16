@@ -23,7 +23,7 @@ export async function notifyOps(
     (data.customerName as string) || (data.customerEmail as string) || "(no name)"
   }`
   const text = Object.entries(payload)
-    .map(([k, v]) => `${k}: ${typeof v === "string" ? v : JSON.stringify(v)}`)
+    .map(([k, v]) => `${k}: ${formatValue(v)}`)
     .join("\n")
   const html = `
     <div style="font-family:system-ui,-apple-system,Segoe UI,sans-serif;max-width:560px;margin:auto;padding:24px;color:#0F172A;">
@@ -34,9 +34,7 @@ export async function notifyOps(
             ([k, v]) =>
               `<tr><td style="padding:2px 12px 2px 0;color:#64748B;">${escapeHtml(
                 k,
-              )}</td><td><code>${escapeHtml(
-                typeof v === "string" ? v : JSON.stringify(v),
-              )}</code></td></tr>`,
+              )}</td><td><code>${escapeHtml(formatValue(v))}</code></td></tr>`,
           )
           .join("")}
       </table>
@@ -47,6 +45,12 @@ export async function notifyOps(
   } catch (err) {
     console.warn("[notify-sales] send failed, payload follows:", err, payload)
   }
+}
+
+function formatValue(value: unknown): string {
+  if (value === undefined || value === null) return ""
+  if (typeof value === "string") return value
+  return JSON.stringify(value) ?? ""
 }
 
 function escapeHtml(s: string): string {

@@ -11,7 +11,7 @@ const ALLOWED_ASSETS = new Set([
   "ciso-monthly-sample.pdf",
 ])
 
-const DOWNLOADS_DIR = resolve(process.cwd(), "public", "downloads")
+const DOWNLOADS_DIR = resolve(process.cwd(), "private", "downloads")
 
 export async function GET(
   req: NextRequest,

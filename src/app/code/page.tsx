@@ -17,17 +17,17 @@ const capabilities = [
   {
     icon: ShieldCheck,
     title: "SAST 弱點掃描",
-    desc: "覆蓋 12 種常見企業開發語言,整合 OWASP / CWE 規則,findings 直接落入主管審核工作流。",
+    desc: "覆蓋 12 種常見企業開發語言,弱點可直接進入主管審核工作流。",
   },
   {
     icon: KeySquare,
     title: "CBOM / PQC 加密資產",
-    desc: "盤點 Java / Python / Go / Node / TS / JS / C# 程式碼中的加密用法,評估後量子遷移風險。",
+    desc: "盤點程式碼中的加密用法,評估後量子遷移與長期資料保護風險。",
   },
   {
     icon: Layers,
     title: "SBOM / SCA",
-    desc: "建立依賴清單與第三方元件風險視圖,supports 採購與稽核情境。",
+    desc: "建立依賴清單與第三方元件風險視圖,支援採購與稽核情境。",
   },
   {
     icon: WorkflowIcon,
@@ -71,7 +71,7 @@ export const metadata = {
 
 export default function CodePage() {
   return (
-    <main className="min-h-screen bg-[#0D1521] text-white">
+    <main className="min-h-screen overflow-x-hidden break-all bg-[#0D1521] text-white">
       <Navbar />
 
       <section className="px-6 pb-16 pt-32">
@@ -80,11 +80,14 @@ export default function CodePage() {
             <Code2 className="h-4 w-4" />
             AegisCode Code · 平台授權
           </div>
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-            一站式內部程式碼資安治理 — SAST + CBOM + SBOM + 主管審核閉環。
+          <h1 className="max-w-full text-3xl font-bold leading-tight tracking-tight sm:text-5xl sm:break-words">
+            <span className="block">一站式內部程式碼</span>
+            <span className="block">資安治理</span>
+            <span className="block">SAST + CBOM + SBOM</span>
+            <span className="block">主管審核閉環。</span>
           </h1>
-          <p className="mt-5 max-w-3xl text-lg leading-8 text-gray-400">
-            AegisCode Code 把 SAST 弱點、加密資產盤點、依賴風險與主管審核留痕整合在同一個繁中治理工作台,直接服務開發團隊與資安 BU 管理者的合規工作流。
+          <p className="mt-5 max-w-3xl text-base leading-8 text-gray-400 sm:text-lg">
+            AegisCode Code 整合 SAST、CBOM、SBOM 與主管審核留痕。它服務開發團隊與資安 BU 管理者,讓程式碼治理能直接進入繁中合規工作流。
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
@@ -136,7 +139,7 @@ export default function CodePage() {
             {versusRows.map(([label, content], idx) => (
               <div
                 key={idx}
-                className="grid grid-cols-[180px_1fr] gap-4 border-t border-[#243447] bg-[#101B28] px-5 py-4 text-sm first:border-t-0"
+                className="grid gap-2 border-t border-[#243447] bg-[#101B28] px-5 py-4 text-sm first:border-t-0 sm:grid-cols-[180px_1fr] sm:gap-4"
               >
                 <div className="text-xs font-semibold uppercase tracking-[0.15em] text-gray-500">
                   {label}

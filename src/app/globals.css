@@ -13,12 +13,50 @@
 
 html {
   scroll-behavior: smooth;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
   background-color: #0D1521;
   color: #ffffff;
   font-family: var(--font-inter, ui-sans-serif, system-ui, sans-serif);
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+@media (max-width: 767px) {
+  main,
+  nav,
+  footer,
+  section {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  main .max-w-2xl,
+  main .max-w-3xl,
+  main .max-w-4xl,
+  main .max-w-5xl,
+  main .max-w-6xl,
+  main .max-w-7xl {
+    width: 100%;
+    max-width: 100% !important;
+  }
+
+  main > section > div {
+    width: calc(100vw - 3rem) !important;
+    max-width: calc(100vw - 3rem) !important;
+  }
+
+  main p,
+  main li,
+  main h1,
+  main h2,
+  main h3 {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
 }
 
 /* Subtle grid background */

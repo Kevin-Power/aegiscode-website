@@ -16,6 +16,9 @@ const pagePaths = [
   "/surface",
   "/resources",
 ]
+const assetPaths = [
+  "/downloads/tw-compliance-matrix.pdf",
+]
 const forbidden = [
   { pattern: /NT\$/i, reason: "public price currency" },
   { pattern: /\b9,?900\b/, reason: "legacy Starter amount" },
@@ -58,6 +61,22 @@ for (const path of pagePaths) {
     if (pattern.test(text)) failures.push(`${url} contains ${reason} (${pattern})`)
   }
   console.log(`OK page ${url} (${text.length} bytes)`)
+}
+
+for (const path of assetPaths) {
+  const { url, res, text } = await request(path, { method: "GET" })
+  if (!res.ok) {
+    failures.push(`${url} returned HTTP ${res.status}`)
+    continue
+  }
+  const contentType = res.headers.get("content-type") || ""
+  if (!contentType.includes("application/pdf")) {
+    failures.push(`${url} returned non-PDF content-type ${contentType}`)
+  }
+  if (text.length < 1000) {
+    failures.push(`${url} returned suspiciously small asset (${text.length} bytes)`)
+  }
+  console.log(`OK asset ${url} (${text.length} bytes)`)
 }
 
 {

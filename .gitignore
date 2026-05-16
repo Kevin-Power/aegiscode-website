@@ -45,5 +45,7 @@ next-env.d.ts
 /data/licenses.json
 /data/audit-log.json
 
-# Lead-gated PDFs are deployed by ops, not committed
+# Sales-safe public downloads can be committed; lead-gated assets live under
+# private/downloads and are only served through signed API URLs.
 public/downloads/*.pdf
+!public/downloads/tw-compliance-matrix.pdf

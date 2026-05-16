@@ -183,12 +183,12 @@ export default function ResourcesPage() {
   const [active, setActive] = useState<Asset | null>(null)
 
   return (
-    <main className="min-h-screen bg-[#0D1521] text-white">
+    <main className="min-h-screen overflow-x-hidden break-all bg-[#0D1521] text-white">
       <Navbar />
       <section className="px-6 pb-20 pt-32">
         <div className="mx-auto max-w-6xl">
           <div className="mb-10">
-            <h1 className="text-4xl font-bold sm:text-5xl">
+            <h1 className="text-3xl font-bold leading-tight sm:text-5xl">
               資安治理資產下載中心
             </h1>
             <p className="mt-3 max-w-2xl text-lg text-gray-400">

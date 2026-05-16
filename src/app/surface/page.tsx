@@ -15,17 +15,17 @@ const capabilities = [
   {
     icon: Globe2,
     title: "外部評分整合",
-    desc: "可搭配 SecurityScorecard、BitSight 或客戶既有 EASM,把外部曝險訊號彙整成單一治理視圖。",
+    desc: "可搭配外部評分或既有 EASM,把曝險訊號彙整成單一治理視圖。",
   },
   {
     icon: Sparkles,
     title: "AI 修補建議",
-    desc: "依弱點類型自動生成 P0–P3 優先級修補步驟與驗證方式,並附工時與 ROI 估算。",
+    desc: "依弱點類型整理優先級、修補步驟、驗證方式與工時估算。",
   },
   {
     icon: Scale,
     title: "台灣法規對應",
-    desc: "自動對應資通安全管理法、個資法、ISO 27001:2022,讓技術修補可被稽核理解。",
+    desc: "對應資安法、個資法與 ISO 27001,讓技術修補可被稽核理解。",
   },
   {
     icon: FileText,
@@ -58,7 +58,7 @@ export const metadata = {
 
 export default function SurfacePage() {
   return (
-    <main className="min-h-screen bg-[#0D1521] text-white">
+    <main className="min-h-screen overflow-x-hidden break-all bg-[#0D1521] text-white">
       <Navbar />
 
       {/* Hero */}
@@ -68,11 +68,14 @@ export default function SurfacePage() {
             <Globe2 className="h-4 w-4" />
             AegisCode Surface · 年度顧問訂閱
           </div>
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-            外部攻擊面的年度治理服務 — 把評分變成董事會看得懂的報告。
+          <h1 className="max-w-full text-3xl font-bold leading-tight tracking-tight sm:text-5xl sm:break-words">
+            <span className="block">外部攻擊面</span>
+            <span className="block">年度治理服務</span>
+            <span className="block">把評分變成</span>
+            <span className="block">董事會看得懂的報告。</span>
           </h1>
-          <p className="mt-5 max-w-3xl text-lg leading-8 text-gray-400">
-            AegisCode Surface 不取代外部評分平台。它把外部評分、供應商 domain、修補優先順序、台灣法規對應與顧問月報整合,成為 CISO 可以每月向管理層交代的治理視圖。
+          <p className="mt-5 max-w-3xl text-base leading-8 text-gray-400 sm:text-lg">
+            AegisCode Surface 不取代外部評分平台。它把外部評分、供應商風險、修補優先順序、台灣法規對應與顧問月報整合,成為 CISO 每月可向管理層交代的治理視圖。
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
@@ -128,7 +131,7 @@ export default function SurfacePage() {
             </h2>
           </div>
           <div className="overflow-hidden rounded-2xl border border-[#243447]">
-            <div className="grid grid-cols-[1fr_1.4fr_auto] bg-[#0F1923] px-5 py-3 text-xs font-semibold uppercase tracking-[0.18em] text-gray-500">
+            <div className="hidden bg-[#0F1923] px-5 py-3 text-xs font-semibold uppercase tracking-[0.18em] text-gray-500 sm:grid sm:grid-cols-[1fr_1.4fr_auto]">
               <div>原生 dashboard</div>
               <div>AegisCode Surface</div>
               <div className="text-right">差異</div>
@@ -136,7 +139,7 @@ export default function SurfacePage() {
             {versusRows.map(([native, surface, note]) => (
               <div
                 key={native}
-                className="grid grid-cols-[1fr_1.4fr_auto] border-t border-[#243447] bg-[#101B28] px-5 py-4 text-sm"
+                className="grid gap-2 border-t border-[#243447] bg-[#101B28] px-5 py-4 text-sm first:border-t-0 sm:grid-cols-[1fr_1.4fr_auto] sm:gap-4 sm:first:border-t"
               >
                 <div className="text-gray-400">{native}</div>
                 <div className="text-gray-100">{surface}</div>
