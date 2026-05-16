@@ -39,7 +39,8 @@ The site sells two AegisCode product lines:
 - `/surface` — Surface product depth page (replaces `/external-risk` via 308 redirect)
 - `/resources` — Lead-gated PDF downloads
 - `/api/resources/download` — POST: lead capture, returns 5-min signed URL
-- `/api/resources/file/[assetId]` — GET: HMAC-verifies token and streams PDF from `public/downloads/`
+- `/api/resources/file/[assetId]` — GET: HMAC-verifies token and streams PDF from `private/downloads/` (bundled by `outputFileTracingIncludes`)
+- `/internal/asset-print/[id]` — print-only HTML pages used by `npm run regenerate-pdfs`; gated by `src/proxy.ts` to localhost or `x-admin-token`
 
 ### Trial form tracks
 `/trial?track=CODE` (default) / `?track=SURFACE` / `?track=BOTH`. Surface and Both always go to manual review (no auto-JWT), per the advisory subscription model.
@@ -47,8 +48,13 @@ The site sells two AegisCode product lines:
 ### Required env vars (new)
 - `DOWNLOAD_SIGNING_SECRET` (or falls back to `ADMIN_TOKEN`) — HMAC key for resource download URLs
 
-### One-time SGW-side work
-Three PDFs in `public/downloads/` must be produced by ops from the SGW pipeline. See [docs/SGW_ASSET_PRODUCTION.md](docs/SGW_ASSET_PRODUCTION.md).
+### PDF asset regeneration
+The three marketing PDFs (`surface-proposal.pdf`, `ciso-monthly-sample.pdf`,
+`tw-compliance-matrix.pdf`) are generated locally by puppeteer rendering
+the print-only `/internal/asset-print/[id]` pages, then committed to git
+and bundled by Vercel via `outputFileTracingIncludes`. Replaces the
+previous SGW Python (ReportLab) flow, which produced broken CJK glyphs.
+See [docs/PDF_REGENERATION.md](docs/PDF_REGENERATION.md).
 
 ### Sales runthrough
 See [docs/SALES_RUNTHROUGH.md](docs/SALES_RUNTHROUGH.md) for the customer-facing demo flow.
@@ -103,8 +109,9 @@ source-map upload during build. Without a DSN the SDK init is a no-op.
 **Health endpoint** (`/api/health`): unauthenticated GET returning
 `{ status, uptime, version }`. Use it for Vercel monitors or k8s probes.
 
-**Request ID correlation**: middleware mints (or passes through) an
-`x-request-id` header for every request. Read it in route handlers via
+**Request ID correlation**: `src/proxy.ts` (the Next.js 16 successor to
+`middleware.ts`) mints — or passes through — an `x-request-id` header for
+every request. Read it in route handlers via
 `req.headers.get("x-request-id")` and bind it to the logger:
 
 ```ts
@@ -278,7 +285,7 @@ client transitions into degraded mode within one phone-home cycle.
 ### Security hardening
 
 The license server applies several hardening layers (see
-`src/middleware.ts`, `src/lib/rate-limit.ts`, `src/lib/audit-log.ts`).
+`src/proxy.ts`, `src/lib/rate-limit.ts`, `src/lib/audit-log.ts`).
 
 #### Rate limiting
 
@@ -315,9 +322,9 @@ This is defense-in-depth on top of the registry lookup. If
 `LICENSE_PUBLIC_KEY` is unset, signature verification is skipped (logged
 once) and only the registry lookup gates validity.
 
-#### Security headers (middleware)
+#### Security headers (proxy)
 
-`src/middleware.ts` attaches the following to every response:
+`src/proxy.ts` attaches the following to every response:
 
 - `Strict-Transport-Security: max-age=63072000; includeSubDomains`
 - `X-Content-Type-Options: nosniff`
