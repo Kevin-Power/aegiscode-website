@@ -12,7 +12,9 @@ export default function Footer() {
           <p className="font-medium text-gray-300">
             AegisCode 由宜路科技股份有限公司開發與營運
           </p>
+          <p>AegisCode 是 Yilutek Security Suite 的程式碼與攻擊面治理產品線</p>
           <p>Yilutek Co., Ltd.</p>
+          <p>正式網站：https://aegiscode.yilutek.com</p>
           <p>統一編號與登記地址：採購建檔時提供</p>
           <p>
             聯絡信箱：

@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2, KeyRound, ShieldCheck } from "lucide-react";
 
 const trustItems = [
-  { label: "Code 產品線", value: "SAST + CBOM/PQC + SBOM/SCA" },
-  { label: "Surface 產品線", value: "外部評分整合 + CISO 月報" },
+  { label: "矛尖能力", value: "CBOM/PQC 加密資產治理" },
+  { label: "整合能力", value: "SAST + 外部風險評分" },
   { label: "POC 期程", value: "30 天 Code POC 開放中" },
   { label: "對象", value: "金融、政府與高法遵 CISO" },
 ];
@@ -38,11 +38,11 @@ export default function Hero() {
           </h1>
 
           <p className="mb-5 max-w-2xl text-[19px] font-medium leading-relaxed text-gray-100 sm:text-2xl">
-            從內部程式碼到外部攻擊面 — 一份報告,兩面風險。
+            台灣金融業的加密資產盤點與後量子遷移治理平台。
           </p>
 
           <p className="mb-10 max-w-2xl text-base leading-8 text-gray-400 sm:text-lg">
-            AegisCode 把內部 SAST、CBOM 與外部攻擊面評分、CISO 月報、台灣法規對應收斂成一個治理閉環。Code 服務開發團隊與 BU 管理者,Surface 服務 CISO 與管理層。
+            AegisCode 以 CBOM/PQC inventory 為核心，整合 SAST 與外部風險評分，將程式碼、加密資產與攻擊面證據收斂成主管可審核的合規證據包。
           </p>
 
           <div className="flex flex-col gap-4 sm:flex-row">
@@ -72,10 +72,10 @@ export default function Hero() {
             <div className="mb-4 flex items-center justify-between border-b border-[#243447] pb-3">
               <div>
                 <div className="text-sm font-semibold text-white">CBOM Portfolio</div>
-                <div className="text-xs text-gray-500">Financial governance workspace</div>
+                <div className="text-xs text-gray-500">PQC migration governance</div>
               </div>
               <div className="rounded-full border border-[#14B8A6]/30 bg-[#14B8A6]/10 px-3 py-1 text-xs text-[#5EEAD4]">
-                Demo Ready
+                POC-ready
               </div>
             </div>
 

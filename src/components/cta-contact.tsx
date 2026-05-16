@@ -53,7 +53,7 @@ export default function CtaContact() {
           </p>
 
           <p className="text-gray-600 text-sm">
-            AegisCode 由宜路科技股份有限公司開發與營運
+            AegisCode 是 Yilutek Security Suite 的程式碼與攻擊面治理產品線
           </p>
         </motion.div>
       </div>

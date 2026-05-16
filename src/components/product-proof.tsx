@@ -3,10 +3,10 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import {
-  Activity,
   Database,
   FileDown,
   KeyRound,
+  BookOpenCheck,
   ShieldCheck,
   Server,
 } from "lucide-react";
@@ -14,23 +14,23 @@ import {
 const proofItems = [
   {
     icon: KeyRound,
-    title: "CBOM/PQC Demo Workspace",
-    desc: "可一鍵產生金融情境 demo portfolio，包含 RSA、MD5、硬編 IV、短金鑰與 lifecycle decision。",
+    title: "CBOM/PQC Portfolio",
+    desc: "金融情境 demo 可快速產出加密資產、PQC 遷移風險與主管摘要。",
   },
   {
     icon: FileDown,
-    title: "Evidence Export",
-    desc: "CBOM 報告、portfolio CSV、finding history 與審核紀錄可直接拿去做主管簡報與稽核附件。",
+    title: "Evidence Pack",
+    desc: "CBOM 報告、風險摘要與審核紀錄可作為主管簡報與稽核附件。",
   },
   {
-    icon: Activity,
-    title: "Operational Queue",
-    desc: "Redis/Worker 異常時不留下假 QUEUED 狀態，掃描會標記 FAILED 並回傳可行動錯誤。",
+    icon: BookOpenCheck,
+    title: "Peer-reviewed Research",
+    desc: "Zero-Touch Vulnerability Remediation framework 已於 MDPI Mathematics 發表，DOI: 10.3390/math14061072。",
   },
   {
     icon: Server,
-    title: "Production Health & Seed Guard",
-    desc: "正式環境有獨立 liveness probe；展示或客戶環境 seed 必須指定管理員密碼，避免預設帳密流入交付環境。",
+    title: "Enterprise Delivery Guard",
+    desc: "POC 與客戶環境採用明確的啟用條件、權限控管與交付檢查，避免 demo 設定誤入正式環境。",
   },
 ];
 
@@ -56,13 +56,13 @@ export default function ProductProof() {
               不是簡報概念，已經有可展示、可驗證、可交付的產品證據。
             </h2>
             <p className="mt-4 text-base leading-relaxed text-gray-400">
-              AegisCode 的對外訊息現在直接連到產品實作進度：CBOM/PQC demo、稽核輸出、掃描可靠性與部署安全都已納入產品工作流。
+              AegisCode 的對外訊息現在直接連到客戶可檢查的產品證據：CBOM/PQC portfolio、Evidence Pack、研究基礎與 Enterprise POC 交付控管。
             </p>
             <div className="mt-8 grid grid-cols-3 gap-4">
               {[
-                ["217", "tests passing"],
-                ["CBOM", "demo ready"],
-                ["<100ms", "健康檢查回應"],
+                ["CBOM", "portfolio 快速產出"],
+                ["Demo", "金融情境一鍵生成"],
+                ["DOI", "10.3390/math14061072"],
               ].map(([value, label]) => (
                 <div key={label} className="rounded-xl border border-[#243447] bg-[#1A2332] p-4">
                   <div className="text-2xl font-bold text-[#14B8A6]">{value}</div>
@@ -108,10 +108,12 @@ export default function ProductProof() {
               </p>
             </div>
             <a
-              href="/trial"
+              href="https://www.mdpi.com/2227-7390/14/6/1072"
+              target="_blank"
+              rel="noreferrer"
               className="shrink-0 rounded-lg bg-[#F59E0B] px-5 py-2.5 text-sm font-semibold text-[#111827] hover:bg-[#FBBF24]"
             >
-              申請 30 天 POC
+              查看研究來源
             </a>
           </div>
         </motion.div>
