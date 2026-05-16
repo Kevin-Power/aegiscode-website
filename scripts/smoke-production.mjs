@@ -8,12 +8,23 @@ const expectCheckoutPaused =
   process.env.SMOKE_EXPECT_CHECKOUT_PAUSED !== "0" &&
   process.env.SMOKE_EXPECT_CHECKOUT_PAUSED !== "false"
 
-const pagePaths = ["/", "/pricing", "/trial", "/external-risk"]
+const pagePaths = [
+  "/",
+  "/pricing",
+  "/trial",
+  "/code",
+  "/surface",
+  "/resources",
+]
 const forbidden = [
   { pattern: /NT\$/i, reason: "public price currency" },
   { pattern: /\b9,?900\b/, reason: "legacy Starter amount" },
   { pattern: /\b45,?000\b/, reason: "legacy Professional amount" },
   { pattern: /\b150,?000\b/, reason: "legacy Enterprise amount" },
+  { pattern: /\b40W\b/i, reason: "Surface annual subscription leak" },
+  { pattern: /40\s*萬/, reason: "Surface annual subscription leak" },
+  { pattern: /四十萬/, reason: "Surface annual subscription leak" },
+  { pattern: /\b400,?000\b/, reason: "Surface annual subscription leak" },
   { pattern: /#pricing/i, reason: "old pricing anchor" },
   { pattern: /\bWT\b/i, reason: "legacy WT wording" },
   { pattern: /\bSonaqu\b/i, reason: "legacy Sonaqu wording" },
@@ -23,6 +34,8 @@ const forbidden = [
   { pattern: /市面上唯一/, reason: "unverifiable uniqueness claim" },
   { pattern: /壓低門檻/, reason: "internal pricing strategy leak" },
   { pattern: /秒砍/, reason: "internal competitor strategy leak" },
+  { pattern: /框價/, reason: "internal sales jargon leak" },
+  { pattern: /objection/i, reason: "internal sales jargon leak" },
 ]
 
 const failures = []
