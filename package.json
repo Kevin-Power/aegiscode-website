@@ -9,6 +9,7 @@
     "lint": "eslint",
     "guard:public-branding": "node scripts/check-public-branding.mjs",
     "guard:public-pricing": "node scripts/check-public-pricing-hidden.mjs",
+    "regenerate-pdfs": "node scripts/regenerate-pdfs.mjs",
     "readiness": "node scripts/check-production-readiness.mjs",
     "readiness:report": "node scripts/check-production-readiness.mjs --report",
     "smoke:production": "node scripts/smoke-production.mjs",
@@ -33,6 +34,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.3",
+    "puppeteer": "^24.0.0",
     "tailwindcss": "^4",
     "tsx": "^4.22.0",
     "typescript": "^5"
