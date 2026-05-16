@@ -45,7 +45,17 @@ next-env.d.ts
 /data/licenses.json
 /data/audit-log.json
 
-# Sales-safe public downloads can be committed; lead-gated assets live under
-# private/downloads and are only served through signed API URLs.
-public/downloads/*.pdf
-!public/downloads/tw-compliance-matrix.pdf
+# Policy (since the puppeteer HTML→PDF flow landed): the three marketing
+# PDFs under private/downloads/ and public/downloads/ ARE committed to
+# git. Vercel bundles private/downloads/ into the
+# /api/resources/file/[assetId] function via next.config.ts
+# outputFileTracingIncludes, and public/downloads/ ships through the CDN.
+# Regenerate them locally with `npm run regenerate-pdfs` (see
+# docs/PDF_REGENERATION.md) and commit the diff.
+
+# Puppeteer downloads its bundled Chromium into ~/.cache/puppeteer (or
+# %LOCALAPPDATA%/puppeteer on Windows) — outside the repo by default.
+# Belt-and-braces ignores in case a future puppeteer release ever caches
+# inside node_modules:
+node_modules/puppeteer-core-cache/
+node_modules/.puppeteer-cache/
