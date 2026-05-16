@@ -94,12 +94,12 @@ const productFaqItems = [
   },
 ]
 
-const versusRows: Array<[string, string]> = [
-  ["SonarQube Enterprise 強項", "成熟的程式碼品質與 SAST 規則庫"],
-  ["AegisCode Code 補強", "繁中治理工作流 + AI 程式碼健檢"],
-  ["AegisCode Code 補強", "CBOM / PQC 加密資產盤點"],
-  ["AegisCode Code 補強", "SBOM / SCA + 主管審核留痕"],
-  ["AegisCode Code 補強", "台灣金融合規證據包"],
+const versusMatrix: Array<{ dim: string; sonar: string; aegis: string }> = [
+  { dim: "程式碼品質 + SAST", sonar: "成熟", aegis: "整合" },
+  { dim: "CBOM / PQC", sonar: "未支援", aegis: "矛尖能力" },
+  { dim: "繁中治理工作流", sonar: "未支援", aegis: "原生" },
+  { dim: "主管審核留痕", sonar: "部分", aegis: "完整" },
+  { dim: "台灣金融合規證據包", sonar: "未支援", aegis: "原生" },
 ]
 
 const deploymentOptions = [
@@ -195,18 +195,22 @@ export default function CodePage() {
       <CodeTour />
 
       <section className="px-6 py-16">
-        <div className="mx-auto max-w-5xl">
-          <h2 className="mb-6 text-3xl font-bold">vs SonarQube Enterprise</h2>
+        <div className="mx-auto max-w-6xl">
+          <h2 className="mb-8 text-3xl font-bold">vs SonarQube Enterprise</h2>
           <div className="overflow-hidden rounded-2xl border border-[#243447]">
-            {versusRows.map(([label, content], idx) => (
+            <div className="hidden bg-[#0F1923] px-5 py-3 text-xs font-semibold uppercase tracking-[0.18em] text-gray-500 sm:grid sm:grid-cols-[1.2fr_1fr_1fr]">
+              <div>維度</div>
+              <div>SonarQube Enterprise</div>
+              <div>AegisCode Code</div>
+            </div>
+            {versusMatrix.map((row) => (
               <div
-                key={idx}
-                className="grid gap-2 border-t border-[#243447] bg-[#101B28] px-5 py-4 text-sm first:border-t-0 sm:grid-cols-[180px_1fr] sm:gap-4"
+                key={row.dim}
+                className="grid gap-1 border-t border-[#243447] bg-[#101B28] px-5 py-4 text-sm sm:grid-cols-[1.2fr_1fr_1fr] sm:gap-4 sm:first:border-t"
               >
-                <div className="text-xs font-semibold uppercase tracking-[0.15em] text-gray-500">
-                  {label}
-                </div>
-                <div className="text-gray-200">{content}</div>
+                <div className="font-medium text-gray-100">{row.dim}</div>
+                <div className="text-gray-400">{row.sonar}</div>
+                <div className="text-[#5EEAD4]">{row.aegis}</div>
               </div>
             ))}
           </div>
