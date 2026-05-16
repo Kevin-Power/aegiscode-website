@@ -70,6 +70,14 @@ const checks = [
     fix: "Set SENTRY_DSN/NEXT_PUBLIC_SENTRY_DSN for production error reporting.",
   },
   {
+    level: has("DOWNLOAD_SIGNING_SECRET") ? "info" : "warning",
+    name: "Resource download signing secret",
+    ok: any(["DOWNLOAD_SIGNING_SECRET", "ADMIN_TOKEN"]),
+    fix: has("ADMIN_TOKEN")
+      ? "DOWNLOAD_SIGNING_SECRET not set — falling back to ADMIN_TOKEN. Set DOWNLOAD_SIGNING_SECRET explicitly if you want to rotate download links independently of admin access."
+      : "Set DOWNLOAD_SIGNING_SECRET (or rely on ADMIN_TOKEN) so /api/resources/download can issue HMAC-signed URLs.",
+  },
+  {
     level: selfServiceCheckoutEnabled ? "critical" : "info",
     name: "Self-service checkout",
     ok: selfServiceCheckoutEnabled
