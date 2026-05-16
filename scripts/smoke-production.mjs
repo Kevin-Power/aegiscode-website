@@ -120,6 +120,63 @@ for (const path of assetPaths) {
   }
 }
 
+// Gated PDF download end-to-end: POST lead → GET signed file.
+// Opt-in only — this writes an audit entry and notifies sales every run,
+// so daily smokes should NOT trigger it. Set SMOKE_GATED_DOWNLOAD=1 during
+// a release smoke to validate the full path.
+const smokeGatedDownload =
+  process.env.SMOKE_GATED_DOWNLOAD === "1" ||
+  process.env.SMOKE_GATED_DOWNLOAD === "true"
+
+if (smokeGatedDownload) {
+  const postRes = await request("/api/resources/download", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({
+      assetId: "surface-proposal.pdf",
+      contactEmail: "smoke+download@example.com",
+      companyName: "Smoke Test",
+    }),
+  })
+  if (postRes.res.status !== 201) {
+    failures.push(
+      `${postRes.url} POST returned HTTP ${postRes.res.status}: ${postRes.text}`,
+    )
+  } else {
+    let payload
+    try {
+      payload = JSON.parse(postRes.text)
+    } catch (err) {
+      failures.push(`${postRes.url} POST returned non-JSON: ${err}`)
+    }
+    if (payload && typeof payload.url === "string" && payload.url.startsWith("/api/resources/file/")) {
+      const getRes = await request(payload.url)
+      if (!getRes.res.ok) {
+        failures.push(
+          `${getRes.url} GET returned HTTP ${getRes.res.status}: ${getRes.text.slice(0, 200)}`,
+        )
+      } else {
+        const contentType = getRes.res.headers.get("content-type") || ""
+        if (!contentType.includes("application/pdf")) {
+          failures.push(`${getRes.url} returned non-PDF content-type ${contentType}`)
+        } else if (getRes.text.length < 10000) {
+          failures.push(
+            `${getRes.url} returned suspiciously small PDF (${getRes.text.length} bytes)`,
+          )
+        } else {
+          console.log(`OK gated download ${getRes.url} (${getRes.text.length} bytes)`)
+        }
+      }
+    } else {
+      failures.push(`${postRes.url} POST response missing valid url field: ${postRes.text.slice(0, 200)}`)
+    }
+  }
+} else {
+  warnings.push(
+    "Gated PDF download end-to-end skipped (set SMOKE_GATED_DOWNLOAD=1 to enable).",
+  )
+}
+
 for (const message of warnings) console.warn(`WARN ${message}`)
 
 if (failures.length > 0) {
