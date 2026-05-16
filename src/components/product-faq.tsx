@@ -20,7 +20,7 @@ export default function ProductFaq({
           {items.map((item) => (
             <details
               key={item.q}
-              className="group px-5 py-4 [&_summary::-webkit-details-marker]:hide"
+              className="group px-5 py-4 [&_summary::-webkit-details-marker]:hidden"
             >
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-medium text-white">
                 <span>{item.q}</span>
