@@ -25,79 +25,66 @@ const features = [
     icon: Search,
     title: "SAST 掃描與品質閘門",
     desc: "支援 ZIP / Git 掃描、SonarQube 分析、Quality Gate 與 BU 權限控管，讓上線前風險有一致標準。",
-    badge: "GA",
   },
   {
     icon: KeyRound,
     title: "CBOM / PQC 加密資產盤點",
     desc: "盤點演算法、金鑰長度、IV、TLS 與 PQC 遷移風險，提供 portfolio、明細、生命週期決策與證據包。",
-    badge: "POC-ready",
   },
   {
     icon: Package,
     title: "原生 SBOM / SCA",
-    desc: "規劃解析 npm / pip / Maven / Go 依賴並輸出 CycloneDX 標準，補齊委外與供應鏈安全盤點。",
-    badge: "2026 H2",
+    desc: "解析 npm / pip / Maven / Go 依賴並輸出 CycloneDX 標準，補齊委外與供應鏈安全盤點。",
   },
   {
     icon: Box,
     title: "Container / IaC / Secrets 掃描",
     desc: "容器映像、Terraform / K8s / CloudFormation 設定漂移、硬編碼金鑰三面向並行盤點，補齊 SAST / SBOM 之外的供應鏈與設定面風險。",
-    badge: "POC-ready",
   },
   {
     icon: Bug,
     title: "DAST 動態掃描",
     desc: "黑盒動態掃描補強 SAST 看不到的 runtime 風險（authn / session / injection / headers），與 SAST / CBOM / SBOM findings 同框追蹤。",
-    badge: "POC-ready",
   },
   {
     icon: Bot,
     title: "SAST-in-the-Loop / VULNFORGE",
-    desc: "把 SAST findings 轉成可審查、可修復、可追蹤的 AI review 工作流，這是 Professional tier 對抗傳統 SAST 的主要差異化。",
-    badge: "POC-ready",
+    desc: "把 SAST findings 轉成可審查、可修復、可追蹤的 AI review 工作流，繁中修復建議與主管可審核紀錄一次到位。",
   },
   {
     icon: Activity,
     title: "Executive Action Queue",
     desc: "管理儀表板彙整失敗掃描、待審核專案與高風險 CBOM finding，主管一進站就知道先處理什麼。",
-    badge: "GA",
   },
   {
     icon: Sliders,
     title: "Multi-dim Quality Gate",
     desc: "依 BU、嚴重度與風險門檻建立政策，讓開發、資安、主管審核使用同一套決策邏輯。",
-    badge: "GA",
   },
   {
     icon: Target,
     title: "F-ISAC 7 主題成熟度自評",
     desc: "對應治理 / 風險 / 合規 / 開發安全 / 資料保護 / 監控應變 / 第三方七主題，0-5 評分換算 L1-L5 並輸出雷達圖。",
-    badge: "POC-ready",
   },
   {
     icon: Lock,
     title: "SOC 2 / Audit Log",
     desc: "Append-only audit log、登入失敗鎖定、季度 access review 自動產出，直接對應 ISO 27001 / SOC 2 evidence pack 與內稽要求。",
-    badge: "GA",
   },
   {
     icon: Users,
     title: "SAML 2.0 SSO + JIT",
     desc: "對接主流 SAML 2.0 IdP，JIT provisioning 自動建立帳號與 BU 權限，無須 IT 預先建檔；登入軌跡併入 audit log。",
-    badge: "GA",
   },
   {
     icon: ShieldCheck,
     title: "部署安全與授權控管",
-    desc: "正式與客戶環境 seed 強制自訂管理員密碼，授權服務支援 phone-home 與硬體指紋綁定。",
-    badge: "GA",
+    desc: "正式與客戶環境強制自訂管理員密碼，授權服務支援 phone-home 與硬體指紋綁定。",
   },
   {
     icon: GitBranch,
     title: "GitHub App / JIRA / Slack 整合",
     desc: "GitHub App 自動 PR 留言 + status check；JIRA / Azure DevOps 雙向同步；Slack / Teams 出站通知。",
-    badge: "GA",
   },
   {
     icon: Building2,
@@ -129,12 +116,8 @@ export default function Features() {
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">核心功能</h2>
           <p className="text-gray-400 text-lg">
-            可展示功能 · 對應 SonarQube / Snyk / Checkmarx 競品比較與金管會採購情境
+            完整治理矩陣：SAST · DAST · CBOM/PQC · SBOM/SCA · Container/IaC/Secrets · SAST-in-the-Loop · SOC 2 / SAML · F-ISAC · Group CISO
           </p>
-          <div className="inline-flex items-center gap-2 mt-4 px-4 py-1.5 rounded-full bg-[#F59E0B]/10 border border-[#F59E0B]/30 text-[#FBBF24] text-xs font-medium">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#FBBF24] animate-pulse"></span>
-            2026 demo stack: SAST-in-the-Loop · CBOM/PQC · SBOM/SCA · Evidence Export · Action Queue
-          </div>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -148,21 +131,8 @@ export default function Features() {
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 className="group bg-[#1A2332] border border-[#243447] rounded-xl p-6 border-l-4 border-l-[#0D9488] card-glow transition-all duration-300 hover:-translate-y-1"
               >
-                <div className="flex items-center justify-between mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-[#0D9488]/10 flex items-center justify-center group-hover:bg-[#0D9488]/20 transition-colors">
-                    <Icon size={20} className="text-[#14B8A6]" />
-                  </div>
-                  {f.badge && (
-                    <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
-                      f.badge === "POC-ready"
-                        ? "bg-[#F59E0B]/15 text-[#FBBF24] border border-[#F59E0B]/30"
-                        : f.badge === "2026 H2"
-                          ? "bg-[#8B5CF6]/15 text-[#C4B5FD] border border-[#8B5CF6]/30"
-                        : "bg-[#14B8A6]/15 text-[#14B8A6] border border-[#14B8A6]/30"
-                    }`}>
-                      {f.badge}
-                    </span>
-                  )}
+                <div className="w-10 h-10 rounded-lg bg-[#0D9488]/10 flex items-center justify-center mb-4 group-hover:bg-[#0D9488]/20 transition-colors">
+                  <Icon size={20} className="text-[#14B8A6]" />
                 </div>
                 <h3 className="text-lg font-semibold mb-2 text-white">
                   {f.title}
