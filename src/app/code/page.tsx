@@ -1,13 +1,20 @@
 import Link from "next/link"
 import {
   ArrowRight,
+  Box,
+  Bug,
+  Building2,
   CheckCircle2,
   CloudOff,
   Code2,
   FileCheck2,
+  GitBranch,
   KeySquare,
   Layers,
+  Lock,
   ShieldCheck,
+  Target,
+  Users,
   Workflow as WorkflowIcon,
 } from "lucide-react"
 import Navbar from "@/components/navbar"
@@ -30,9 +37,44 @@ const capabilities = [
     desc: "建立依賴清單與第三方元件風險視圖,支援採購與稽核情境。",
   },
   {
+    icon: Box,
+    title: "Container / IaC / Secrets 掃描",
+    desc: "整合 Trivy、Checkov、Gitleaks 三套真實 CLI,補齊容器映像、Terraform / K8s 設定與硬編碼金鑰盤點。",
+  },
+  {
+    icon: Bug,
+    title: "DAST 動態掃描",
+    desc: "OWASP ZAP 整合,補強 SAST 看不到的 runtime 風險,POC 階段可串接您的 staging 環境。",
+  },
+  {
     icon: WorkflowIcon,
     title: "Quality Gate + 主管審核",
     desc: "依 findings 嚴重度設計可配置的閘門規則,審核紀錄完整留痕,可作為金融合規證據。",
+  },
+  {
+    icon: GitBranch,
+    title: "GitHub App / JIRA / Slack 整合",
+    desc: "GitHub App 自動 PR 留言 + status check;JIRA / Azure DevOps 雙向同步;Slack / Teams 出站通知可依嚴重度分流。",
+  },
+  {
+    icon: Lock,
+    title: "SOC 2 / Audit Log",
+    desc: "append-only audit log、login lockout、季度 access review,可作為 ISO / SOC 2 evidence pack 的稽核資料。",
+  },
+  {
+    icon: Users,
+    title: "SAML 2.0 SSO + JIT",
+    desc: "對接 Okta、Azure AD、Google Workspace 等 IdP;Just-In-Time provisioning 自動建立帳號與對應 BU 權限。",
+  },
+  {
+    icon: Target,
+    title: "F-ISAC 7 主題成熟度自評",
+    desc: "對應治理 / 風險 / 合規 / 開發安全 / 資料保護 / 監控應變 / 第三方七主題,0-5 評分換算 L1-L5 並輸出雷達圖。",
+  },
+  {
+    icon: Building2,
+    title: "集團 CISO 多租戶視圖",
+    desc: "母公司 CISO 跨子公司彙整 Critical 漏洞、SLA 過期與 SDLC 覆蓋度;子公司互相不可見,符合資料隔離原則。",
   },
   {
     icon: FileCheck2,
@@ -109,7 +151,7 @@ export default function CodePage() {
 
       <section className="px-6 py-16">
         <div className="mx-auto max-w-6xl">
-          <h2 className="mb-10 text-3xl font-bold">五個核心能力</h2>
+          <h2 className="mb-10 text-3xl font-bold">核心能力</h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {capabilities.map((cap) => {
               const Icon = cap.icon

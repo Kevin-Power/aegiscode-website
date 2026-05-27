@@ -12,6 +12,9 @@ import {
   Activity,
   Sliders,
   Globe,
+  Box,
+  Target,
+  GitBranch,
 } from "lucide-react";
 
 const features = [
@@ -34,6 +37,12 @@ const features = [
     badge: "2026 H2",
   },
   {
+    icon: Box,
+    title: "Container / IaC / Secrets 掃描",
+    desc: "整合 Trivy、Checkov、Gitleaks 三套真實 CLI，補齊容器映像、Terraform / K8s 設定與硬編碼金鑰盤點。",
+    badge: "POC-ready",
+  },
+  {
     icon: Bot,
     title: "SAST-in-the-Loop / VULNFORGE",
     desc: "把 SAST findings 轉成可審查、可修復、可追蹤的 AI review 工作流，這是 Professional tier 對抗傳統 SAST 的主要差異化。",
@@ -52,15 +61,27 @@ const features = [
     badge: "GA",
   },
   {
+    icon: Target,
+    title: "F-ISAC 7 主題成熟度自評",
+    desc: "對應治理 / 風險 / 合規 / 開發安全 / 資料保護 / 監控應變 / 第三方七主題，0-5 評分換算 L1-L5 並輸出雷達圖。",
+    badge: "POC-ready",
+  },
+  {
     icon: ShieldCheck,
     title: "部署安全與授權控管",
     desc: "正式與客戶環境 seed 強制自訂管理員密碼，授權服務支援 phone-home 與硬體指紋綁定。",
     badge: "GA",
   },
   {
+    icon: GitBranch,
+    title: "GitHub App / JIRA / Slack 整合",
+    desc: "GitHub App 自動 PR 留言 + status check；JIRA / Azure DevOps 雙向同步；Slack / Teams 出站通知。",
+    badge: "GA",
+  },
+  {
     icon: Building2,
-    title: "多 BU + 審核工作流",
-    desc: "三級權限（管理員 / BU 主管 / 使用者），完整審核流程，符合企業內控與稽核合規需求。",
+    title: "多 BU + 集團 CISO 視圖",
+    desc: "三級權限（管理員 / BU 主管 / 使用者）+ 審核工作流；母公司 CISO 跨子公司彙整 Critical 漏洞與 SLA 風險。",
   },
   {
     icon: Globe,

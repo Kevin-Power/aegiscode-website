@@ -58,6 +58,22 @@ const faqs = [
     a: "AegisCode 會把 SAST findings 與 LLM 上下文審查結合，針對 Copilot、Claude、ChatGPT 等工具產生的程式碼提供繁中修復建議與主管可審核的紀錄。",
   },
   {
+    q: "Container / IaC / Secrets 掃描的範圍是什麼？",
+    a: "整合 Trivy（容器映像 + 設定）、Checkov（Terraform / K8s / Dockerfile / CloudFormation IaC）、Gitleaks（硬編碼 token / API key / 私鑰）三套真實 CLI。POC 階段會盤點您的 image registry、IaC repo 與 secret 範圍。",
+  },
+  {
+    q: "DAST 動態掃描怎麼跟 SAST 配合？",
+    a: "DAST 以 OWASP ZAP 為基礎，補強 SAST 看不到的 runtime 風險（authn、session、injection、CORS、headers 等）。POC 階段可串接您的 staging 環境，跟 SAST/CBOM/SBOM findings 一起進入主管審核。",
+  },
+  {
+    q: "F-ISAC 7 主題成熟度自評怎麼做？",
+    a: "對應 F-ISAC 治理 / 風險 / 合規 / 開發安全 / 資料保護 / 監控應變 / 第三方七大主題，逐題填寫 0-5 評分與備註，平台換算 L1-L5 成熟度並輸出雷達圖（含前次 vs 本次對照），整合進 Compliance Dashboard。",
+  },
+  {
+    q: "集團母公司能看子公司的全部漏洞嗎？",
+    a: "Enterprise 可規劃多租戶 Group CISO 視圖，母公司 CISO 跨 Organization 彙整子公司 Critical 漏洞、SLA 過期與 SDLC 覆蓋度；子公司之間互相不可見，符合資料隔離。適合金控、跨國集團與 SI 母公司管控子事業群場景。",
+  },
+  {
     q: "AegisCode Surface 跟 SecurityScorecard 原生 dashboard 差在哪？",
     a: "Surface 提供中文化治理工作流、修補優先順序、台灣法規對應、風險量化與顧問交付報告；原生 dashboard 是原始評分視圖。",
   },
