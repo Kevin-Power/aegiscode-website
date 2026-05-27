@@ -13,8 +13,11 @@ import {
   Sliders,
   Globe,
   Box,
-  Target,
+  Bug,
   GitBranch,
+  Lock,
+  Target,
+  Users,
 } from "lucide-react";
 
 const features = [
@@ -39,7 +42,13 @@ const features = [
   {
     icon: Box,
     title: "Container / IaC / Secrets 掃描",
-    desc: "整合 Trivy、Checkov、Gitleaks 三套真實 CLI，補齊容器映像、Terraform / K8s 設定與硬編碼金鑰盤點。",
+    desc: "容器映像、Terraform / K8s / CloudFormation 設定漂移、硬編碼金鑰三面向並行盤點，補齊 SAST / SBOM 之外的供應鏈與設定面風險。",
+    badge: "POC-ready",
+  },
+  {
+    icon: Bug,
+    title: "DAST 動態掃描",
+    desc: "黑盒動態掃描補強 SAST 看不到的 runtime 風險（authn / session / injection / headers），與 SAST / CBOM / SBOM findings 同框追蹤。",
     badge: "POC-ready",
   },
   {
@@ -65,6 +74,18 @@ const features = [
     title: "F-ISAC 7 主題成熟度自評",
     desc: "對應治理 / 風險 / 合規 / 開發安全 / 資料保護 / 監控應變 / 第三方七主題，0-5 評分換算 L1-L5 並輸出雷達圖。",
     badge: "POC-ready",
+  },
+  {
+    icon: Lock,
+    title: "SOC 2 / Audit Log",
+    desc: "Append-only audit log、登入失敗鎖定、季度 access review 自動產出，直接對應 ISO 27001 / SOC 2 evidence pack 與內稽要求。",
+    badge: "GA",
+  },
+  {
+    icon: Users,
+    title: "SAML 2.0 SSO + JIT",
+    desc: "對接主流 SAML 2.0 IdP，JIT provisioning 自動建立帳號與 BU 權限，無須 IT 預先建檔；登入軌跡併入 audit log。",
+    badge: "GA",
   },
   {
     icon: ShieldCheck,

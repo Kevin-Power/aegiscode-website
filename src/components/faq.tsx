@@ -59,11 +59,11 @@ const faqs = [
   },
   {
     q: "Container / IaC / Secrets 掃描的範圍是什麼？",
-    a: "整合 Trivy（容器映像 + 設定）、Checkov（Terraform / K8s / Dockerfile / CloudFormation IaC）、Gitleaks（硬編碼 token / API key / 私鑰）三套真實 CLI。POC 階段會盤點您的 image registry、IaC repo 與 secret 範圍。",
+    a: "涵蓋三大範圍：容器映像（含設定缺陷與已知 CVE）、IaC 模板（Terraform / K8s / Dockerfile / CloudFormation）、硬編碼秘密（token / API key / 私鑰 / DB password）。POC 階段會盤點您的 image registry、IaC repo 與 secret 邊界。",
   },
   {
     q: "DAST 動態掃描怎麼跟 SAST 配合？",
-    a: "DAST 以 OWASP ZAP 為基礎，補強 SAST 看不到的 runtime 風險（authn、session、injection、CORS、headers 等）。POC 階段可串接您的 staging 環境，跟 SAST/CBOM/SBOM findings 一起進入主管審核。",
+    a: "DAST 從黑盒視角掃描跑起來的應用，補強 SAST 看不到的 runtime 風險（authn、session、injection、CORS、headers 等）。POC 階段可串接您的 staging 環境，跟 SAST / CBOM / SBOM findings 一起進入主管審核。",
   },
   {
     q: "F-ISAC 7 主題成熟度自評怎麼做？",

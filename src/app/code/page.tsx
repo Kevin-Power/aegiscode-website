@@ -39,12 +39,12 @@ const capabilities = [
   {
     icon: Box,
     title: "Container / IaC / Secrets 掃描",
-    desc: "整合 Trivy、Checkov、Gitleaks 三套真實 CLI,補齊容器映像、Terraform / K8s 設定與硬編碼金鑰盤點。",
+    desc: "容器映像、Terraform / K8s / CloudFormation 設定漂移、硬編碼金鑰三面向並行盤點,補齊 SAST / SBOM 之外的供應鏈與設定面風險。",
   },
   {
     icon: Bug,
     title: "DAST 動態掃描",
-    desc: "OWASP ZAP 整合,補強 SAST 看不到的 runtime 風險,POC 階段可串接您的 staging 環境。",
+    desc: "黑盒動態掃描補強 SAST 看不到的 runtime 風險（authn / session / injection / headers）,POC 階段串接您的 staging 環境,問題與 SAST findings 同框追蹤。",
   },
   {
     icon: WorkflowIcon,
@@ -64,7 +64,7 @@ const capabilities = [
   {
     icon: Users,
     title: "SAML 2.0 SSO + JIT",
-    desc: "對接 Okta、Azure AD、Google Workspace 等 IdP;Just-In-Time provisioning 自動建立帳號與對應 BU 權限。",
+    desc: "對接主流 SAML 2.0 IdP,Just-In-Time provisioning 自動建立帳號與對應 BU 權限,無須 IT 預先建檔;登入軌跡併入 audit log。",
   },
   {
     icon: Target,
