@@ -3,30 +3,39 @@
 import { motion, useInView } from "framer-motion"
 import Link from "next/link"
 import {
+  Activity,
   ArrowRight,
   Code2,
   FileCheck2,
+  FileText,
   Globe2,
   KeySquare,
   Layers,
+  Lock,
   Scale,
   ShieldCheck,
   Sparkles,
+  Target,
+  Users,
 } from "lucide-react"
 import { useRef } from "react"
 
 const codeCaps = [
-  { icon: ShieldCheck, label: "SAST 弱點掃描" },
-  { icon: KeySquare, label: "CBOM / PQC 加密資產" },
-  { icon: Layers, label: "SBOM / SCA + 主管審核" },
-  { icon: FileCheck2, label: "繁中合規證據包" },
+  { icon: ShieldCheck, label: "SAST + DAST 完整掃描閉環" },
+  { icon: KeySquare, label: "CBOM / PQC 加密資產盤點" },
+  { icon: Layers, label: "SBOM / SCA + Container / IaC / Secrets" },
+  { icon: Target, label: "F-ISAC 7 主題成熟度自評" },
+  { icon: Lock, label: "SOC 2 / SAML SSO + 集團 CISO 視圖" },
+  { icon: FileCheck2, label: "繁中合規證據包 + 主管審核留痕" },
 ]
 
 const surfaceCaps = [
-  { icon: Globe2, label: "外部評分整合" },
-  { icon: Sparkles, label: "AI 修補建議 P0–P3" },
-  { icon: Scale, label: "台灣法規對應" },
-  { icon: FileCheck2, label: "顧問級 CISO 月報" },
+  { icon: Globe2, label: "外部評分整合 + 供應商風險彙整" },
+  { icon: Sparkles, label: "AI 修補建議 P0–P3 + 工時 / ROI 試算" },
+  { icon: Scale, label: "台灣法規對應（資安法 / 個資法 / ISO 27001）" },
+  { icon: Activity, label: "每週差異追蹤 + 修補任務追蹤" },
+  { icon: FileText, label: "顧問級 CISO 月報（董事會可呈交）" },
+  { icon: Users, label: "季度治理檢討 + 每月顧問解讀會議" },
 ]
 
 export default function DualPillars() {
@@ -64,7 +73,7 @@ export default function DualPillars() {
             </div>
             <h3 className="text-xl font-bold">內部程式碼資安治理</h3>
             <p className="mt-2 text-sm leading-7 text-gray-400">
-              SAST + CBOM/PQC + SBOM/SCA + 主管審核 + 繁中證據包。對象是研發團隊與資安 BU 管理者。
+              從 SAST、DAST、CBOM/PQC 到 F-ISAC 自評與 SOC 2 Audit Log，內部程式碼資安治理的完整閉環。對象是研發團隊、資安 BU 與集團 CISO。
             </p>
             <ul className="mt-6 space-y-3">
               {codeCaps.map((cap) => {
@@ -104,7 +113,7 @@ export default function DualPillars() {
             </div>
             <h3 className="text-xl font-bold">外部攻擊面治理</h3>
             <p className="mt-2 text-sm leading-7 text-gray-400">
-              評分整合 + AI 修補 + 法規對應 + CISO 月報 + 年度顧問訂閱。對象是 CISO 與管理層。
+              把外部評分、供應商風險、修補優先順序、台灣法規對應與顧問月報整合成 CISO 每月可向董事會交代的治理視圖。對象是 CISO、稽核與管理層。
             </p>
             <ul className="mt-6 space-y-3">
               {surfaceCaps.map((cap) => {
