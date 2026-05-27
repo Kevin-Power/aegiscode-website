@@ -31,7 +31,7 @@ const faqs = [
   },
   {
     q: "可以搭配 SecurityScorecard 或其他外部風險評分嗎？",
-    a: "可以作為 Enterprise POC 的 connector-ready 評估項目。AegisCode 可匯入 SecurityScorecard、BitSight 或客戶既有 EASM/TPRM 資料，將外部曝險、供應商 domain、內部 SAST、SBOM 與 CBOM 證據整合成主管治理視圖；正式串接範圍會依 API 授權與合約確認。",
+    a: "可以納入 Enterprise POC 評估範圍。AegisCode 可匯入 SecurityScorecard、BitSight 或客戶既有 EASM/TPRM 資料，將外部曝險、供應商 domain、內部 SAST、SBOM 與 CBOM 證據整合成主管治理視圖；正式串接範圍會依 API 授權與合約確認。",
   },
   {
     q: "公開價格在哪裡？",

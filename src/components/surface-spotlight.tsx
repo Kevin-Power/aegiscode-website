@@ -36,7 +36,7 @@ const riskRows = [
   ["開源供應鏈風險", "SBOM / SCA", "Medium"],
   ["加密資產風險", "CBOM / PQC", "High"],
   ["外部曝險評分", "Security rating import", "Review"],
-  ["第三方治理狀態", "Vendor domain mapping", "Ready"],
+  ["第三方治理狀態", "Vendor domain mapping", "已對接"],
 ];
 
 function riskTone(status: string): string {
@@ -62,7 +62,7 @@ export default function SurfaceSpotlight() {
           <div>
             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-sky-400/25 bg-sky-400/10 px-4 py-1.5 text-xs font-medium text-sky-200">
               <Globe2 className="h-4 w-4" />
-              外部風險治理包 / Sales-ready
+              外部風險治理包 · 年度顧問訂閱
             </div>
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
               AegisCode Surface — 從程式碼治理，延伸到外部曝險與供應商風險。
@@ -115,7 +115,7 @@ export default function SurfaceSpotlight() {
                 <h3 className="mt-1 text-xl font-bold text-white">AegisCode Governance Pack</h3>
               </div>
               <div className="rounded-lg border border-[#14B8A6]/30 bg-[#14B8A6]/10 px-3 py-2 text-xs font-semibold text-[#5EEAD4]">
-                POC-ready
+                董事會視圖
               </div>
             </div>
 

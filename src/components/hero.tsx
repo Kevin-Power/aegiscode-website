@@ -75,7 +75,7 @@ export default function Hero() {
                 <div className="text-xs text-gray-500">PQC migration governance</div>
               </div>
               <div className="rounded-full border border-[#14B8A6]/30 bg-[#14B8A6]/10 px-3 py-1 text-xs text-[#5EEAD4]">
-                POC-ready
+                金管會 PQC
               </div>
             </div>
 
