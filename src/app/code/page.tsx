@@ -2,15 +2,21 @@ import Link from "next/link"
 import {
   ArrowRight,
   Briefcase,
+  Box,
+  Bug,
   Building2,
   CheckCircle2,
   CloudOff,
   Code2,
   Cpu,
   FileCheck2,
+  GitBranch,
   KeySquare,
   Layers,
+  Lock,
   ShieldCheck,
+  Target,
+  Users,
   Workflow as WorkflowIcon,
 } from "lucide-react"
 import Navbar from "@/components/navbar"
@@ -43,12 +49,47 @@ const capabilities = [
     desc: "建立依賴清單與第三方元件風險視圖,支援採購與稽核情境。",
   },
   {
-    icon: FileCheck2,
+    icon: Box,
+    title: "Container / IaC / Secrets 掃描",
+    desc: "容器映像、Terraform / K8s / CloudFormation 設定漂移、硬編碼金鑰三面向並行盤點,補齊 SAST / SBOM 之外的供應鏈與設定面風險。",
+  },
+  {
+    icon: Bug,
+    title: "DAST 動態掃描",
+    desc: "黑盒動態掃描補強 SAST 看不到的 runtime 風險（authn / session / injection / headers）,POC 階段串接您的 staging 環境,問題與 SAST findings 同框追蹤。",
+  },
+  {
+    icon: WorkflowIcon,
     title: "Quality Gate + 主管審核",
     desc: "依 findings 嚴重度設計閘門規則,主管審核留痕完整,可作為金融合規證據。",
   },
   {
-    icon: Code2,
+    icon: GitBranch,
+    title: "GitHub App / JIRA / Slack 整合",
+    desc: "GitHub App 自動 PR 留言 + status check;JIRA / Azure DevOps 雙向同步;Slack / Teams 出站通知可依嚴重度分流。",
+  },
+  {
+    icon: Lock,
+    title: "SOC 2 / Audit Log",
+    desc: "append-only audit log、login lockout、季度 access review,可作為 ISO / SOC 2 evidence pack 的稽核資料。",
+  },
+  {
+    icon: Users,
+    title: "SAML 2.0 SSO + JIT",
+    desc: "對接主流 SAML 2.0 IdP,Just-In-Time provisioning 自動建立帳號與對應 BU 權限,無須 IT 預先建檔;登入軌跡併入 audit log。",
+  },
+  {
+    icon: Target,
+    title: "F-ISAC 7 主題成熟度自評",
+    desc: "對應治理 / 風險 / 合規 / 開發安全 / 資料保護 / 監控應變 / 第三方七主題,0-5 評分換算 L1-L5 並輸出雷達圖。",
+  },
+  {
+    icon: Building2,
+    title: "集團 CISO 多租戶視圖",
+    desc: "母公司 CISO 跨子公司彙整 Critical 漏洞、SLA 過期與 SDLC 覆蓋度;子公司互相不可見,符合資料隔離原則。",
+  },
+  {
+    icon: FileCheck2,
     title: "繁中合規證據包",
     desc: "報告、修補建議、稽核紀錄全繁中化,可直接用於 POC 與客戶內部簡報。",
   },
@@ -169,7 +210,7 @@ export default function CodePage() {
 
       <section className="px-6 py-16">
         <div className="mx-auto max-w-6xl">
-          <h2 className="mb-10 text-3xl font-bold">六個核心能力</h2>
+          <h2 className="mb-10 text-3xl font-bold">核心能力</h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {capabilities.map((cap) => {
               const Icon = cap.icon

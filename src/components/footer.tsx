@@ -15,7 +15,7 @@ export default function Footer() {
           <p>AegisCode 是 Yilutek Security Suite 的程式碼與攻擊面治理產品線</p>
           <p>Yilutek Co., Ltd.</p>
           <p>正式網站：https://aegiscode.yilutek.com</p>
-          <p>統一編號與登記地址：採購建檔時提供</p>
+          <p>統一編號：90898596</p>
           <p>
             聯絡信箱：
             <a href="mailto:sales@aegiscode.com" className="text-[#14B8A6] hover:underline">

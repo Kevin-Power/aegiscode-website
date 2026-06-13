@@ -5,8 +5,8 @@ import { ArrowRight, CheckCircle2, KeyRound, ShieldCheck } from "lucide-react";
 
 const trustItems = [
   { label: "矛尖能力", value: "CBOM/PQC 加密資產治理" },
-  { label: "整合能力", value: "SAST + 外部風險評分" },
-  { label: "POC 期程", value: "30 天 Code POC 開放中" },
+  { label: "治理閉環", value: "Code 內部 + Surface 外部雙軌" },
+  { label: "合規對應", value: "金管會 PQC / SOC 2 / F-ISAC" },
   { label: "對象", value: "金融、政府與高法遵 CISO" },
 ];
 
@@ -38,11 +38,11 @@ export default function Hero() {
           </h1>
 
           <p className="mb-5 max-w-2xl text-[19px] font-medium leading-relaxed text-gray-100 sm:text-2xl">
-            台灣金融業的加密資產盤點與後量子遷移治理平台。
+            台灣金融與高法遵組織的程式碼與攻擊面治理平台。
           </p>
 
           <p className="mb-10 max-w-2xl text-base leading-8 text-gray-400 sm:text-lg">
-            AegisCode 以 CBOM/PQC inventory 為核心，整合 SAST 與外部風險評分，將程式碼、加密資產與攻擊面證據收斂成主管可審核的合規證據包。
+            從 CBOM/PQC 到 SOC 2 Audit Log，從 SAST/DAST 到外部攻擊面，AegisCode 把內外風險證據收斂成董事會可呈交的合規證據包，對應金管會、SOC 2 與 F-ISAC 治理框架。
           </p>
 
           <div className="flex flex-col gap-4 sm:flex-row">
@@ -75,7 +75,7 @@ export default function Hero() {
                 <div className="text-xs text-gray-500">PQC migration governance</div>
               </div>
               <div className="rounded-full border border-[#14B8A6]/30 bg-[#14B8A6]/10 px-3 py-1 text-xs text-[#5EEAD4]">
-                POC-ready
+                金管會 PQC
               </div>
             </div>
 
