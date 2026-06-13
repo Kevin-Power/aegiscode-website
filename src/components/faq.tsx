@@ -51,7 +51,7 @@ const faqs = [
   },
   {
     q: "可以先試用嗎？",
-    a: "可以先申請 30 天 POC。團隊會協助確認掃描範圍、Demo 情境與合規交付需求，再提供導入建議。",
+    a: "可以先申請 30 天 POC。團隊會協助確認掃描範圍、評估情境與合規交付需求，再提供導入建議。",
   },
   {
     q: "AI 程式碼健檢是什麼？",
@@ -82,8 +82,8 @@ const faqs = [
     a: "是，客戶提供 API token。Surface 也支援 BitSight 或客戶既有 EASM 工具的訊號整合。",
   },
   {
-    q: "CISO 月報長什麼樣？可以看 sample 嗎？",
-    a: "可以，到資源中心 /resources 下載匿名化的 sample PDF。",
+    q: "CISO 月報長什麼樣？可以看範本嗎？",
+    a: "可以，到資源中心 /resources 下載匿名化的月報範本 PDF。",
   },
   {
     q: "AegisCode Surface 是訂閱還是專案？",

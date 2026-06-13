@@ -107,7 +107,7 @@ export default function Navbar() {
             href="/trial"
             className="rounded-lg bg-[#0D9488] px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-[#0F766E]"
           >
-            預約 Demo
+            預約導覽
           </Link>
         </div>
 
@@ -152,7 +152,7 @@ export default function Navbar() {
               onClick={() => setMobileOpen(false)}
               className="rounded-lg bg-[#0D9488] px-5 py-2 text-center text-sm font-medium text-white transition-colors hover:bg-[#0F766E]"
             >
-              預約 Demo
+              預約導覽
             </Link>
           </div>
         </div>

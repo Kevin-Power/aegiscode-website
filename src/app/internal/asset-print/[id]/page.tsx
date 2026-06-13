@@ -20,7 +20,7 @@ const KNOWN_IDS = new Set([
 
 const TITLES: Record<string, string> = {
   "surface-proposal": "AegisCode Surface 服務說明書",
-  "ciso-monthly-sample": "AegisCode Surface CISO 月報 sample",
+  "ciso-monthly-sample": "AegisCode Surface CISO 月報範本",
   "tw-compliance-matrix": "台灣資安法規對應一覽",
 }
 
@@ -428,9 +428,9 @@ function ServiceProposalPage() {
 function CisoMonthlySamplePage() {
   return (
     <>
-      <BrandHeader subtitle="Surface — CISO 月報 sample(匿名化)" />
+      <BrandHeader subtitle="Surface — CISO 月報範本(匿名化)" />
       <h1 className="doc-title">外部攻擊面治理月報 — 2026 年 4 月</h1>
-      <p className="doc-subtitle">匿名化 sample · 不含真實客戶資料</p>
+      <p className="doc-subtitle">匿名化範本 · 不含真實客戶資料</p>
 
       <h2 className="section-title">本月 KPI</h2>
       <div className="kpi-grid avoid-break">
@@ -464,7 +464,7 @@ function CisoMonthlySamplePage() {
       </p>
       <p>
         <em>
-          備註:本月報為 sample 資料,實際客戶月報會內嵌平台產生的趨勢圖、
+          備註:本月報為匿名化範本資料，實際客戶月報會內嵌平台產生的趨勢圖、
           熱區雷達與 90 天滾動歷史比較。
         </em>
       </p>
@@ -577,7 +577,7 @@ function CisoMonthlySamplePage() {
 
       <p>
         <em>
-          本月報為產品 sample,實際客戶月報依範圍客製
+          本月報為產品範本，實際客戶月報依範圍客製
           (Domain 數量、整合的外部評分平台、法規對應深度皆可調整)。
         </em>
       </p>

@@ -101,10 +101,10 @@ const faqJsonLd = {
     },
     {
       "@type": "Question",
-      name: "CISO 月報長什麼樣?可以看 sample 嗎?",
+      name: "CISO 月報長什麼樣？可以看範本嗎？",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "可,到 /resources 下載匿名化的 sample PDF。",
+        text: "可以，到 /resources 下載匿名化的月報範本 PDF。",
       },
     },
     {

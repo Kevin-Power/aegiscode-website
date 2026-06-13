@@ -35,7 +35,7 @@ const surfaceTracks = [
 
 const pocItems = [
   "SAST findings 與 AI 修復建議審核流程",
-  "CBOM/PQC 加密資產盤點與 portfolio demo",
+  "CBOM/PQC 加密資產盤點與 portfolio 導覽",
   "外部曝險資料、供應商 domain 與內部證據整合",
   "集團 CISO 視圖、稽核摘要與主管報告樣本",
   "SSO、資料留存、DPA、地端或私有雲部署需求盤點",

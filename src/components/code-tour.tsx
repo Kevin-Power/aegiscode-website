@@ -92,7 +92,7 @@ export default function CodeTour() {
       <div className="mx-auto max-w-6xl">
         <h2 className="mb-3 text-3xl font-bold">產品畫面導覽</h2>
         <p className="mb-8 max-w-3xl text-sm leading-7 text-gray-400">
-          4 個核心模組依 demo 流程排列。點選分頁切換,內容為 demo 情境 mock,僅作示意。
+          4 個核心模組依產品導覽流程排列。點選分頁切換，查看匿名化金融情境中的治理證據與審核節點。
         </p>
 
         {/* Mobile: select */}

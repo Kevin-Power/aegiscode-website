@@ -131,7 +131,7 @@ const productFaqItems = [
   },
   {
     q: "30 天 POC 可以評估到什麼程度?",
-    a: "POC 涵蓋 SAST findings 展示、CBOM/PQC 盤點 demo、SBOM/SCA 報告樣本、Quality Gate 試跑,以及部署與稽核需求盤點。POC 結束時您能拿到一份完整的 Evidence Pack 樣本與導入建議。",
+    a: "POC 涵蓋 SAST findings 展示、CBOM/PQC 盤點、SBOM/SCA 報告範本、Quality Gate 試跑，以及部署與稽核需求盤點。POC 結束時您能拿到一份完整的 Evidence Pack 範本與導入建議。",
   },
 ]
 
@@ -151,7 +151,7 @@ const deploymentOptions = [
 
 const pocDeliverables = [
   "SAST findings 與 AI 修復建議展示",
-  "CBOM / PQC 加密資產盤點 Demo",
+  "CBOM / PQC 加密資產盤點導覽",
   "SBOM / SCA 報告與稽核證據包樣本",
   "Quality Gate 與主管審核紀錄試跑",
   "部署、SSO、資料留存與 DPA 需求盤點",

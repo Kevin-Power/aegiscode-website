@@ -145,7 +145,7 @@ export async function POST(req: NextRequest): Promise<Response> {
         track,
         instructions:
           track === "CODE"
-            ? "POC request received. AegisCode sales will contact you to schedule the demo and issue an evaluation license after environment readiness is confirmed."
+            ? "POC request received. AegisCode sales will contact you to schedule the product walkthrough and issue an evaluation license after environment readiness is confirmed."
             : track === "SURFACE"
               ? "Surface 諮詢申請已建立。顧問會在 1-2 個工作天內聯繫,先確認 Domain 規模、現有評分授權與時程。"
               : "已收到 Code + Surface 雙產品評估申請。顧問會聯繫您安排合併評估流程。",

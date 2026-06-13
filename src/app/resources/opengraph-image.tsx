@@ -58,7 +58,7 @@ export default async function Image() {
               lineHeight: 1.3,
             }}
           >
-            Surface proposal · CISO monthly sample · TW compliance matrix.
+            Surface proposal · CISO monthly template · TW compliance matrix.
           </div>
         </div>
 
@@ -86,7 +86,7 @@ export default async function Image() {
                 background: "rgba(110,231,183,0.08)",
               }}
             >
-              CISO sample
+              CISO template
             </span>
             <span
               style={{

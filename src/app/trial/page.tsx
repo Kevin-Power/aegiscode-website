@@ -113,8 +113,8 @@ function TrialForm() {
         ) : (
           <div className="mb-4 rounded-lg border border-[#243447] bg-[#0D1521]/70 p-4 text-sm text-gray-300">
             {isAdvisory
-              ? "我們已收到您的需求。在此期間,您可以先在資源中心下載服務說明書與 CISO 月報 sample,讓內部相關人員先建立共識。"
-              : "我們已收到申請,顧問會先確認 Demo 情境、部署條件與資料留存需求,再提供評估授權。"}
+              ? "我們已收到您的需求。在此期間，您可以先在資源中心下載服務說明書與 CISO 月報範本，讓內部相關人員先建立共識。"
+              : "我們已收到申請，顧問會先確認評估情境、部署條件與資料留存需求，再提供評估授權。"}
           </div>
         )}
         {isAdvisory ? (
@@ -377,7 +377,7 @@ export default function TrialPage() {
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-10">
             <h1 className="text-4xl sm:text-5xl font-bold mb-3 gradient-text glow-teal">
-              預約 CBOM Demo
+              預約 CBOM 導覽
             </h1>
             <p className="text-gray-400 text-lg">
               30 天 POC，免信用卡，先確認治理工作流、部署條件與合規交付範圍。

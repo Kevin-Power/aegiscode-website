@@ -43,7 +43,7 @@ export default function RoiPage() {
               href="/trial"
               className="inline-flex items-center justify-center rounded-lg bg-[#0D9488] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#0F766E]"
             >
-              預約 CBOM Demo
+              預約 CBOM 導覽
             </Link>
             <a
               href="mailto:sales@aegiscode.com"

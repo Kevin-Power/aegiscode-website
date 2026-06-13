@@ -35,7 +35,7 @@ export default function ReportFlip() {
       <div className="mx-auto max-w-5xl">
         <h2 className="mb-3 text-3xl font-bold">月報預覽 — 3 頁節錄</h2>
         <p className="mb-8 max-w-3xl text-sm leading-7 text-gray-400">
-          匿名化情境示意,展示董事會層級可閱讀的版面。完整 sample PDF 可在資源中心下載。
+          匿名化情境範本，展示董事會層級可閱讀的版面。完整月報範本可在資源中心下載。
         </p>
 
         <div className="relative rounded-2xl border border-[#243447] bg-[#0F1923] p-6 sm:p-10">
@@ -78,7 +78,7 @@ export default function ReportFlip() {
             href="/resources"
             className="text-sm text-sky-300 underline-offset-4 hover:underline"
           >
-            下載完整 CISO 月報 sample PDF →
+            下載完整 CISO 月報範本 →
           </Link>
         </div>
       </div>

@@ -15,7 +15,7 @@ const proofItems = [
   {
     icon: KeyRound,
     title: "CBOM/PQC Portfolio",
-    desc: "金融情境 demo 可快速產出加密資產、PQC 遷移風險與主管摘要。",
+    desc: "以匿名化金融情境快速產出加密資產、PQC 遷移風險與主管摘要。",
   },
   {
     icon: FileDown,
@@ -30,7 +30,7 @@ const proofItems = [
   {
     icon: Server,
     title: "Enterprise Delivery Guard",
-    desc: "POC 與客戶環境採用明確的啟用條件、權限控管與交付檢查，避免 demo 設定誤入正式環境。",
+    desc: "POC 與客戶環境採用明確的啟用條件、權限控管與交付檢查，確保評估範圍與正式導入邊界清楚分離。",
   },
 ];
 
@@ -61,7 +61,7 @@ export default function ProductProof() {
             <div className="mt-8 grid grid-cols-3 gap-4">
               {[
                 ["CBOM", "portfolio 快速產出"],
-                ["Demo", "金融情境一鍵生成"],
+                ["POC", "金融情境導覽"],
                 ["DOI", "10.3390/math14061072"],
               ].map(([value, label]) => (
                 <div key={label} className="rounded-xl border border-[#243447] bg-[#1A2332] p-4">

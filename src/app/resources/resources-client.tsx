@@ -31,7 +31,7 @@ const assets: Asset[] = [
   },
   {
     id: "ciso-monthly-sample.pdf",
-    title: "CISO 月報 sample(匿名化)",
+    title: "CISO 月報範本(匿名化)",
     desc: "真實顧客月報的匿名化版本,讓 CISO 在簽約前先看到「我們交付什麼」。",
     bullets: [
       "風險量化、趨勢與 Top Backlog",

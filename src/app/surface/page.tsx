@@ -128,7 +128,7 @@ export default function SurfacePage() {
               href="/resources"
               className="inline-flex items-center justify-center rounded-lg border border-[#243447] px-6 py-3 text-sm font-semibold text-gray-300 transition hover:border-[#14B8A6] hover:text-white"
             >
-              下載 CISO 月報 sample
+              下載 CISO 月報範本
             </Link>
           </div>
         </div>
@@ -213,14 +213,14 @@ export default function SurfacePage() {
             想看真實 CISO 月報長什麼樣?
           </h2>
           <p className="mt-3 text-gray-300">
-            匿名化的 sample PDF 可以在資源中心下載。
+            匿名化的月報範本 PDF 可以在資源中心下載。
           </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
             <Link
               href="/resources"
               className="inline-flex items-center justify-center rounded-lg bg-[#0D9488] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#0F766E]"
             >
-              下載月報 sample
+              下載月報範本
             </Link>
             <Link
               href="/trial?track=SURFACE"
