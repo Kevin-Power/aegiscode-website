@@ -84,6 +84,16 @@ const TW_COMPLIANCE_REGULATIONS: Array<{
       "A.5.23 雲端服務與第三方風險",
     ],
   },
+  {
+    title: "金融業後量子密碼遷移參考指引",
+    subtitle: "金管會 2026/6/18 發布 · 準備期 2026–2027",
+    items: [
+      "密碼技術清冊 CBOM 盤點(AI 自動化輔助)",
+      "加密敏捷性與密碼反模式清除",
+      "風險導向遷移優先序評估",
+      "供應鏈 SBOM 與可離線驗證證據鏈",
+    ],
+  },
 ]
 
 function PrintShell({ children }: { children: ReactNode }) {
@@ -593,16 +603,16 @@ function TwComplianceMatrixPage() {
       <BrandHeader subtitle="台灣資安法規對應一覽" />
       <h1 className="doc-title">台灣資安法規對應一覽</h1>
       <p className="doc-subtitle">
-        資通安全管理法 × 個資法 × ISO 27001:2022 對應條目
+        資通安全管理法 × 個資法 × ISO 27001:2022 × 金融業 PQC 遷移指引(2026/6/18) 對應條目
       </p>
 
       <p>
-        AegisCode Surface 內建中文化法規對應,讓資安修補的每一步都能直接連到
-        法規責任,適合金融、政府與高法遵組織的稽核情境。下表為三條法規最常被
+        AegisCode 內建中文化法規對應,讓資安修補與加密盤點的每一步都能直接連到
+        法規責任,適合金融、政府與高法遵組織的稽核情境。下表為四項法規／指引最常被
         稽核的條目並列對照,可貼進稽核準備文件作為快速索引。
       </p>
 
-      <h2 className="section-title">三條法規並列對照</h2>
+      <h2 className="section-title">四項法規 / 指引並列對照</h2>
       <div className="three-col-grid">
         {TW_COMPLIANCE_REGULATIONS.map((reg) => (
           <div className="regulation-card avoid-break" key={reg.title}>
