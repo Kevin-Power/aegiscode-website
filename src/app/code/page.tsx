@@ -22,6 +22,7 @@ import {
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import CodeProofStrip from "@/components/code-proof-strip"
+import PqcAlignment from "@/components/pqc-alignment"
 import OutcomeVignette from "@/components/outcome-vignette"
 import CodeTour from "@/components/code-tour"
 import RoiMini from "@/components/roi-mini"
@@ -31,12 +32,12 @@ const capabilities = [
   {
     icon: KeySquare,
     title: "CBOM / PQC 加密資產",
-    desc: "盤點程式碼中的加密用法,評估後量子遷移與長期資料保護風險。矛尖能力。",
+    desc: "盤點程式碼中的加密用法,對應金管會《後量子密碼遷移參考指引》(2026/6/18) 準備期的 CBOM 建置。指引明文鼓勵以 AI 自動化盤點——正是 AegisCode 的核心引擎。矛尖能力。",
   },
   {
     icon: ShieldCheck,
     title: "SAST 弱點掃描",
-    desc: "覆蓋 12 種常見企業開發語言,弱點可直接進入主管審核工作流。",
+    desc: "覆蓋 20+ 種常見企業開發語言,弱點可直接進入主管審核工作流。",
   },
   {
     icon: WorkflowIcon,
@@ -112,7 +113,7 @@ const outcomeCards = [
     icon: Cpu,
     scenario: "某製造/IoT 廠多語言治理",
     pain: "依賴工具拼接,每個語言各管各的,主管審核斷裂",
-    outcome: "單一 Quality Gate 整合 12 種開發語言,主管審核留痕一致",
+    outcome: "單一 Quality Gate 整合 20+ 種開發語言,主管審核留痕一致",
   },
 ]
 
@@ -201,6 +202,8 @@ export default function CodePage() {
       </section>
 
       <CodeProofStrip />
+
+      <PqcAlignment />
 
       <OutcomeVignette
         title="3 個典型客戶情境"

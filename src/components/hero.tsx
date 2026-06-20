@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2, KeyRound, ShieldCheck } from "lucide-react";
+import { ArrowRight, CheckCircle2, KeyRound, Scale, ShieldCheck } from "lucide-react";
 
 const trustItems = [
   { label: "矛尖能力", value: "CBOM/PQC 加密資產治理" },
@@ -41,9 +41,22 @@ export default function Hero() {
             台灣金融與高法遵組織的程式碼與攻擊面治理平台。
           </p>
 
-          <p className="mb-10 max-w-2xl text-base leading-8 text-gray-400 sm:text-lg">
+          <p className="mb-8 max-w-2xl text-base leading-8 text-gray-400 sm:text-lg">
             從 CBOM/PQC 到 SOC 2 Audit Log，從 SAST/DAST 到外部攻擊面，AegisCode 把內外風險證據收斂成董事會可呈交的合規證據包，對應金管會、SOC 2 與 F-ISAC 治理框架。
           </p>
+
+          <a
+            href="/code#pqc"
+            className="mb-10 flex items-start gap-3 rounded-xl border border-amber-400/30 bg-amber-400/[0.07] px-4 py-3 transition hover:border-amber-400/55"
+          >
+            <span className="mt-0.5 inline-flex shrink-0 items-center gap-1.5 rounded-md bg-amber-400/15 px-2 py-1 text-[11px] font-semibold tracking-wide text-amber-200">
+              <Scale size={12} />
+              2026/6/18 新法規
+            </span>
+            <p className="text-sm leading-6 text-amber-100/90">
+              金管會已發布《金融業後量子密碼遷移參考指引》——準備期 2026–2027 第一項任務即建立 CBOM，指引明文鼓勵以 AI 自動化盤點，採購窗口已開啟。
+            </p>
+          </a>
 
           <div className="flex flex-col gap-4 sm:flex-row">
             <a
@@ -118,7 +131,7 @@ export default function Hero() {
             <div className="mt-4 flex items-start gap-3 rounded-lg border border-[#14B8A6]/25 bg-[#14B8A6]/10 p-4">
               <KeyRound className="mt-0.5 h-5 w-5 shrink-0 text-[#14B8A6]" />
               <p className="text-sm leading-relaxed text-gray-300">
-                RSA、MD5、硬編 IV、短金鑰與 PQC 遷移風險，全部進入同一份可審核證據鏈。
+                RSA、MD5、硬編 IV、短金鑰與後量子遷移風險全部進入同一份可審核證據鏈。HNDL（先竊取、待量子破解）讓今天加密的資料未來被解密——遷移不能等 2035。
               </p>
             </div>
           </div>

@@ -7,7 +7,7 @@ const reviewOutputs = [
   "SAST findings 與 LLM 上下文合併判讀",
   "繁體中文修復建議與審核摘要",
   "主管可追蹤的接受風險、誤判、修復紀錄",
-  "支援 Copilot、Claude、ChatGPT 生成程式碼的二次檢查",
+  "支援 AI 助手與 Copilot 類工具生成程式碼的二次檢查",
 ];
 
 const dimensions = [
@@ -42,7 +42,7 @@ export default function AiHealthCheck() {
             AI 程式碼健檢與 SAST-in-the-Loop 審查
           </h2>
           <p className="mx-auto max-w-3xl text-lg leading-relaxed text-gray-400">
-            AegisCode 整合 SAST findings 與 LLM 上下文審查，為 Copilot、Claude、ChatGPT
+            AegisCode 整合 SAST findings 與 LLM 上下文審查，為 AI 助手與 Copilot 類工具
             生成的程式碼提供繁中工作流的健檢與修復建議。
           </p>
         </motion.div>

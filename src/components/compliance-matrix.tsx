@@ -39,6 +39,16 @@ const regulations: Array<{
       "A.5.23 雲端服務與第三方風險",
     ],
   },
+  {
+    title: "金融業後量子密碼遷移參考指引",
+    subtitle: "金管會 2026/6/18 發布 · 準備期 2026–2027",
+    items: [
+      "密碼技術清冊 CBOM 盤點(AI 自動化輔助)",
+      "加密敏捷性與密碼反模式清除",
+      "風險導向遷移優先序評估",
+      "供應鏈 SBOM 與可離線驗證證據鏈",
+    ],
+  },
 ]
 
 export default function ComplianceMatrix() {
@@ -65,11 +75,11 @@ export default function ComplianceMatrix() {
             把技術修補 ↔ 管理層看得懂的法規條目對齊。
           </h2>
           <p className="mt-3 max-w-3xl text-base leading-8 text-gray-400">
-            AegisCode Surface 內建中文化法規對應,讓資安修補的每一步都能直接連到法規責任,適合金融、政府與高法遵組織的稽核情境。
+            AegisCode 內建中文化法規對應,讓資安修補與加密盤點的每一步都能直接連到法規責任,適合金融、政府與高法遵組織的稽核情境。
           </p>
         </motion.div>
 
-        <div className="grid gap-5 md:grid-cols-3">
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
           {regulations.map((reg) => (
             <div
               key={reg.title}

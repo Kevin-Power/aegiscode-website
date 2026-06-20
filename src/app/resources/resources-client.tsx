@@ -45,10 +45,10 @@ const assets: Asset[] = [
     id: "tw-compliance-matrix.pdf",
     publicHref: "/downloads/tw-compliance-matrix.pdf",
     title: "台灣法規對應一覽表",
-    desc: "資通安全管理法 × 個資法 × ISO 27001:2022,AegisCode 對應條目的一頁速查表。",
+    desc: "資通安全管理法 × 個資法 × ISO 27001:2022 × 金融業 PQC 遷移指引(2026/6/18),AegisCode 對應條目的一頁速查表。",
     bullets: [
-      "三條法規並列對照",
-      "可貼進稽核準備文件",
+      "四項法規 / 指引並列對照",
+      "含 PQC 指引官方六項最小欄位",
       "持續更新,公開索引",
     ],
     readTime: "3 分鐘讀完",

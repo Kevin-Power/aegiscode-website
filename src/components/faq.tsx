@@ -7,7 +7,15 @@ import { useRef, useState } from "react";
 const faqs = [
   {
     q: "AegisCode 支援哪些程式語言？",
-    a: "目前規劃支援 12 種常見企業開發語言，包含 Java、Python、JavaScript/TypeScript、Go、C#、PHP、Ruby、Rust 等。POC 階段會依您的 repo 語言組成確認掃描範圍。",
+    a: "SAST 弱點掃描覆蓋 20+ 種常見企業開發語言（Java、Python、JavaScript/TypeScript、Go、C#、Rust 等）；CBOM 加密資產盤點則以 123 條規則深度涵蓋 9 種主流後端語言（Java/Python/Go/Node/C#/Rust/Kotlin/Scala/ABAP）。POC 階段會依您的 repo 語言組成確認掃描範圍。",
+  },
+  {
+    q: "金管會的後量子密碼（PQC）遷移指引要求什麼？準備期要先做什麼？",
+    a: "金管會已於 2026/6/18 發布《金融業後量子密碼遷移參考指引》。準備期 2026–2027 的第一項任務即建立密碼技術清冊（CBOM），指引並明文鼓勵以 AI 等自動化工具輔助盤點與維護；後續為過渡期 2027–2030、2035 年前全面替換現行加密演算法。AegisCode 的 CBOM 盤點對應指引的官方最小欄位（用途／情境、演算法／參數、憑證鏈／金鑰來源、部署位置、供應商版本與支援狀態、可替換性／預估工期）。",
+  },
+  {
+    q: "AegisCode 的 CBOM 盤點可以直接當成 PQC 合規證據嗎？",
+    a: "可以。CBOM 加密資產盤點以 123 條規則涵蓋 9 種主流後端語言，對齊指引的官方最小欄位，部署位置自動帶出 file:line（人工 Excel 盤點難以建立與維護），並可匯出 JSON／Excel 清冊與簽章證據包（報告 + SBOM + SLSA 出處證明 + RS256 數位簽章，可離線驗證真偽）。",
   },
   {
     q: "掃描速度大概需要多久？",
@@ -55,7 +63,7 @@ const faqs = [
   },
   {
     q: "AI 程式碼健檢是什麼？",
-    a: "AegisCode 會把 SAST findings 與 LLM 上下文審查結合，針對 Copilot、Claude、ChatGPT 等工具產生的程式碼提供繁中修復建議與主管可審核的紀錄。",
+    a: "AegisCode 會把 SAST findings 與 LLM 上下文審查結合，針對 AI 助手與 Copilot 類工具產生的程式碼提供繁中修復建議與主管可審核的紀錄。",
   },
   {
     q: "Container / IaC / Secrets 掃描的範圍是什麼？",

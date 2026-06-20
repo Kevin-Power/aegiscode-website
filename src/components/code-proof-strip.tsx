@@ -11,9 +11,9 @@ const kpis = [
     sub: "Code POC 已開放",
   },
   {
-    value: "12 種",
-    label: "支援語言",
-    sub: "涵蓋金融常見開發棧",
+    value: "123 規則",
+    label: "CBOM 加密盤點",
+    sub: "深度涵蓋 9 種主流後端語言",
   },
 ] as const
 
