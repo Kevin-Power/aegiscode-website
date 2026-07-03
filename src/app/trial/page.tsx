@@ -96,7 +96,7 @@ function TrialForm() {
     return (
       <div className="max-w-xl mx-auto bg-[#1A2332] border border-[#0D9488] rounded-xl p-8">
         <h2 className="text-2xl font-bold mb-3 text-[#14B8A6]">
-          {isAdvisory ? "諮詢申請已建立" : "POC 申請已建立"}
+          {isAdvisory ? "諮詢申請已建立" : "評估申請已建立"}
         </h2>
         <p className="text-gray-300 mb-4">{result.instructions}</p>
         {result.licenseId && result.expiresAt ? (
@@ -326,7 +326,7 @@ function TrialForm() {
             ? "送出 Surface 諮詢申請"
             : track === "BOTH"
               ? "送出雙產品評估申請"
-              : "送出 30 天 POC 申請"}
+              : "送出評估申請（30 天 POC）"}
       </button>
 
       <p className="text-xs text-gray-500 text-center">

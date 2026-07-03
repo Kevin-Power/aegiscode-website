@@ -40,11 +40,11 @@ export default function Hero() {
           </h1>
 
           <p className="mb-6 max-w-2xl text-lg font-medium leading-relaxed text-gray-100 sm:text-xl">
-            AegisCode 在 CI 內自動產出<span className="text-white">程式碼層 CBOM</span>，配合七大掃描能力與簽章證據，讓金融機構在金管會 2026–2027 準備期內，交出可稽核的後量子遷移盤點。
+            AegisCode 在 CI 內自動產出<span className="text-white">程式碼層 CBOM</span>，配合七大掃描能力與簽章證據，讓金融機構在金管會 2026–2027 準備期內，交出可稽核的盤點證據。
           </p>
 
           <p className="mb-8 max-w-2xl text-sm leading-7 text-gray-400 sm:text-base">
-            準備期第一項任務即建立加密資產清冊（CBOM），指引明文鼓勵以 AI 自動化盤點——採購窗口已開啟。
+            準備期第一項任務即建立加密資產清冊（CBOM），指引明文鼓勵以 AI 自動化盤點——合規時程已經開始倒數。
           </p>
 
           <div className="flex flex-col gap-4 sm:flex-row">

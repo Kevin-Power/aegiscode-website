@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next"
 
 const SITE_URL = "https://aegiscode.yilutek.com"
-const LAST_MODIFIED = new Date("2026-06-13T00:00:00+08:00")
+const LAST_MODIFIED = new Date("2026-07-03T00:00:00+08:00")
 
 const routes = [
   { path: "/", priority: 1.0 },

@@ -37,9 +37,9 @@ export const metadata: Metadata = {
     "台灣金融合規",
   ],
   openGraph: {
-    title: "AegisCode - CBOM/PQC、SAST 與外部風險治理平台",
+    title: "金管會 PQC 遷移指引因應｜程式碼層 CBOM 盤點 — AegisCode",
     description:
-      "CBOM/PQC inventory 為核心，整合 SAST 與外部風險評分，產出主管可審核的合規證據包。",
+      "在 CI 內自動產出程式碼層 CBOM，對應金管會 2026《後量子密碼遷移參考指引》，為台灣金融機構提供可稽核的盤點證據。",
     url: "https://aegiscode.yilutek.com",
     siteName: "AegisCode",
     images: [
@@ -47,16 +47,16 @@ export const metadata: Metadata = {
         url: "/og-aegiscode.svg",
         width: 1200,
         height: 630,
-        alt: "AegisCode - CBOM/PQC、SAST 與外部風險治理平台",
+        alt: "AegisCode｜程式碼層 CBOM／PQC 加密資產盤點平台",
       },
     ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "AegisCode - CBOM/PQC、SAST 與外部風險治理平台",
+    title: "金管會 PQC 遷移指引因應｜程式碼層 CBOM 盤點 — AegisCode",
     description:
-      "CBOM/PQC inventory 為核心，整合 SAST 與外部風險評分，產出主管可審核的合規證據包。",
+      "在 CI 內自動產出程式碼層 CBOM，對應金管會 2026《後量子密碼遷移參考指引》，為台灣金融機構提供可稽核的盤點證據。",
     images: ["/og-aegiscode.svg"],
   },
 };
