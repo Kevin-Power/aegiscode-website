@@ -377,7 +377,7 @@ export default function TrialPage() {
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-10">
             <h1 className="text-4xl sm:text-5xl font-bold mb-3 gradient-text glow-teal">
-              預約 CBOM 導覽
+              申請 PQC Readiness 評估
             </h1>
             <p className="text-gray-400 text-lg">
               30 天 POC，免信用卡，先確認治理工作流、部署條件與合規交付範圍。

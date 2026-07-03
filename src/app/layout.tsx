@@ -3,9 +3,9 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://aegiscode.yilutek.com"),
-  title: "AegisCode - CBOM/PQC、SAST 與外部風險治理平台",
+  title: "金管會 PQC 遷移指引因應｜程式碼層 CBOM 盤點 — AegisCode",
   description:
-    "AegisCode 為台灣金融與高法遵組織提供 CBOM/PQC 加密資產盤點、SAST 與外部風險整合，產出主管可審核的合規證據包。",
+    "金管會 2026《後量子密碼遷移參考指引》要求建立加密資產清冊（CBOM）。AegisCode 在 CI 內自動產出程式碼層 CBOM，整合 SAST/SCA 與 AI 程式碼審查，為台灣金融機構提供可稽核的盤點證據。",
   keywords: [
     "code quality",
     "code security",
@@ -14,7 +14,6 @@ export const metadata: Metadata = {
     "static analysis",
     "AI code review",
     "SAST-in-the-Loop",
-    "VULNFORGE",
     "CBOM",
     "PQC",
     "SBOM",
@@ -23,7 +22,8 @@ export const metadata: Metadata = {
     "Secrets scan",
     "IaC scan",
     "cryptographic inventory",
-    "SonarQube",
+    "後量子密碼遷移",
+    "金管會 PQC 指引",
     "SecurityScorecard",
     "third-party risk management",
     "external attack surface management",

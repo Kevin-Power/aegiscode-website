@@ -24,7 +24,6 @@ const navItems: NavItem[] = [
       { label: "常見問題", href: "/#faq" },
     ],
   },
-  { label: "POC 申請", href: "/trial" },
 ]
 
 function Dropdown({ item }: { item: NavItem }) {
@@ -107,7 +106,7 @@ export default function Navbar() {
             href="/trial"
             className="rounded-lg bg-[#0D9488] px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-[#0F766E]"
           >
-            預約導覽
+            申請 PQC 評估
           </Link>
         </div>
 
@@ -152,7 +151,7 @@ export default function Navbar() {
               onClick={() => setMobileOpen(false)}
               className="rounded-lg bg-[#0D9488] px-5 py-2 text-center text-sm font-medium text-white transition-colors hover:bg-[#0F766E]"
             >
-              預約導覽
+              申請 PQC 評估
             </Link>
           </div>
         </div>

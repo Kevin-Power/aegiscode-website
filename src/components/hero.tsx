@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2, KeyRound, Scale, ShieldCheck } from "lucide-react";
+import { ArrowRight, CheckCircle2, KeyRound, Scale } from "lucide-react";
 
 const trustItems = [
   { label: "矛尖能力", value: "CBOM/PQC 加密資產治理" },
@@ -28,49 +28,38 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-[#243447] bg-[#1A2332]/80 px-4 py-1.5 text-xs font-medium text-gray-300">
-            <ShieldCheck size={14} className="text-[#14B8A6]" />
-            為台灣金融與高法遵組織打造
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-amber-400/[0.08] px-4 py-1.5 text-xs font-semibold text-amber-200">
+            <Scale size={14} />
+            金管會 PQC 遷移指引 · 2026/6/18 發布
           </div>
 
-          <h1 className="gradient-text glow-teal mb-5 text-6xl font-bold tracking-tight sm:text-7xl md:text-8xl">
-            AegisCode
+          <h1 className="mb-5 text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl">
+            你的程式碼裡，
+            <br />
+            <span className="gradient-text glow-teal">有多少加密資產還沒盤點？</span>
           </h1>
 
-          <p className="mb-5 max-w-2xl text-[19px] font-medium leading-relaxed text-gray-100 sm:text-2xl">
-            台灣金融與高法遵組織的程式碼與攻擊面治理平台。
+          <p className="mb-6 max-w-2xl text-lg font-medium leading-relaxed text-gray-100 sm:text-xl">
+            AegisCode 在 CI 內自動產出<span className="text-white">程式碼層 CBOM</span>，配合七大掃描能力與簽章證據，讓金融機構在金管會 2026–2027 準備期內，交出可稽核的後量子遷移盤點。
           </p>
 
-          <p className="mb-8 max-w-2xl text-base leading-8 text-gray-400 sm:text-lg">
-            從 CBOM/PQC 到 SOC 2 Audit Log，從 SAST/DAST 到外部攻擊面，AegisCode 把內外風險證據收斂成董事會可呈交的合規證據包，對應金管會、SOC 2 與 F-ISAC 治理框架。
+          <p className="mb-8 max-w-2xl text-sm leading-7 text-gray-400 sm:text-base">
+            準備期第一項任務即建立加密資產清冊（CBOM），指引明文鼓勵以 AI 自動化盤點——採購窗口已開啟。
           </p>
-
-          <a
-            href="/code#pqc"
-            className="mb-10 flex items-start gap-3 rounded-xl border border-amber-400/30 bg-amber-400/[0.07] px-4 py-3 transition hover:border-amber-400/55"
-          >
-            <span className="mt-0.5 inline-flex shrink-0 items-center gap-1.5 rounded-md bg-amber-400/15 px-2 py-1 text-[11px] font-semibold tracking-wide text-amber-200">
-              <Scale size={12} />
-              2026/6/18 新法規
-            </span>
-            <p className="text-sm leading-6 text-amber-100/90">
-              金管會已發布《金融業後量子密碼遷移參考指引》——準備期 2026–2027 第一項任務即建立 CBOM，指引明文鼓勵以 AI 自動化盤點，採購窗口已開啟。
-            </p>
-          </a>
 
           <div className="flex flex-col gap-4 sm:flex-row">
             <a
-              href="/code"
+              href="/trial"
               className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-8 py-3.5 text-base font-semibold text-[#0D1521] transition hover:bg-gray-200"
             >
-              了解 AegisCode Code
+              申請 PQC Readiness 評估
               <ArrowRight size={18} />
             </a>
             <a
-              href="/surface"
+              href="/resources"
               className="inline-flex items-center justify-center rounded-lg border border-sky-400/40 px-8 py-3.5 text-base font-medium text-sky-100 transition hover:bg-sky-400/10"
             >
-              了解 AegisCode Surface
+              下載金管會 PQC 指引對照表
             </a>
           </div>
         </motion.div>

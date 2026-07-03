@@ -24,7 +24,7 @@ const features = [
   {
     icon: Search,
     title: "SAST 掃描與品質閘門",
-    desc: "支援 ZIP / Git 掃描、SonarQube 分析、Quality Gate 與 BU 權限控管，讓上線前風險有一致標準。",
+    desc: "支援 ZIP / Git 掃描、深度 SAST 分析、Quality Gate 與 BU 權限控管，讓上線前風險有一致標準。",
   },
   {
     icon: KeyRound,
@@ -48,7 +48,7 @@ const features = [
   },
   {
     icon: Bot,
-    title: "SAST-in-the-Loop / VULNFORGE",
+    title: "SAST-in-the-Loop AI 修補工作流",
     desc: "把 SAST findings 轉成可審查、可修復、可追蹤的 AI review 工作流，繁中修復建議與主管可審核紀錄一次到位。",
   },
   {

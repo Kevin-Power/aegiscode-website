@@ -69,7 +69,7 @@ const faqJsonLd = {
     },
     {
       "@type": "Question",
-      name: "AegisCode 與 SonarQube Enterprise 差異在哪?",
+      name: "AegisCode 與傳統程式碼品質平台差異在哪?",
       acceptedAnswer: {
         "@type": "Answer",
         text: "AegisCode 聚焦繁中治理工作流、CBOM/PQC 加密資產盤點、主管審核紀錄與台灣金融合規證據包。",

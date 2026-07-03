@@ -30,8 +30,8 @@ const faqs = [
     a: "資料留存週期、刪除流程與 Zero Data Retention 選項可依合約與 DPA 定義。高法遵客戶可在 POC 前先指定資料邊界與遮罩規則。",
   },
   {
-    q: "AegisCode 和 SonarQube Enterprise 差異在哪？",
-    a: "SonarQube Enterprise 偏向成熟的程式碼品質與 SAST 掃描。AegisCode 聚焦台灣金融與繁中治理工作流，包含 SAST-in-the-Loop AI 審查、CBOM/PQC、SBOM/SCA、主管審核紀錄與合規證據包。",
+    q: "AegisCode 和傳統程式碼品質平台差異在哪？",
+    a: "傳統程式碼品質平台偏向成熟的程式碼品質與 SAST 掃描。AegisCode 聚焦台灣金融與繁中治理工作流，包含 SAST-in-the-Loop AI 審查、CBOM/PQC、SBOM/SCA、主管審核紀錄與合規證據包。",
   },
   {
     q: "SBOM / SCA 和 GitHub Advanced Security 有什麼差別？",

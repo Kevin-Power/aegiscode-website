@@ -41,7 +41,7 @@ const capabilities = [
   },
   {
     icon: WorkflowIcon,
-    title: "SAST-in-the-Loop / VULNFORGE",
+    title: "SAST-in-the-Loop AI 修補工作流",
     desc: "把 SAST findings 轉成可審查、可修復、可追蹤的 AI review 工作流。",
   },
   {
@@ -176,12 +176,12 @@ export default function CodePage() {
             AegisCode Code · 平台授權
           </div>
           <h1 className="max-w-full text-3xl font-bold leading-tight tracking-tight sm:text-5xl sm:break-words">
-            <span className="block">以 CBOM/PQC 為矛尖</span>
-            <span className="block">的內部程式碼治理</span>
+            <span className="block">以 CBOM/PQC 為矛尖的</span>
+            <span className="block">內部程式碼安全治理</span>
             <span className="block">SAST + 主管審核閉環</span>
           </h1>
           <p className="mt-5 max-w-3xl text-base leading-8 text-gray-400 sm:text-lg">
-            AegisCode Code 以 CBOM/PQC 加密資產盤點為矛尖,搭配 SAST 弱點掃描、VULNFORGE 修補工作流與主管審核留痕。專為金融、政府與高法遵組織的繁中合規場景設計。
+            AegisCode Code 以 CBOM/PQC 加密資產盤點為矛尖,搭配 SAST 弱點掃描、AI 修補工作流與主管審核留痕。專為金融、政府與高法遵組織的繁中合規場景設計。
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
@@ -240,11 +240,11 @@ export default function CodePage() {
 
       <section className="px-6 py-16">
         <div className="mx-auto max-w-6xl">
-          <h2 className="mb-8 text-3xl font-bold">vs SonarQube Enterprise</h2>
+          <h2 className="mb-8 text-3xl font-bold">vs 傳統程式碼品質平台</h2>
           <div className="overflow-hidden rounded-2xl border border-[#243447]">
             <div className="hidden bg-[#0F1923] px-5 py-3 text-xs font-semibold uppercase tracking-[0.18em] text-gray-500 sm:grid sm:grid-cols-[1.2fr_1fr_1fr]">
               <div>維度</div>
-              <div>SonarQube Enterprise</div>
+              <div>傳統程式碼品質平台</div>
               <div>AegisCode Code</div>
             </div>
             {versusMatrix.map((row) => (

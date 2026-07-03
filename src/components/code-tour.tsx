@@ -44,7 +44,7 @@ const steps: TourStep[] = [
   {
     key: "vulnforge",
     icon: Bot,
-    tabLabel: "VULNFORGE",
+    tabLabel: "AI 修補",
     title: "SAST-in-the-Loop:findings → fix workflow",
     body: (
       <div className="space-y-3 text-sm leading-7 text-gray-200">
