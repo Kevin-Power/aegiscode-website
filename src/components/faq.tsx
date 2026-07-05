@@ -11,7 +11,7 @@ const faqs = [
   },
   {
     q: "金管會的後量子密碼（PQC）遷移指引要求什麼？準備期要先做什麼？",
-    a: "金管會已於 2026/6/18 發布《金融業後量子密碼遷移參考指引》。準備期 2026–2027 的第一項任務即建立密碼技術清冊（CBOM），指引並明文鼓勵以 AI 等自動化工具輔助盤點與維護；後續為過渡期 2027–2030、2035 年前全面替換現行加密演算法。AegisCode 的 CBOM 盤點對應指引的官方最小欄位（用途／情境、演算法／參數、憑證鏈／金鑰來源、部署位置、供應商版本與支援狀態、可替換性／預估工期）。",
+    a: "金管會已於 2026/6/18 發布《金融業後量子密碼遷移參考指引》。準備期 2026–2027 的第一項任務即建立密碼技術清冊（CBOM），指引並明文鼓勵以 AI 等自動化工具輔助盤點與維護；後續為過渡期 2027–2030、2035 年前全面替換現行加密演算法。AegisCode 的 CBOM 盤點對應指引的官方最小欄位（用途／情境、演算法／參數、憑證鏈／金鑰來源、部署位置、供應商版本與支援狀態、可替換性／預估工期等）。",
   },
   {
     q: "AegisCode 的 CBOM 盤點可以直接當成 PQC 合規證據嗎？",
@@ -38,8 +38,8 @@ const faqs = [
     a: "GitHub Advanced Security 很適合 GitHub 原生開發流程。AegisCode 則把 SBOM/SCA、CBOM/PQC、Quality Gate、主管證據包與多 BU 治理收斂成一套採購與稽核能理解的工作流。",
   },
   {
-    q: "可以搭配 SecurityScorecard 或其他外部風險評分嗎？",
-    a: "可以納入 Enterprise POC 評估範圍。AegisCode 可匯入 SecurityScorecard、BitSight 或客戶既有 EASM/TPRM 資料，將外部曝險、供應商 domain、內部 SAST、SBOM 與 CBOM 證據整合成主管治理視圖；正式串接範圍會依 API 授權與合約確認。",
+    q: "可以搭配外部風險評分或攻擊面評分服務嗎？",
+    a: "可以納入 Enterprise POC 評估範圍。AegisCode 可匯入主流外部風險評分與 EASM/TPRM 訊號來源（依客戶既有授權），將外部曝險、供應商 domain、內部 SAST、SBOM 與 CBOM 證據整合成主管治理視圖；正式串接範圍會依 API 授權與合約確認。",
   },
   {
     q: "公開價格在哪裡？",
@@ -82,12 +82,12 @@ const faqs = [
     a: "Enterprise 可規劃多租戶 Group CISO 視圖，母公司 CISO 跨 Organization 彙整子公司 Critical 漏洞、SLA 過期與 SDLC 覆蓋度；子公司之間互相不可見，符合資料隔離。適合金控、跨國集團與 SI 母公司管控子事業群場景。",
   },
   {
-    q: "AegisCode Surface 跟 SecurityScorecard 原生 dashboard 差在哪？",
+    q: "AegisCode Surface 跟外部評分平台原生 dashboard 差在哪？",
     a: "Surface 提供中文化治理工作流、修補優先順序、台灣法規對應、風險量化與顧問交付報告；原生 dashboard 是原始評分視圖。",
   },
   {
-    q: "Surface 需要客戶自備 SecurityScorecard 授權嗎？",
-    a: "是，客戶提供 API token。Surface 也支援 BitSight 或客戶既有 EASM 工具的訊號整合。",
+    q: "Surface 需要客戶自備外部評分服務授權嗎？",
+    a: "若要納入外部評分訊號，由客戶提供既有服務的 API token；Surface 也支援客戶既有 EASM/TPRM 工具的訊號整合。",
   },
   {
     q: "CISO 月報長什麼樣？可以看範本嗎？",

@@ -126,15 +126,15 @@ function TrialForm() {
           </a>
         ) : null}
         {result.jwt ? (
-          <div className="mt-4">
-            <p className="text-xs text-yellow-400 mb-2">
-              Email service 尚未設定,請將下方 JWT 放入{" "}
-              <code>AegisCode/config/license.jwt</code>,或聯絡
-              sales@aegiscode.com 協助啟用。
-            </p>
-            <pre className="bg-[#0D1521] border border-[#243447] rounded p-3 text-xs text-emerald-300 break-all whitespace-pre-wrap">
-              {result.jwt}
-            </pre>
+          <div className="mt-4 rounded-lg border border-[#243447] bg-[#0D1521]/70 p-4 text-sm text-gray-300">
+            您的評估授權將以安全管道寄送至公司信箱。若逾時未收到,請聯絡{" "}
+            <a
+              href="mailto:sales@aegiscode.com"
+              className="text-[#5EEAD4] hover:underline"
+            >
+              sales@aegiscode.com
+            </a>
+            {" "}協助啟用。
           </div>
         ) : null}
       </div>
@@ -241,7 +241,7 @@ function TrialForm() {
           />
           <div>
             <label className="block text-sm text-gray-300 mb-1">
-              是否已有 SecurityScorecard / BitSight 授權?
+              是否已導入外部風險評分 / 攻擊面評分服務?
             </label>
             <select
               value={hasExternalRating}
@@ -380,7 +380,7 @@ export default function TrialPage() {
               申請 PQC Readiness 評估
             </h1>
             <p className="text-gray-400 text-lg">
-              30 天 POC，免信用卡，先確認治理工作流、部署條件與合規交付範圍。
+              30 天 POC，免信用卡，先確認治理工作流、部署條件與合規交付範圍，涵蓋 PQC 準備期與 AI 開發鏈攻擊面。
             </p>
           </div>
           <Suspense fallback={<div className="text-gray-500">Loading...</div>}>

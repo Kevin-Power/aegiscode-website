@@ -75,7 +75,7 @@ export default function ComplianceMatrix() {
             把技術修補 ↔ 管理層看得懂的法規條目對齊。
           </h2>
           <p className="mt-3 max-w-3xl text-base leading-8 text-gray-400">
-            AegisCode 內建中文化法規對應,讓資安修補與加密盤點的每一步都能直接連到法規責任,適合金融、政府與高法遵組織的稽核情境。
+            AegisCode 內建中文化法規對應,讓資安修補與加密盤點的每一步都能直接連到法規責任,適合金融、政府與高法遵組織的稽核情境。以上為協助客戶把修補與盤點證據對應到各自法規／ISMS 控制項,非 AegisCode 自身之認證主張。
           </p>
         </motion.div>
 

@@ -17,7 +17,7 @@ const signals = [
   {
     icon: Radar,
     label: "外部曝險評分",
-    text: "可搭配 SecurityScorecard、BitSight 或客戶既有 EASM 評分，補齊外部可觀測風險。",
+    text: "可搭配主流外部攻擊面評分或客戶既有 EASM 訊號，補齊外部可觀測風險。",
   },
   {
     icon: Building2,
@@ -68,7 +68,7 @@ export default function SurfaceSpotlight() {
               AegisCode Surface — 從程式碼治理，延伸到外部曝險與供應商風險。
             </h2>
             <p className="mt-4 text-base leading-8 text-gray-400">
-              AegisCode 不需要取代 SecurityScorecard。更好的打法，是把外部安全評分、供應商 domain 與 AegisCode 的 SAST、SBOM、CBOM 證據整合，形成高法遵組織可以審核、可以追蹤、可以交付的治理視圖。
+              AegisCode 不需要取代既有外部評分平台。更好的打法，是把外部安全評分、供應商 domain 與 AegisCode 的 SAST、SBOM、CBOM 證據整合，形成高法遵組織可以審核、可以追蹤、可以交付的治理視圖。Surface 負責把這些證據彙整成外部治理視圖，實際掃描與攔截仍由 build-time 的 AegisCode 完成。
             </p>
 
             <div className="mt-7 grid gap-4">

@@ -3,6 +3,12 @@ import { ArrowRight, CheckCircle2, ShieldCheck } from "lucide-react"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 
+export const metadata = {
+  title: "導入方案與 POC 範圍 — AegisCode",
+  description:
+    "AegisCode 依團隊規模、部署方式(地端／私有雲)、SSO／DPA 與稽核證據需求,於 30 天 POC 後提供正式建議;目前不公開固定價格。",
+}
+
 const codeTracks = [
   {
     name: "Starter",
@@ -36,6 +42,7 @@ const surfaceTracks = [
 const pocItems = [
   "SAST findings 與 AI 修復建議審核流程",
   "CBOM/PQC 加密資產盤點與 portfolio 導覽",
+  "AI 開發鏈攻擊面盤點:MCP 設定與來源驗證、prompt injection 熱點於導入時評估",
   "外部曝險資料、供應商 domain 與內部證據整合",
   "集團 CISO 視圖、稽核摘要與主管報告樣本",
   "SSO、資料留存、DPA、地端或私有雲部署需求盤點",
@@ -91,7 +98,7 @@ export default function PricingPage() {
                 href="/trial?track=CODE"
                 className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#0D9488] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#0F766E]"
               >
-                申請 Code POC
+                申請 PQC 評估(30 天 POC)
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </section>

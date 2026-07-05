@@ -8,6 +8,7 @@ import {
   Globe,
   Globe2,
   Scale,
+  ShieldAlert,
   Sparkles,
 } from "lucide-react"
 import Navbar from "@/components/navbar"
@@ -38,6 +39,11 @@ const capabilities = [
     icon: FileText,
     title: "顧問級 CISO 月報",
     desc: "風險量化、趨勢、Top Backlog、法規對應與 ROI 試算,一份可以呈交董事會的 PDF。",
+  },
+  {
+    icon: ShieldAlert,
+    title: "AI 供應鏈曝險視圖",
+    desc: "把 AI／MCP 相關曝險(對外暴露的 AI 服務、可疑 MCP 端點、第三方 AI 元件)納入外部治理視圖,補上傳統評分平台看不到的新興攻擊面。",
   },
 ]
 
@@ -72,7 +78,7 @@ const outcomeCards = [
 
 const productFaqItems = [
   {
-    q: "SecurityScorecard / BitSight 本來就有 dashboard,為什麼還需要 Surface?",
+    q: "既有外部評分平台本來就有 dashboard,為什麼還需要 Surface?",
     a: "原生 dashboard 提供的是原始視圖。Surface 提供的是中文化治理平台、修補優先順序、法規對應、風險量化與顧問交付月報——這些才是管理層真正會閱讀的內容。Surface 不取代外部評分平台,它把評分轉成董事會看得懂的治理結論。",
   },
   {
@@ -90,14 +96,14 @@ const productFaqItems = [
 ]
 
 export const metadata = {
-  title: "AegisCode Surface — 外部攻擊面治理 | AegisCode",
+  title: "外部攻擊面治理服務 | 金融級 CISO 月報 — AegisCode Surface",
   description:
-    "AegisCode Surface 是外部攻擊面年度治理服務,結合 SecurityScorecard / BitSight 評分、AI 修補建議、台灣法規對應與顧問級 CISO 月報。",
+    "AegisCode Surface 是為金融機構打造的外部攻擊面年度治理服務,整合外部評分、供應商風險、修補優先順序、台灣法規對應與顧問級 CISO 月報,讓 CISO 每月向董事會交代風險趨勢。",
 }
 
 export default function SurfacePage() {
   return (
-    <main className="min-h-screen overflow-x-hidden break-all bg-[#0D1521] text-white">
+    <main className="min-h-screen overflow-x-hidden break-words bg-[#0D1521] text-white">
       <Navbar />
 
       {/* Hero */}
@@ -146,7 +152,7 @@ export default function SurfacePage() {
       {/* Capabilities */}
       <section className="px-6 py-16">
         <div className="mx-auto max-w-6xl">
-          <h2 className="mb-10 text-3xl font-bold">四個核心能力</h2>
+          <h2 className="mb-10 text-3xl font-bold">核心能力</h2>
           <div className="grid gap-6 md:grid-cols-2">
             {capabilities.map((cap) => {
               const Icon = cap.icon

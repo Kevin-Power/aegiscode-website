@@ -48,7 +48,7 @@ const assets: Asset[] = [
     desc: "資通安全管理法 × 個資法 × ISO 27001:2022 × 金融業 PQC 遷移指引(2026/6/18),AegisCode 對應條目的一頁速查表。",
     bullets: [
       "四項法規 / 指引並列對照",
-      "含 PQC 指引官方六項最小欄位",
+      "含 PQC 指引官方最小欄位",
       "持續更新,公開索引",
     ],
     readTime: "3 分鐘讀完",
@@ -183,16 +183,16 @@ export default function ResourcesPage() {
   const [active, setActive] = useState<Asset | null>(null)
 
   return (
-    <main className="min-h-screen overflow-x-hidden break-all bg-[#0D1521] text-white">
+    <main className="min-h-screen overflow-x-hidden break-words bg-[#0D1521] text-white">
       <Navbar />
       <section className="px-6 pb-20 pt-32">
         <div className="mx-auto max-w-6xl">
           <div className="mb-10">
             <h1 className="text-3xl font-bold leading-tight sm:text-5xl">
-              資安治理資產下載中心
+              金融資安治理資產下載中心｜PQC・CBOM・AI 攻擊面
             </h1>
             <p className="mt-3 max-w-2xl text-lg text-gray-400">
-              業務與客戶在 RFP、簽約前評估與內部簡報常用的素材。
+              業務與客戶在 RFP、簽約前評估與內部簡報常用的素材,涵蓋 PQC 遷移、CBOM 盤點與台灣法規對應。
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">

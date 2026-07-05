@@ -6,7 +6,7 @@ import { ArrowRight, CheckCircle2, KeyRound, Scale } from "lucide-react";
 const trustItems = [
   { label: "矛尖能力", value: "CBOM/PQC 加密資產治理" },
   { label: "治理閉環", value: "Code 內部 + Surface 外部雙軌" },
-  { label: "合規對應", value: "金管會 PQC / SOC 2 / F-ISAC" },
+  { label: "合規支援", value: "PQC 盤點 · SOC 2/ISO 證據對應 · F-ISAC 自評" },
   { label: "對象", value: "金融、政府與高法遵 CISO" },
 ];
 

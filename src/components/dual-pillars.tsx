@@ -25,7 +25,7 @@ const codeCaps = [
   { icon: KeySquare, label: "CBOM / PQC 加密資產盤點" },
   { icon: Layers, label: "SBOM / SCA + Container / IaC / Secrets" },
   { icon: Target, label: "F-ISAC 7 主題成熟度自評" },
-  { icon: Lock, label: "SOC 2 / SAML SSO + 集團 CISO 視圖" },
+  { icon: Lock, label: "稽核軌跡 / SAML SSO + 集團 CISO 視圖" },
   { icon: FileCheck2, label: "繁中合規證據包 + 主管審核留痕" },
 ]
 
@@ -73,7 +73,7 @@ export default function DualPillars() {
             </div>
             <h3 className="text-xl font-bold">內部程式碼資安治理</h3>
             <p className="mt-2 text-sm leading-7 text-gray-400">
-              從 SAST、DAST、CBOM/PQC 到 F-ISAC 自評與 SOC 2 Audit Log，內部程式碼資安治理的完整閉環。對象是研發團隊、資安 BU 與集團 CISO。
+              以 CBOM/PQC 加密資產盤點對接金管會後量子遷移，再串起 SAST、DAST、SBOM/SCA 與 F-ISAC 自評，構成內部程式碼治理的完整閉環。對象是研發團隊、資安 BU 與集團 CISO。
             </p>
             <ul className="mt-6 space-y-3">
               {codeCaps.map((cap) => {

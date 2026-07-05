@@ -12,7 +12,7 @@ import {
 
 const steps = [
   { icon: Upload, label: "匯入", desc: "連接 Git 專案或上傳程式碼" },
-  { icon: ScanSearch, label: "掃描", desc: "SAST、SCA 與 AI 上下文審查" },
+  { icon: ScanSearch, label: "掃描", desc: "七大掃描 + AI 上下文審查" },
   { icon: FileBarChart, label: "彙整", desc: "產出 findings、CBOM 與證據包" },
   { icon: Wrench, label: "修復", desc: "提供繁中修復建議與簽核流程" },
   { icon: CheckCircle2, label: "交付", desc: "交付主管可審核的稽核紀錄" },
@@ -87,7 +87,7 @@ export default function Workflow() {
           <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#0D9488]/10 border border-[#0D9488]/30">
             <span className="w-2 h-2 rounded-full bg-[#14B8A6]" />
             <span className="text-sm text-[#14B8A6] font-medium">
-              {"增量掃描 < 30 秒，全量掃描 100K LOC < 5 分鐘"}
+              {"增量掃描 < 30 秒，全量掃描 100K LOC < 5 分鐘（目標規格）"}
             </span>
           </div>
         </motion.div>

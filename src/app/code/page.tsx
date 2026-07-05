@@ -25,6 +25,7 @@ import CodeProofStrip from "@/components/code-proof-strip"
 import PqcAlignment from "@/components/pqc-alignment"
 import OutcomeVignette from "@/components/outcome-vignette"
 import CodeTour from "@/components/code-tour"
+import AiAttackSurface from "@/components/ai-attack-surface"
 import RoiMini from "@/components/roi-mini"
 import ProductFaq from "@/components/product-faq"
 
@@ -71,13 +72,13 @@ const capabilities = [
   },
   {
     icon: Lock,
-    title: "SOC 2 / Audit Log",
-    desc: "append-only audit log、login lockout、季度 access review,可作為 ISO / SOC 2 evidence pack 的稽核資料。",
+    title: "稽核軌跡 / Audit Log",
+    desc: "append-only audit log、login lockout、季度 access review,可作為客戶自身 ISO 27001 / SOC 2 稽核的佐證資料(findings 對應,非本平台已取得認證)。",
   },
   {
     icon: Users,
     title: "SAML 2.0 SSO + JIT",
-    desc: "對接主流 SAML 2.0 IdP,Just-In-Time provisioning 自動建立帳號與對應 BU 權限,無須 IT 預先建檔;登入軌跡併入 audit log。",
+    desc: "對接主流 SAML 2.0 IdP,Just-In-Time provisioning 自動建立帳號與對應 BU 權限,無須 IT 預先建檔;屬平台自身的登入存取控管(非對外簽發／驗證機器身分),登入軌跡併入 audit log。",
   },
   {
     icon: Target,
@@ -159,21 +160,21 @@ const pocDeliverables = [
 ]
 
 export const metadata = {
-  title: "AegisCode Code — 內部程式碼資安治理 | AegisCode",
+  title: "金管會 PQC 遷移指引因應｜CI 內建 CBOM 與七大掃描 — AegisCode Code",
   description:
-    "AegisCode Code 是企業內部程式碼資安平台,整合 SAST、CBOM/PQC、SBOM/SCA、主管審核與繁中合規證據包,適合金融、政府與高法遵組織。",
+    "AegisCode Code 在 CI 內自動產出程式碼層 CBOM,對應金管會 2026《後量子密碼遷移參考指引》準備期;整合 SAST／SCA／DAST／IaC／Secrets／容器七大掃描、AI 修補工作流與繁中合規證據包,支援地端／air-gapped 部署。",
 }
 
 export default function CodePage() {
   return (
-    <main className="min-h-screen overflow-x-hidden break-all bg-[#0D1521] text-white">
+    <main className="min-h-screen overflow-x-hidden break-words bg-[#0D1521] text-white">
       <Navbar />
 
       <section className="px-6 pb-16 pt-32">
         <div className="mx-auto max-w-6xl">
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#14B8A6]/30 bg-[#14B8A6]/10 px-4 py-1.5 text-xs font-medium text-[#5EEAD4]">
             <Code2 className="h-4 w-4" />
-            AegisCode Code · 平台授權
+            AegisCode Code · build-time CI 資安關卡
           </div>
           <h1 className="max-w-full text-3xl font-bold leading-tight tracking-tight sm:text-5xl sm:break-words">
             <span className="block">以 CBOM/PQC 為矛尖的</span>
@@ -188,14 +189,14 @@ export default function CodePage() {
               href="/trial?track=CODE"
               className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#0D9488] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#0F766E]"
             >
-              預約 Code POC
+              申請 PQC Readiness 評估
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
-              href="/pricing"
+              href="#pqc"
               className="inline-flex items-center justify-center rounded-lg border border-[#243447] px-6 py-3 text-sm font-semibold text-gray-300 transition hover:border-[#14B8A6] hover:text-white"
             >
-              查看方案
+              看 PQC 對齊表
             </Link>
           </div>
         </div>
@@ -213,7 +214,10 @@ export default function CodePage() {
 
       <section className="px-6 py-16">
         <div className="mx-auto max-w-6xl">
-          <h2 className="mb-10 text-3xl font-bold">核心能力</h2>
+          <h2 className="mb-4 text-3xl font-bold">核心能力</h2>
+          <p className="mb-10 max-w-3xl text-sm leading-7 text-gray-400">
+            七大掃描:SAST · SCA · DAST · IaC · Secrets · 容器 · CBOM(含 PQC)。AI 程式碼健檢為另計差異化,不計入七大掃描。
+          </p>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {capabilities.map((cap) => {
               const Icon = cap.icon
@@ -235,6 +239,8 @@ export default function CodePage() {
           </div>
         </div>
       </section>
+
+      <AiAttackSurface />
 
       <CodeTour />
 

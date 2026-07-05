@@ -6,7 +6,9 @@ import Features from "@/components/features"
 import ProductProof from "@/components/product-proof"
 import SurfaceSpotlight from "@/components/surface-spotlight"
 import ComplianceMatrix from "@/components/compliance-matrix"
+import PqcAlignment from "@/components/pqc-alignment"
 import AiHealthCheck from "@/components/ai-health-check"
+import AiAttackSurface from "@/components/ai-attack-surface"
 import Workflow from "@/components/workflow"
 import Stats from "@/components/stats"
 import Faq from "@/components/faq"
@@ -85,7 +87,7 @@ const faqJsonLd = {
     },
     {
       "@type": "Question",
-      name: "AegisCode Surface 跟 SecurityScorecard 原生 dashboard 差在哪?",
+      name: "AegisCode Surface 跟外部評分平台原生 dashboard 差在哪?",
       acceptedAnswer: {
         "@type": "Answer",
         text: "Surface 提供中文化治理工作流、修補優先順序、台灣法規對應、風險量化與顧問交付報告;原生 dashboard 是原始評分視圖。",
@@ -93,10 +95,10 @@ const faqJsonLd = {
     },
     {
       "@type": "Question",
-      name: "Surface 需要客戶自備 SecurityScorecard 授權嗎?",
+      name: "Surface 需要客戶自備外部評分服務授權嗎?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "是,客戶提供 API token。Surface 也支援 BitSight 或客戶既有 EASM 工具的訊號整合。",
+        text: "若要納入外部評分訊號,由客戶提供既有服務的 API token;Surface 也支援客戶既有 EASM/TPRM 工具的訊號整合。",
       },
     },
     {
@@ -145,7 +147,9 @@ export default function Home() {
       <ProductProof />
       <SurfaceSpotlight />
       <ComplianceMatrix />
+      <PqcAlignment />
       <AiHealthCheck />
+      <AiAttackSurface />
       <Workflow />
       <Stats />
       <Faq />

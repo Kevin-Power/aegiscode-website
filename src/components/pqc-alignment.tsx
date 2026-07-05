@@ -18,7 +18,7 @@ const strategies: Array<{
   },
   {
     strategy: "② 密碼技術清冊 CBOM 盤點",
-    capability: "CBOM 引擎:123 規則 / 9 語言,對齊官方六項最小欄位,部署位置自動帶 file:line",
+    capability: "CBOM 引擎:123 規則 / 9 語言,對齊官方最小欄位,部署位置自動帶 file:line",
     hit: "direct",
   },
   {

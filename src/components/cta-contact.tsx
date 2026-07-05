@@ -20,7 +20,7 @@ export default function CtaContact() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-            從內部程式碼到外部攻擊面,一份治理交代兩面風險
+            金管會準備期已開跑 —— 先做一次 PQC / CBOM Readiness 評估
           </h2>
           <p className="text-gray-400 text-lg mb-10">
             Code 走 30 天 POC,Surface 走顧問諮詢。選擇你要先看的那條,或兩條一起評估。
@@ -31,7 +31,7 @@ export default function CtaContact() {
               href="/trial?track=CODE"
               className="inline-flex items-center justify-center rounded-lg bg-[#0D9488] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#0F766E]"
             >
-              申請 Code POC
+              申請 PQC Readiness 評估
             </Link>
             <Link
               href="/trial?track=SURFACE"

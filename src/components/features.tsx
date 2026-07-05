@@ -68,8 +68,8 @@ const features = [
   },
   {
     icon: Lock,
-    title: "SOC 2 / Audit Log",
-    desc: "Append-only audit log、登入失敗鎖定、季度 access review 自動產出，直接對應 ISO 27001 / SOC 2 evidence pack 與內稽要求。",
+    title: "稽核軌跡 / Audit Log",
+    desc: "Append-only audit log、登入失敗鎖定、季度 access review 自動產出，可作為客戶自身 ISO 27001 / SOC 2 稽核的佐證資料（findings 對應，非本平台已取得認證）。",
   },
   {
     icon: Users,
@@ -78,8 +78,8 @@ const features = [
   },
   {
     icon: ShieldCheck,
-    title: "部署安全與授權控管",
-    desc: "正式與客戶環境強制自訂管理員密碼，授權服務支援 phone-home 與硬體指紋綁定。",
+    title: "地端部署安全與授權控管",
+    desc: "地端／私有雲部署，首次啟用強制更換預設管理員密碼；授權與環境綁定機制確保白標與離線場景下的合規控管。",
   },
   {
     icon: GitBranch,
@@ -116,7 +116,7 @@ export default function Features() {
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">核心功能</h2>
           <p className="text-gray-400 text-lg">
-            完整治理矩陣：SAST · DAST · CBOM/PQC · SBOM/SCA · Container/IaC/Secrets · SAST-in-the-Loop · SOC 2 / SAML · F-ISAC · Group CISO
+            七大掃描：SAST · SCA · DAST · IaC · Secrets · 容器 · CBOM（含 PQC）。再加 AI 修補工作流、F-ISAC 自評與集團 CISO 視圖。
           </p>
         </motion.div>
 
@@ -128,7 +128,7 @@ export default function Features() {
                 key={f.title}
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
+                transition={{ duration: 0.5, delay: Math.min(i * 0.05, 0.4) }}
                 className="group bg-[#1A2332] border border-[#243447] rounded-xl p-6 border-l-4 border-l-[#0D9488] card-glow transition-all duration-300 hover:-translate-y-1"
               >
                 <div className="w-10 h-10 rounded-lg bg-[#0D9488]/10 flex items-center justify-center mb-4 group-hover:bg-[#0D9488]/20 transition-colors">

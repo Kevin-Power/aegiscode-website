@@ -321,7 +321,7 @@ function ServiceProposalPage() {
             <td>平台存取</td>
             <td>
               治理工作台、Domain 深入分析、修補任務追蹤、外部評分整合視圖
-              (可串接既有 SecurityScorecard / BitSight 結果)。
+              (可串接客戶既有外部評分結果)。
             </td>
           </tr>
           <tr>
@@ -379,10 +379,9 @@ function ServiceProposalPage() {
 
       <h2 className="section-title">適合誰</h2>
       <p>
-        金融、政府、高法遵組織的 CISO / 資安主管,過去仰賴外部評分平台
-        (SecurityScorecard、BitSight、Cyberhaven 等)取得評分,但缺乏可呈交
-        管理層的中文化月報、台灣法規對應與修補優先順序。Surface 不取代評分
-        平台,而是把評分轉成董事會看得懂的治理視圖。
+        金融、政府、高法遵組織的 CISO / 資安主管,過去仰賴既有外部評分平台
+        取得評分,但缺乏可呈交管理層的中文化月報、台灣法規對應與修補優先
+        順序。Surface 不取代評分平台,而是把評分轉成董事會看得懂的治理視圖。
       </p>
 
       <h2 className="section-title">客戶責任</h2>

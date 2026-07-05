@@ -15,7 +15,7 @@ const surfaceMilestones = [
   {
     quarter: "2026 Q2",
     title: "Surface 商業版 v0.1 釋出",
-    desc: "SecurityScorecard 整合、AI 修補建議、台灣法規對應、CISO 月報、年度顧問訂閱開放申請。",
+    desc: "外部評分整合、AI 修補建議、台灣法規對應、CISO 月報、年度顧問訂閱開放申請。",
   },
 ];
 
@@ -34,7 +34,7 @@ export default function Stats() {
         >
           <h2 className="mb-4 text-3xl font-bold sm:text-4xl">雙產品研發與交付里程碑</h2>
           <p className="text-lg text-gray-400">
-            不用 placeholder 數字撐場，直接呈現 AegisCode Code 與 Surface 的產品成熟路線。
+            從 CBOM/PQC 核心到金融情境 POC 與正式版，透明呈現產品成熟軌跡與交付能力。
           </p>
         </motion.div>
 

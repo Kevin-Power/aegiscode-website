@@ -20,7 +20,7 @@ const evidence = [
     href: "https://www.ibm.com/think/insights/whats-new-2024-cost-of-a-data-breach-report",
   },
   {
-    number: "CCS 2023",
+    number: "AI ≠ 安全",
     label: "AI 助手使用者產出較不安全程式碼",
     detail: "且更傾向相信自己的程式碼是安全的",
     source: "Perry et al., ACM CCS 2023",
@@ -34,8 +34,8 @@ const painPoints = [
   "SBOM、CBOM、PQC、Quality Gate 與稽核附件散落在不同工具",
   "多 BU 權限、主管審核與證據留存難以符合金融業採購要求",
   "委外與內部專案都需要同一套可交付、可追溯的治理語言",
-  "外部曝險每月不知道有沒有下降，SecurityScorecard 或 BitSight 評分上下，卻沒有可呈交董事會的趨勢報告",
-  "內部弱點、外部評分與供應鏈各自為政，管理層想看一份「整體資安狀態」永遠拼不出來",
+  "AI coding 工具與 MCP server 進入研發流程，prompt injection、冒充 MCP server、濫用本機 AI CLI 成為沒人盤點的新攻擊面",
+  "RSA／短金鑰散落各系統，HNDL（先竊取、待量子破解）讓今天的密文未來被解密，卻沒有一份可稽核的加密資產清冊",
 ];
 
 export default function PainPoints() {
