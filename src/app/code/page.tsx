@@ -51,6 +51,11 @@ const capabilities = [
     desc: "建立依賴清單與第三方元件風險視圖,支援採購與稽核情境。",
   },
   {
+    icon: Cpu,
+    title: "AI-BOM AI 元件清冊",
+    desc: "與 SBOM、CBOM 並列的第三張清冊:盤點模型 API、AI SDK／框架、向量資料庫、MCP server 與 agent 設定檔,標記資料出境風險,對應 AI 治理與資料主權盤點需求。",
+  },
+  {
     icon: Box,
     title: "Container / IaC / Secrets 掃描",
     desc: "容器映像、Terraform / K8s / CloudFormation 設定漂移、硬編碼金鑰三面向並行盤點,補齊 SAST / SBOM 之外的供應鏈與設定面風險。",
@@ -140,6 +145,7 @@ const productFaqItems = [
 const versusMatrix: Array<{ dim: string; sonar: string; aegis: string }> = [
   { dim: "程式碼品質 + SAST", sonar: "成熟", aegis: "整合" },
   { dim: "CBOM / PQC", sonar: "未支援", aegis: "矛尖能力" },
+  { dim: "AI-BOM AI 元件清冊", sonar: "未支援", aegis: "原生" },
   { dim: "繁中治理工作流", sonar: "未支援", aegis: "原生" },
   { dim: "主管審核留痕", sonar: "部分", aegis: "完整" },
   { dim: "台灣金融合規證據包", sonar: "未支援", aegis: "原生" },
@@ -155,6 +161,7 @@ const pocDeliverables = [
   "SAST findings 與 AI 修復建議展示",
   "CBOM / PQC 加密資產盤點導覽",
   "SBOM / SCA 報告與稽核證據包樣本",
+  "AI-BOM AI 元件清冊展示(模型 API / MCP / agent 設定盤點)",
   "Quality Gate 與主管審核紀錄試跑",
   "部署、SSO、資料留存與 DPA 需求盤點",
 ]
@@ -162,7 +169,7 @@ const pocDeliverables = [
 export const metadata = {
   title: "金管會 PQC 遷移指引因應｜CI 內建 CBOM 與七大掃描 — AegisCode Code",
   description:
-    "AegisCode Code 在 CI 內自動產出程式碼層 CBOM,對應金管會 2026《後量子密碼遷移參考指引》準備期;整合 SAST／SCA／DAST／IaC／Secrets／容器七大掃描、AI 修補工作流與繁中合規證據包,支援地端／air-gapped 部署。",
+    "AegisCode Code 在 CI 內自動產出程式碼層 CBOM,對應金管會 2026《後量子密碼遷移參考指引》準備期;整合 SAST／SCA／DAST／IaC／Secrets／容器七大掃描、AI 修補工作流、AI-BOM AI 元件清冊與繁中合規證據包,支援地端／air-gapped 部署。",
 }
 
 export default function CodePage() {

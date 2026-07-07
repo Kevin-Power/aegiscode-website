@@ -31,7 +31,11 @@ const faqs = [
   },
   {
     q: "AegisCode 和傳統程式碼品質平台差異在哪？",
-    a: "傳統程式碼品質平台偏向成熟的程式碼品質與 SAST 掃描。AegisCode 聚焦台灣金融與繁中治理工作流，包含 SAST-in-the-Loop AI 審查、CBOM/PQC、SBOM/SCA、主管審核紀錄與合規證據包。",
+    a: "傳統程式碼品質平台偏向成熟的程式碼品質與 SAST 掃描。AegisCode 聚焦台灣金融與繁中治理工作流，包含 SAST-in-the-Loop AI 審查、CBOM/PQC、SBOM/SCA、AI-BOM AI 元件盤點、主管審核紀錄與合規證據包。",
+  },
+  {
+    q: "開發團隊已大量使用 AI 寫程式，AegisCode 能盤點 AI 的使用嗎？",
+    a: "可以。AI-BOM AI 元件清冊自動盤點 repo 內的模型 API、AI SDK／框架、向量資料庫、MCP server、agent 設定檔與本地模型權重，並標記資料出境、MCP 套件未鎖版本等治理風險；可匯出 CycloneDX 1.6 並隨簽章證據包交付——與 SBOM（相依套件）、CBOM（加密資產）並列的第三張清冊。POC 階段即可用您的 repo 展示。",
   },
   {
     q: "SBOM / SCA 和 GitHub Advanced Security 有什麼差別？",

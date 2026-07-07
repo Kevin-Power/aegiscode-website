@@ -28,7 +28,7 @@ const itemListJsonLd = {
         name: "AegisCode Code",
         brand: { "@type": "Brand", name: "AegisCode" },
         description:
-          "內部程式碼資安治理:SAST 弱點掃描、CBOM/PQC 加密資產盤點、SBOM/SCA、主管審核紀錄與台灣金融合規證據包。",
+          "內部程式碼資安治理:SAST 弱點掃描、CBOM/PQC 加密資產盤點、SBOM/SCA、AI-BOM AI 元件盤點、主管審核紀錄與台灣金融合規證據包。",
         category: "Application Security Testing",
         url: "https://aegiscode.yilutek.com/code",
       },
@@ -74,7 +74,7 @@ const faqJsonLd = {
       name: "AegisCode 與傳統程式碼品質平台差異在哪?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "AegisCode 聚焦繁中治理工作流、CBOM/PQC 加密資產盤點、主管審核紀錄與台灣金融合規證據包。",
+        text: "AegisCode 聚焦繁中治理工作流、CBOM/PQC 加密資產盤點、AI-BOM AI 元件盤點、主管審核紀錄與台灣金融合規證據包。",
       },
     },
     {

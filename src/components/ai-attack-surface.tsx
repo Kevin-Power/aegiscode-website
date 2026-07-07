@@ -2,7 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, Bot, Radar, ScanSearch, ShieldAlert } from "lucide-react";
+import { ArrowRight, Bot, ClipboardList, Radar, ScanSearch, ShieldAlert } from "lucide-react";
 import { useRef } from "react";
 
 type Stage = "shipped" | "poc" | "roadmap";
@@ -18,6 +18,12 @@ const capabilities: Array<{
     title: "AI 生成程式碼二次安全檢查",
     desc: "對 AI 助手 / Copilot 生成的程式碼做注入與不安全模式的二次審查，接上 SAST-in-the-Loop 工作流，把被污染或不安全的產物擋在合併前。",
     stage: "shipped",
+  },
+  {
+    icon: ClipboardList,
+    title: "AI-BOM AI 元件清冊",
+    desc: "自動盤點 repo 內的 AI 元件——對外模型 API、SDK／框架、向量資料庫、MCP server、agent 設定檔與本地模型權重——標記資料出境與未鎖版本風險，可匯出 CycloneDX 1.6 並隨簽章證據包交付。",
+    stage: "poc",
   },
   {
     icon: ScanSearch,
@@ -76,7 +82,7 @@ export default function AiAttackSurface() {
           </p>
         </motion.div>
 
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2">
           {capabilities.map((cap, i) => {
             const Icon = cap.icon;
             const stage = stageStyles[cap.stage];

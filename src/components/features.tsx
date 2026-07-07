@@ -7,6 +7,7 @@ import {
   ShieldCheck,
   Bot,
   Building2,
+  Cpu,
   KeyRound,
   Package,
   Activity,
@@ -35,6 +36,11 @@ const features = [
     icon: Package,
     title: "原生 SBOM / SCA",
     desc: "解析 npm / pip / Maven / Go 依賴並輸出 CycloneDX 標準，補齊委外與供應鏈安全盤點。",
+  },
+  {
+    icon: Cpu,
+    title: "AI-BOM AI 元件清冊",
+    desc: "盤點模型 API、AI SDK／框架、向量資料庫、MCP server 與 agent 設定檔，標記資料出境風險——與 SBOM、CBOM 並列的第三張清冊。",
   },
   {
     icon: Box,
