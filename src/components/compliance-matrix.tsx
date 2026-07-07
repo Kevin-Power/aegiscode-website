@@ -49,6 +49,16 @@ const regulations: Array<{
       "供應鏈 SBOM 與可離線驗證證據鏈",
     ],
   },
+  {
+    title: "歐盟網路韌性法案 CRA",
+    subtitle: "出口歐盟適用 · 通報義務 2026/9/11 生效",
+    items: [
+      "機器可讀 SBOM(CycloneDX / SPDX)",
+      "已知被利用漏洞情資 — 對應 24 / 72 小時通報觸發",
+      "漏洞處理與修補紀錄佐證(簽章證據包)",
+      "VEX 可利用性聲明(OpenVEX)— 本季推出",
+    ],
+  },
 ]
 
 export default function ComplianceMatrix() {
@@ -69,7 +79,7 @@ export default function ComplianceMatrix() {
         >
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-amber-400/25 bg-amber-400/10 px-4 py-1.5 text-xs font-medium text-amber-200">
             <Scale className="h-4 w-4" />
-            台灣法規對應
+            法規對應 · 台灣 + 出口歐盟
           </div>
           <h2 className="max-w-3xl text-3xl font-bold tracking-tight sm:text-4xl">
             把技術修補 ↔ 管理層看得懂的法規條目對齊。
@@ -79,7 +89,7 @@ export default function ComplianceMatrix() {
           </p>
         </motion.div>
 
-        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {regulations.map((reg) => (
             <div
               key={reg.title}

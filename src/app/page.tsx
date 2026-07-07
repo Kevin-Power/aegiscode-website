@@ -79,6 +79,14 @@ const faqJsonLd = {
     },
     {
       "@type": "Question",
+      name: "出口歐盟要因應 CRA 網路韌性法案,AegisCode 能幫忙嗎?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "CRA 通報義務 2026/9/11 生效。AegisCode 自動產出機器可讀 SBOM(CycloneDX/SPDX)與簽章證據包,已知被利用漏洞情資對應 24/72 小時通報觸發;VEX 可利用性聲明與 CRA 合規對應報告本季推出。",
+      },
+    },
+    {
+      "@type": "Question",
       name: "是否支援 SSO、SAML 或 OIDC?",
       acceptedAnswer: {
         "@type": "Answer",

@@ -137,6 +137,10 @@ const productFaqItems = [
     a: "Air-gapped 是我們支援的部署模式之一。POC 階段會評估網路隔離、SSO 整合與資料留存要求,正式環境條件會在 POC 結束前釐清。",
   },
   {
+    q: "出口歐盟的產品要因應 CRA(網路韌性法案),AegisCode 幫得上嗎?",
+    a: "可以。CRA 要求機器可讀 SBOM、漏洞處理證明,以及 2026/9/11 起被主動利用漏洞的 24／72 小時通報。AegisCode 的 SBOM、簽章證據包與已知被利用漏洞情資已對應這三塊;VEX 可利用性聲明(OpenVEX)與 CRA 合規對應報告本季推出,POC 階段可先以出口產品的 repo 演練。",
+  },
+  {
     q: "30 天 POC 可以評估到什麼程度?",
     a: "POC 涵蓋 SAST findings 展示、CBOM/PQC 盤點、SBOM/SCA 報告範本、Quality Gate 試跑，以及部署與稽核需求盤點。POC 結束時您能拿到一份完整的 Evidence Pack 範本與導入建議。",
   },
