@@ -23,7 +23,7 @@ export default function CtaContact() {
             金管會準備期已開跑 —— 先做一次 PQC / CBOM Readiness 評估
           </h2>
           <p className="text-gray-400 text-lg mb-10">
-            Code 走 30 天 POC,Surface 走顧問諮詢。選擇你要先看的那條,或兩條一起評估。
+            Code 走 30 天 POC,Surface 走顧問諮詢。選擇你要先看的那條,或兩條一起評估。通路與技術夥伴也可直接洽談合作。
           </p>
 
           <div className="flex flex-col gap-3 sm:flex-row sm:justify-center mb-6">
@@ -38,6 +38,12 @@ export default function CtaContact() {
               className="inline-flex items-center justify-center rounded-lg border border-sky-400/40 px-6 py-3 text-sm font-semibold text-sky-100 transition hover:bg-sky-400/10"
             >
               預約 Surface 諮詢
+            </Link>
+            <Link
+              href="/trial?track=PARTNER"
+              className="inline-flex items-center justify-center rounded-lg border border-[#243447] px-6 py-3 text-sm font-semibold text-gray-300 transition hover:border-[#14B8A6]/50 hover:text-white"
+            >
+              洽談合作(經銷 / SI / 技術)
             </Link>
           </div>
 

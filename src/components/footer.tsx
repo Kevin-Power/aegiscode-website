@@ -1,4 +1,6 @@
-const legalLinks = [
+const footerLinks = [
+  { label: "申請 POC", href: "/trial" },
+  { label: "合作洽談", href: "/trial?track=PARTNER" },
   { label: "隱私權政策", href: "/privacy" },
   { label: "服務條款", href: "/terms" },
   { label: "資料處理協議 DPA", href: "/dpa" },
@@ -29,7 +31,7 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-wrap items-center gap-5">
-          {legalLinks.map((link) => (
+          {footerLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
