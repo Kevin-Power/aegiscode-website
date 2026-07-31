@@ -6,13 +6,13 @@ import { ArrowRight, CheckCircle2, KeyRound, Scale } from "lucide-react";
 const trustItems = [
   { label: "矛尖能力", value: "CBOM/PQC 加密資產治理" },
   { label: "治理閉環", value: "Code 內部 + Surface 外部雙軌" },
-  { label: "合規支援", value: "PQC 盤點 · SOC 2/ISO 證據對應 · F-ISAC 自評" },
-  { label: "對象", value: "金融、政府與高法遵 CISO" },
+  { label: "合規支援", value: "PQC 盤點 · SOC 2/ISO 證據對應 · F-ISAC 自評 · CRA" },
+  { label: "對象", value: "金融、製造業、政府與高法遵 CISO" },
 ];
 
 const dashboardRows = [
   ["Core Banking API", "CBOM/PQC", "High"],
-  ["Mobile Banking", "SAST", "Medium"],
+  ["Smart Factory MES", "SAST/AI-BOM", "Medium"],
   ["Payment Gateway", "SBOM/SCA", "Critical"],
 ];
 
@@ -30,7 +30,7 @@ export default function Hero() {
         >
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-amber-400/[0.08] px-4 py-1.5 text-xs font-semibold text-amber-200">
             <Scale size={14} />
-            金管會 PQC 遷移指引 · 2026/6/18 發布
+            金管會 PQC 遷移指引 · 2026/6/18 發布 · 製造業高合規適用
           </div>
 
           <h1 className="mb-5 text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl">
@@ -40,11 +40,11 @@ export default function Hero() {
           </h1>
 
           <p className="mb-6 max-w-2xl text-lg font-medium leading-relaxed text-gray-100 sm:text-xl">
-            AegisCode 在 CI 內自動產出<span className="text-white">程式碼層 CBOM</span>，配合七大掃描能力與簽章證據，讓金融機構在金管會 2026–2027 準備期內，交出可稽核的盤點證據。
+            AegisCode 在 CI 內自動產出<span className="text-white">程式碼層 CBOM</span>，配合七大掃描能力與簽章證據，讓金融機構與製造業在金管會 2026–2027 準備期與 Industry 4.0 合規需求下，交出可稽核的盤點證據。
           </p>
 
           <p className="mb-8 max-w-2xl text-sm leading-7 text-gray-400 sm:text-base">
-            準備期第一項任務即建立加密資產清冊（CBOM），指引明文鼓勵以 AI 自動化盤點——合規時程已經開始倒數。
+            準備期第一項任務即建立加密資產清冊（CBOM），指引明文鼓勵以 AI 自動化盤點——合規時程已經開始倒數。智慧工廠長期設備與 AI Agent 同樣需要加密資產與 AI-BOM 治理。
           </p>
 
           <div className="flex flex-col gap-4 sm:flex-row">
@@ -77,7 +77,7 @@ export default function Hero() {
                 <div className="text-xs text-gray-500">PQC migration governance</div>
               </div>
               <div className="rounded-full border border-[#14B8A6]/30 bg-[#14B8A6]/10 px-3 py-1 text-xs text-[#5EEAD4]">
-                金管會 PQC
+                金管會 PQC · 製造業
               </div>
             </div>
 
@@ -98,7 +98,7 @@ export default function Hero() {
               {dashboardRows.map(([system, type, risk]) => (
                 <div
                   key={system}
-                  className="grid grid-cols-[1.3fr_0.8fr_0.6fr] items-center gap-3 border-b border-[#243447] bg-[#1A2332]/70 px-4 py-3 last:border-b-0"
+                  className={`grid grid-cols-[1.3fr_0.8fr_0.6fr] items-center gap-3 border-b border-[#243447] bg-[#1A2332]/70 px-4 py-3 last:border-b-0`}
                 >
                   <div className="truncate text-sm text-gray-200">{system}</div>
                   <div className="text-xs text-gray-500">{type}</div>
@@ -120,7 +120,7 @@ export default function Hero() {
             <div className="mt-4 flex items-start gap-3 rounded-lg border border-[#14B8A6]/25 bg-[#14B8A6]/10 p-4">
               <KeyRound className="mt-0.5 h-5 w-5 shrink-0 text-[#14B8A6]" />
               <p className="text-sm leading-relaxed text-gray-300">
-                RSA、MD5、硬編 IV、短金鑰與後量子遷移風險全部進入同一份可審核證據鏈。HNDL（先竊取、待量子破解）讓今天加密的資料未來被解密——遷移不能等 2035。
+                RSA、MD5、硬編 IV、短金鑰與後量子遷移風險全部進入同一份可審核證據鏈。HNDL（先竊取、待量子破解）讓今天加密的資料未來被解密——金融核心與工廠長期設備都不能等 2035。
               </p>
             </div>
           </div>
