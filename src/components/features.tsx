@@ -8,6 +8,8 @@ import {
   Bot,
   Building2,
   Cpu,
+  GitPullRequest,
+  History,
   KeyRound,
   Package,
   Activity,
@@ -56,6 +58,16 @@ const features = [
     icon: Bot,
     title: "SAST-in-the-Loop AI 修補工作流",
     desc: "把 SAST findings 轉成可審查、可修復、可追蹤的 AI review 工作流，繁中修復建議與主管可審核紀錄一次到位。",
+  },
+  {
+    icon: GitPullRequest,
+    title: "受控相依更新 PR",
+    desc: "高風險相依套件由平台開出鎖定版本的修補 PR，更新範圍、關聯 findings 與審核留痕綁定——自動升級不繞過治理。",
+  },
+  {
+    icon: History,
+    title: "掃描歷史與複測差異",
+    desc: "同一專案任兩次掃描直接比對：新增、已修復、回歸 findings 分列呈現，複測驗證與稽核追蹤不再人工對表。",
   },
   {
     icon: Activity,

@@ -11,6 +11,8 @@ import {
   Cpu,
   FileCheck2,
   GitBranch,
+  GitPullRequest,
+  History,
   KeySquare,
   Layers,
   Lock,
@@ -44,6 +46,16 @@ const capabilities = [
     icon: WorkflowIcon,
     title: "SAST-in-the-Loop AI 修補工作流",
     desc: "把 SAST findings 轉成可審查、可修復、可追蹤的 AI review 工作流。",
+  },
+  {
+    icon: GitPullRequest,
+    title: "受控相依更新 PR",
+    desc: "高風險相依套件由平台開出鎖定版本的修補 PR,更新範圍、關聯 findings 與審核留痕綁定——自動升級不繞過治理。",
+  },
+  {
+    icon: History,
+    title: "掃描歷史與複測差異",
+    desc: "同一專案任兩次掃描直接比對:新增、已修復、回歸 findings 分列呈現,複測驗證與稽核追蹤不再人工對表。",
   },
   {
     icon: Layers,
@@ -138,7 +150,7 @@ const productFaqItems = [
   },
   {
     q: "出口歐盟的產品要因應 CRA(網路韌性法案),AegisCode 幫得上嗎?",
-    a: "可以。CRA 要求機器可讀 SBOM、漏洞處理證明,以及 2026/9/11 起被主動利用漏洞的 24／72 小時通報。AegisCode 的 SBOM、簽章證據包與已知被利用漏洞情資已對應這三塊;VEX 可利用性聲明(OpenVEX)與 CRA 合規對應報告本季推出,POC 階段可先以出口產品的 repo 演練。",
+    a: "可以。CRA 要求機器可讀 SBOM、漏洞處理證明,以及 2026/9/11 起被主動利用漏洞的 24／72 小時通報。AegisCode 的 SBOM、簽章證據包與已知被利用漏洞情資已對應這三塊;VEX 可利用性聲明(OpenVEX)與 CRA 合規對應報告已內建,隨掃描與治理紀錄自動產出,POC 階段可直接以出口產品的 repo 演練。",
   },
   {
     q: "30 天 POC 可以評估到什麼程度?",
@@ -150,6 +162,7 @@ const versusMatrix: Array<{ dim: string; sonar: string; aegis: string }> = [
   { dim: "程式碼品質 + SAST", sonar: "成熟", aegis: "整合" },
   { dim: "CBOM / PQC", sonar: "未支援", aegis: "矛尖能力" },
   { dim: "AI-BOM AI 元件清冊", sonar: "未支援", aegis: "原生" },
+  { dim: "受控相依更新 PR", sonar: "未支援", aegis: "原生" },
   { dim: "繁中治理工作流", sonar: "未支援", aegis: "原生" },
   { dim: "主管審核留痕", sonar: "部分", aegis: "完整" },
   { dim: "台灣金融合規證據包", sonar: "未支援", aegis: "原生" },
@@ -167,13 +180,14 @@ const pocDeliverables = [
   "SBOM / SCA 報告與稽核證據包樣本",
   "AI-BOM AI 元件清冊展示(模型 API / MCP / agent 設定盤點)",
   "Quality Gate 與主管審核紀錄試跑",
+  "掃描歷史複測差異展示(修復驗證閉環)",
   "部署、SSO、資料留存與 DPA 需求盤點",
 ]
 
 export const metadata = {
   title: "金管會 PQC 遷移指引因應｜CI 內建 CBOM 與七大掃描 — AegisCode Code",
   description:
-    "AegisCode Code 在 CI 內自動產出程式碼層 CBOM,對應金管會 2026《後量子密碼遷移參考指引》準備期;整合 SAST／SCA／DAST／IaC／Secrets／容器七大掃描、AI 修補工作流、AI-BOM AI 元件清冊與繁中合規證據包,支援地端／air-gapped 部署。",
+    "AegisCode Code 在 CI 內自動產出程式碼層 CBOM,對應金管會 2026《後量子密碼遷移參考指引》準備期;整合 SAST／SCA／DAST／IaC／Secrets／容器七大掃描、AI 修補工作流、受控相依更新、AI-BOM AI 元件清冊與繁中合規證據包,支援地端／air-gapped 部署。",
 }
 
 export default function CodePage() {

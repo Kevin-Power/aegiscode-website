@@ -56,7 +56,17 @@ const regulations: Array<{
       "機器可讀 SBOM(CycloneDX / SPDX)",
       "已知被利用漏洞情資 — 對應 24 / 72 小時通報觸發",
       "漏洞處理與修補紀錄佐證(簽章證據包)",
-      "VEX 可利用性聲明(OpenVEX)— 本季推出",
+      "VEX 可利用性聲明(OpenVEX)隨治理紀錄自動產出",
+    ],
+  },
+  {
+    title: "CMMC 2.0 Level 2",
+    subtitle: "美國國防供應鏈 · NIST SP 800-171 Rev 2",
+    items: [
+      "NIST SP 800-171 Rev 2 實務對照報告",
+      "弱點掃描、修補時效與供應鏈安全證據",
+      "涵蓋範圍誠實標注 covered / partial,不過度宣稱",
+      "稽核前差距盤點的可稽核起點",
     ],
   },
 ]
@@ -79,7 +89,7 @@ export default function ComplianceMatrix() {
         >
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-amber-400/25 bg-amber-400/10 px-4 py-1.5 text-xs font-medium text-amber-200">
             <Scale className="h-4 w-4" />
-            法規對應 · 台灣 + 出口歐盟
+            法規對應 · 台灣 + 歐盟 CRA + 美國 CMMC
           </div>
           <h2 className="max-w-3xl text-3xl font-bold tracking-tight sm:text-4xl">
             把技術修補 ↔ 管理層看得懂的法規條目對齊。
