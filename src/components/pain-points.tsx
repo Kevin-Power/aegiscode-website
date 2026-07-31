@@ -36,6 +36,8 @@ const painPoints = [
   "委外與內部專案都需要同一套可交付、可追溯的治理語言",
   "AI coding 工具與 MCP server 進入研發流程，prompt injection、冒充 MCP server、濫用本機 AI CLI 成為沒人盤點的新攻擊面",
   "RSA／短金鑰散落各系統，HNDL（先竊取、待量子破解）讓今天的密文未來被解密，卻沒有一份可稽核的加密資產清冊",
+  "智慧工廠與 OT/ICS 設備生命週期長，加密資產與 AI Agent 設定難以滾動盤點，產線中斷成本遠高於一般 IT",
+  "製造業出口歐盟產品需因應 CRA，缺乏機器可讀 SBOM/VEX 與可稽核證據包",
 ];
 
 export default function PainPoints() {
@@ -54,7 +56,7 @@ export default function PainPoints() {
           <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
             為什麼需要 <span className="text-[#14B8A6]">AegisCode</span>？
           </h2>
-          <p className="text-lg text-gray-400">用可查證來源說明程式碼治理風險</p>
+          <p className="text-lg text-gray-400">用可查證來源說明程式碼治理風險（金融 · 製造業 · AI 開發）</p>
         </motion.div>
 
         <div className="mb-16 grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -89,7 +91,7 @@ export default function PainPoints() {
           className="rounded-xl border border-[#243447] bg-[#1A2332] p-8"
         >
           <h3 className="mb-6 text-lg font-semibold text-gray-200">
-            高法遵組織常見的程式碼治理痛點
+            高法遵組織（金融、製造業、政府）常見的程式碼與 AI 治理痛點
           </h3>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {painPoints.map((point) => (
