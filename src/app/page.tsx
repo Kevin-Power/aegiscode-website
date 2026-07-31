@@ -1,6 +1,7 @@
 import Navbar from "@/components/navbar"
 import Hero from "@/components/hero"
 import DualPillars from "@/components/dual-pillars"
+import Industries from "@/components/industries"
 import PainPoints from "@/components/pain-points"
 import Features from "@/components/features"
 import ProductProof from "@/components/product-proof"
@@ -28,7 +29,7 @@ const itemListJsonLd = {
         name: "AegisCode Code",
         brand: { "@type": "Brand", name: "AegisCode" },
         description:
-          "內部程式碼資安治理:SAST 弱點掃描、CBOM/PQC 加密資產盤點、SBOM/SCA、AI-BOM AI 元件盤點、主管審核紀錄與台灣金融合規證據包。",
+          "內部程式碼資安治理：SAST 弱點掃描、CBOM/PQC 加密資產盤點、SBOM/SCA、AI-BOM AI 元件盤點、主管審核紀錄，適用金融機構金管會 PQC 合規、製造業 Industry 4.0 / OT 與 CRA 需求。",
         category: "Application Security Testing",
         url: "https://aegiscode.yilutek.com/code",
       },
@@ -41,7 +42,7 @@ const itemListJsonLd = {
         name: "AegisCode Surface",
         brand: { "@type": "Brand", name: "AegisCode" },
         description:
-          "外部攻擊面年度治理服務:評分整合、AI 修補建議、台灣法規對應與顧問級 CISO 月報。",
+          "外部攻擊面年度治理服務：評分整合、AI 修補建議、台灣法規與 EU CRA 對應、顧問級 CISO 月報，適用金融控股、製造業集團與高法遵組織。",
         category: "External Attack Surface Management",
         url: "https://aegiscode.yilutek.com/surface",
       },
@@ -74,7 +75,7 @@ const faqJsonLd = {
       name: "AegisCode 與傳統程式碼品質平台差異在哪?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "AegisCode 聚焦繁中治理工作流、CBOM/PQC 加密資產盤點、AI-BOM AI 元件盤點、主管審核紀錄與台灣金融合規證據包。",
+        text: "AegisCode 聚焦繁中治理工作流、CBOM/PQC 加密資產盤點、AI-BOM AI 元件盤點、主管審核紀錄與台灣金融合規證據包，同時支援製造業 OT 與 CRA 需求。",
       },
     },
     {
@@ -150,6 +151,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <DualPillars />
+      <Industries />
       <PainPoints />
       <Features />
       <ProductProof />
