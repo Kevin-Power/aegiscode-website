@@ -18,8 +18,8 @@ export default function Footer() {
           <p>統一編號：90898596</p>
           <p>
             聯絡信箱：
-            <a href="mailto:sales@aegiscode.com" className="text-[#14B8A6] hover:underline">
-              sales@aegiscode.com
+            <a href="mailto:IT@yilutek.com" className="text-[#14B8A6] hover:underline">
+              IT@yilutek.com
             </a>
           </p>
           <p>業務電話：採購建檔時提供</p>

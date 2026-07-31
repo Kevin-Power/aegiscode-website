@@ -44,10 +44,10 @@ export default function CtaContact() {
           <p className="text-gray-500 text-sm mb-12">
             或者直接 email{" "}
             <a
-              href="mailto:sales@aegiscode.com"
+              href="mailto:IT@yilutek.com"
               className="text-[#5EEAD4] hover:underline"
             >
-              sales@aegiscode.com
+              IT@yilutek.com
             </a>
             {" "}聯絡顧問
           </p>

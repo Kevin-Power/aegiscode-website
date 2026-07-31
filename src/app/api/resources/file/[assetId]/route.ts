@@ -67,7 +67,7 @@ export async function GET(
     return Response.json(
       {
         error:
-          "Asset file is not yet deployed. Please contact sales@aegiscode.com.",
+          "Asset file is not yet deployed. Please contact IT@yilutek.com.",
       },
       { status: 404 },
     )

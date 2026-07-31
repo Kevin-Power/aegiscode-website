@@ -81,7 +81,7 @@ export async function POST(req: NextRequest): Promise<Response> {
     return Response.json(
       {
         error:
-          "Resource downloads are not yet configured — please contact sales@aegiscode.com.",
+          "Resource downloads are not yet configured — please contact IT@yilutek.com.",
       },
       { status: 503 },
     )

@@ -32,7 +32,7 @@ function resolvedFrom(explicit: string | undefined): string {
     explicit ||
     process.env.SMTP_FROM ||
     process.env.RESEND_FROM ||
-    "AegisCode <noreply@aegiscode.com>"
+    "AegisCode <IT@yilutek.com>"
   )
 }
 
@@ -260,7 +260,7 @@ export function pocRequestReceivedEmail(
     "",
     "接下來 AegisCode 顧問會協助確認 Demo 情境、部署條件、資料留存、SSO 與合規證據包需求，再安排 CBOM / SAST-in-the-Loop 展示。",
     "",
-    "如果您想先補充需求，可直接回覆此信或寄到 sales@aegiscode.com。",
+    "如果您想先補充需求，可直接回覆此信或寄到 IT@yilutek.com。",
     "",
     "-- AegisCode",
   ].join("\n")
@@ -275,7 +275,68 @@ export function pocRequestReceivedEmail(
         <tr><td style="padding:4px 12px 4px 0;color:#64748B;">團隊規模</td><td>${escapeHtml(String(a.teamSize || "待確認"))}</td></tr>
       </table>
       <p style="line-height:1.6;">接下來 AegisCode 顧問會協助確認 Demo 情境、部署條件、資料留存、SSO 與合規證據包需求，再安排 CBOM / SAST-in-the-Loop 展示。</p>
-      <p style="color:#64748B;font-size:13px;">如需先補充需求，可直接回覆此信或寄到 <a href="mailto:sales@aegiscode.com">sales@aegiscode.com</a>。</p>
+      <p style="color:#64748B;font-size:13px;">如需先補充需求，可直接回覆此信或寄到 <a href="mailto:IT@yilutek.com">IT@yilutek.com</a>。</p>
+      <p style="color:#94A3B8;font-size:12px;margin-top:24px;">-- AegisCode</p>
+    </div>
+  `
+  return { subject, html, text }
+}
+
+/** Display labels for the partnership types accepted by /api/trial/signup.
+ *  Keep the keys in sync with PARTNER_TYPES in that route. */
+const PARTNER_TYPE_LABELS: Record<string, string> = {
+  reseller: "經銷代理",
+  si: "系統整合 (SI)",
+  technology: "技術合作",
+  investment: "投資洽談",
+}
+
+export interface PartnershipRequestReceivedEmailArgs {
+  customerName: string
+  partnerType?: string
+  partnerWebsite?: string
+}
+
+/** Confirmation for the PARTNER track. Deliberately separate from
+ *  pocRequestReceivedEmail — a channel or investment enquiry has no POC,
+ *  no tier and no deployment scoping, so the POC copy would be wrong. */
+export function partnershipRequestReceivedEmail(
+  a: PartnershipRequestReceivedEmailArgs,
+): { subject: string; html: string; text: string } {
+  const subject = "AegisCode 已收到您的合作洽談申請"
+  const typeLabel = a.partnerType
+    ? PARTNER_TYPE_LABELS[a.partnerType] || a.partnerType
+    : "待確認"
+  const text = [
+    `${a.customerName} 您好，`,
+    "",
+    "我們已收到您的 AegisCode 合作洽談申請。",
+    "",
+    `合作類型：${typeLabel}`,
+    ...(a.partnerWebsite ? [`公司網站：${a.partnerWebsite}`] : []),
+    "",
+    "我們會在 2-3 個工作天內與您聯繫，先了解您的合作模式、既有客戶群與期望的分工方式，再安排後續討論。",
+    "",
+    "如果您想先補充資訊，可直接回覆此信或寄到 IT@yilutek.com。",
+    "",
+    "-- AegisCode",
+  ].join("\n")
+
+  const html = `
+    <div style="font-family:system-ui,-apple-system,Segoe UI,sans-serif;max-width:560px;margin:auto;padding:24px;color:#0F172A;">
+      <h2 style="margin:0 0 12px;color:#0D9488;">已收到您的合作洽談申請</h2>
+      <p>${escapeHtml(a.customerName)} 您好，</p>
+      <p>我們已收到您的 AegisCode 合作洽談申請。</p>
+      <table style="border-collapse:collapse;margin:12px 0;font-size:13px;">
+        <tr><td style="padding:4px 12px 4px 0;color:#64748B;">合作類型</td><td>${escapeHtml(typeLabel)}</td></tr>
+        ${
+          a.partnerWebsite
+            ? `<tr><td style="padding:4px 12px 4px 0;color:#64748B;">公司網站</td><td>${escapeHtml(a.partnerWebsite)}</td></tr>`
+            : ""
+        }
+      </table>
+      <p style="line-height:1.6;">我們會在 2-3 個工作天內與您聯繫，先了解您的合作模式、既有客戶群與期望的分工方式，再安排後續討論。</p>
+      <p style="color:#64748B;font-size:13px;">如需先補充資訊，可直接回覆此信或寄到 <a href="mailto:IT@yilutek.com">IT@yilutek.com</a>。</p>
       <p style="color:#94A3B8;font-size:12px;margin-top:24px;">-- AegisCode</p>
     </div>
   `

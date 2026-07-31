@@ -61,7 +61,13 @@ const checks = [
     level: "warning",
     name: "Sales notification recipient",
     ok: has("SALES_NOTIFY_EMAIL"),
-    fix: "Set SALES_NOTIFY_EMAIL; otherwise notifications default to sales@aegiscode.com.",
+    fix: "Set SALES_NOTIFY_EMAIL; otherwise notifications default to IT@yilutek.com.",
+  },
+  {
+    level: "warning",
+    name: "Google Sheet lead sink",
+    ok: all(["GOOGLE_SHEETS_WEBHOOK_URL", "GOOGLE_SHEETS_WEBHOOK_SECRET"]),
+    fix: "Set GOOGLE_SHEETS_WEBHOOK_URL and GOOGLE_SHEETS_WEBHOOK_SECRET so /trial submissions land in the lead sheet. Both are required together; see docs/google-apps-script/README.md. Leads still reach SALES_NOTIFY_EMAIL without them.",
   },
   {
     level: "warning",

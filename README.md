@@ -423,7 +423,7 @@ vercel env add LICENSE_PUBLIC_KEY  # paste trial-public-key.pem
 
 If `LICENSE_SIGNING_PRIVATE_KEY` is unset, the trial signup endpoint
 returns HTTP 503 with `"Trial signup not configured ??please contact
-sales@aegiscode.com."` so the flow fails closed.
+IT@yilutek.com."` so the flow fails closed.
 
 ### Configuring Stripe
 

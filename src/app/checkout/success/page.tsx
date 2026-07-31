@@ -17,8 +17,8 @@ export default function CheckoutSuccessPage() {
           <p className="text-gray-400 text-sm">
             Your license JWT will arrive by email within a few minutes. If
             you don&apos;t receive it, write to{" "}
-            <a className="underline" href="mailto:sales@aegiscode.com">
-              sales@aegiscode.com
+            <a className="underline" href="mailto:IT@yilutek.com">
+              IT@yilutek.com
             </a>
             .
           </p>

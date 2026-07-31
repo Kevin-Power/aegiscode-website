@@ -5,12 +5,22 @@ import { useSearchParams } from "next/navigation";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 
+type Track = "CODE" | "SURFACE" | "BOTH" | "PARTNER";
+
+const PARTNER_TYPES = [
+  ["reseller", "經銷代理"],
+  ["si", "系統整合 (SI)"],
+  ["technology", "技術合作"],
+  ["investment", "投資洽談"],
+] as const;
+
 function TrialForm() {
   const params = useSearchParams();
-  const initialTrack: "CODE" | "SURFACE" | "BOTH" = (() => {
+  const initialTrack: Track = (() => {
     const p = params.get("track");
     if (p === "SURFACE") return "SURFACE";
     if (p === "BOTH") return "BOTH";
+    if (p === "PARTNER") return "PARTNER";
     return "CODE";
   })();
 
@@ -24,7 +34,10 @@ function TrialForm() {
   const [teamSize, setTeamSize] = useState("");
   const [website, setWebsite] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  const [track, setTrack] = useState<"CODE" | "SURFACE" | "BOTH">(initialTrack);
+  const [track, setTrack] = useState<Track>(initialTrack);
+  const [partnerType, setPartnerType] = useState("");
+  const [partnerWebsite, setPartnerWebsite] = useState("");
+  const [partnerNote, setPartnerNote] = useState("");
   const [domainCount, setDomainCount] = useState("");
   const [hasExternalRating, setHasExternalRating] = useState<"yes" | "no" | "">("");
   const [monthlyReportEta, setMonthlyReportEta] = useState<"2-weeks" | "4-weeks" | "8-weeks" | "">("");
@@ -38,10 +51,15 @@ function TrialForm() {
         instructions: string;
         manualReview?: boolean;
         jwt?: string;
-        track?: "CODE" | "SURFACE" | "BOTH";
+        track?: Track;
       }
     | { ok: false; error: string }
   >(null);
+
+  // Surface questions apply to SURFACE and BOTH, but not to PARTNER — a
+  // channel enquiry has no domain portfolio to scope.
+  const isCodeTrack = track === "CODE" || track === "BOTH";
+  const isSurfaceTrack = track === "SURFACE" || track === "BOTH";
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -59,12 +77,18 @@ function TrialForm() {
           teamSize,
           website,
           track,
-          domainCount: track !== "CODE" ? domainCount : undefined,
-          hasExternalRating:
-            track !== "CODE" ? hasExternalRating === "yes" : undefined,
-          monthlyReportEta:
-            track !== "CODE" ? monthlyReportEta || undefined : undefined,
+          domainCount: isSurfaceTrack ? domainCount : undefined,
+          hasExternalRating: isSurfaceTrack
+            ? hasExternalRating === "yes"
+            : undefined,
+          monthlyReportEta: isSurfaceTrack
+            ? monthlyReportEta || undefined
+            : undefined,
           decisionMaker: track === "BOTH" ? decisionMaker || undefined : undefined,
+          partnerType: track === "PARTNER" ? partnerType || undefined : undefined,
+          partnerWebsite:
+            track === "PARTNER" ? partnerWebsite || undefined : undefined,
+          partnerNote: track === "PARTNER" ? partnerNote || undefined : undefined,
         }),
       });
       const data = (await r.json()) as Record<string, unknown>;
@@ -93,10 +117,15 @@ function TrialForm() {
 
   if (result?.ok) {
     const isAdvisory = !result.licenseId;
+    const isPartner = result.track === "PARTNER";
     return (
       <div className="max-w-xl mx-auto bg-[#1A2332] border border-[#0D9488] rounded-xl p-8">
         <h2 className="text-2xl font-bold mb-3 text-[#14B8A6]">
-          {isAdvisory ? "諮詢申請已建立" : "評估申請已建立"}
+          {isPartner
+            ? "合作洽談申請已建立"
+            : isAdvisory
+              ? "諮詢申請已建立"
+              : "評估申請已建立"}
         </h2>
         <p className="text-gray-300 mb-4">{result.instructions}</p>
         {result.licenseId && result.expiresAt ? (
@@ -112,9 +141,11 @@ function TrialForm() {
           </dl>
         ) : (
           <div className="mb-4 rounded-lg border border-[#243447] bg-[#0D1521]/70 p-4 text-sm text-gray-300">
-            {isAdvisory
-              ? "我們已收到您的需求。在此期間，您可以先在資源中心下載服務說明書與 CISO 月報範本，讓內部相關人員先建立共識。"
-              : "我們已收到申請，顧問會先確認評估情境、部署條件與資料留存需求，再提供評估授權。"}
+            {isPartner
+              ? "我們已收到您的合作意向。在此期間，您可以先在資源中心了解 AegisCode 的產品範圍與交付方式，方便後續討論分工。"
+              : isAdvisory
+                ? "我們已收到您的需求。在此期間，您可以先在資源中心下載服務說明書與 CISO 月報範本，讓內部相關人員先建立共識。"
+                : "我們已收到申請，顧問會先確認評估情境、部署條件與資料留存需求，再提供評估授權。"}
           </div>
         )}
         {isAdvisory ? (
@@ -122,17 +153,17 @@ function TrialForm() {
             href="/resources"
             className="inline-flex items-center justify-center rounded-lg bg-[#0D9488] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#0F766E]"
           >
-            順手下載服務說明書 →
+            {isPartner ? "先看看產品資源 →" : "順手下載服務說明書 →"}
           </a>
         ) : null}
         {result.jwt ? (
           <div className="mt-4 rounded-lg border border-[#243447] bg-[#0D1521]/70 p-4 text-sm text-gray-300">
             您的評估授權將以安全管道寄送至公司信箱。若逾時未收到,請聯絡{" "}
             <a
-              href="mailto:sales@aegiscode.com"
+              href="mailto:IT@yilutek.com"
               className="text-[#5EEAD4] hover:underline"
             >
-              sales@aegiscode.com
+              IT@yilutek.com
             </a>
             {" "}協助啟用。
           </div>
@@ -154,14 +185,15 @@ function TrialForm() {
 
       <div>
         <label className="mb-2 block text-sm font-semibold text-gray-200">
-          評估方向 / Evaluation track
+          申請類型 / Request type
         </label>
-        <div className="grid gap-2 sm:grid-cols-3">
+        <div className="grid gap-2 grid-cols-2 sm:grid-cols-4">
           {(
             [
               ["CODE", "AegisCode Code", "程式碼 / SAST / CBOM"],
               ["SURFACE", "AegisCode Surface", "外部攻擊面 / CISO 月報"],
               ["BOTH", "兩者都評估", "完整治理閉環"],
+              ["PARTNER", "合作洽談", "經銷 / SI / 技術 / 投資"],
             ] as const
           ).map(([value, title, hint]) => (
             <button
@@ -202,7 +234,7 @@ function TrialForm() {
         onChange={setContactPhone}
       />
 
-      {track === "CODE" || track === "BOTH" ? (
+      {isCodeTrack ? (
         <div>
           <label className="block text-sm text-gray-300 mb-1">
             Code Tier
@@ -222,7 +254,7 @@ function TrialForm() {
         </div>
       ) : null}
 
-      {track === "CODE" || track === "BOTH" ? (
+      {isCodeTrack ? (
         <Field
           label="團隊規模 / Team size estimate"
           value={teamSize}
@@ -231,7 +263,7 @@ function TrialForm() {
         />
       ) : null}
 
-      {track === "SURFACE" || track === "BOTH" ? (
+      {isSurfaceTrack ? (
         <>
           <Field
             label="管理的 Domain / Portfolio 規模"
@@ -274,6 +306,43 @@ function TrialForm() {
               <option value="8-weeks">8 週內</option>
             </select>
           </div>
+        </>
+      ) : null}
+
+      {track === "PARTNER" ? (
+        <>
+          <div>
+            <label className="block text-sm text-gray-300 mb-1">
+              合作類型 / Partnership type
+            </label>
+            <select
+              value={partnerType}
+              onChange={(e) => setPartnerType(e.target.value)}
+              required
+              className="w-full bg-[#0D1521] border border-[#243447] rounded-lg px-3 py-2 text-gray-100 focus:border-[#0D9488] outline-none"
+            >
+              <option value="">請選擇</option>
+              {PARTNER_TYPES.map(([value, label]) => (
+                <option key={value} value={value}>
+                  {label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <Field
+            label="公司網站 / Company website"
+            value={partnerWebsite}
+            onChange={setPartnerWebsite}
+            placeholder="https://"
+            maxLength={300}
+          />
+          <TextArea
+            label="需求說明 / What are you proposing?"
+            value={partnerNote}
+            onChange={setPartnerNote}
+            placeholder="例如：我們在金融業有既有客戶群，希望代理 AegisCode Code 的 CBOM 模組"
+            maxLength={2000}
+          />
         </>
       ) : null}
 
@@ -326,11 +395,15 @@ function TrialForm() {
             ? "送出 Surface 諮詢申請"
             : track === "BOTH"
               ? "送出雙產品評估申請"
-              : "送出評估申請（30 天 POC）"}
+              : track === "PARTNER"
+                ? "送出合作洽談申請"
+                : "送出評估申請（30 天 POC）"}
       </button>
 
       <p className="text-xs text-gray-500 text-center">
-        送出後，AegisCode 團隊會寄送啟用資訊與 POC 評估建議。我們不會出售或轉交您的聯絡資料。
+        {track === "PARTNER"
+          ? "送出後，我們會在 2-3 個工作天內與您聯繫討論合作方式。我們不會出售或轉交您的聯絡資料。"
+          : "送出後，AegisCode 團隊會寄送啟用資訊與 POC 評估建議。我們不會出售或轉交您的聯絡資料。"}
       </p>
     </form>
   );
@@ -369,6 +442,34 @@ function Field({
   );
 }
 
+function TextArea({
+  label,
+  value,
+  onChange,
+  placeholder,
+  maxLength,
+}: {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  placeholder?: string;
+  maxLength?: number;
+}) {
+  return (
+    <div>
+      <label className="block text-sm text-gray-300 mb-1">{label}</label>
+      <textarea
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        maxLength={maxLength}
+        rows={4}
+        className="w-full bg-[#0D1521] border border-[#243447] rounded-lg px-3 py-2 text-gray-100 focus:border-[#0D9488] outline-none resize-y"
+      />
+    </div>
+  );
+}
+
 export default function TrialPage() {
   return (
     <main className="bg-[#0D1521] min-h-screen text-white">
@@ -377,10 +478,10 @@ export default function TrialPage() {
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-10">
             <h1 className="text-4xl sm:text-5xl font-bold mb-3 gradient-text glow-teal">
-              申請 PQC Readiness 評估
+              申請 POC 評估或洽談合作
             </h1>
             <p className="text-gray-400 text-lg">
-              30 天 POC，免信用卡，先確認治理工作流、部署條件與合規交付範圍，涵蓋 PQC 準備期與 AI 開發鏈攻擊面。
+              30 天 POC，免信用卡，先確認治理工作流、部署條件與合規交付範圍，涵蓋 PQC 準備期與 AI 開發鏈攻擊面。若您是通路、系統整合或技術夥伴，也可由此提出合作洽談。
             </p>
           </div>
           <Suspense fallback={<div className="text-gray-500">Loading...</div>}>

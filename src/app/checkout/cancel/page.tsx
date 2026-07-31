@@ -22,7 +22,7 @@ export default function CheckoutCancelPage() {
               申請 30 天 POC
             </a>
             <a
-              href="mailto:sales@aegiscode.com"
+              href="mailto:IT@yilutek.com"
               className="px-6 py-3 rounded-lg border border-[#243447] hover:border-[#0D9488] text-gray-300 hover:text-white font-medium transition"
             >
               聯絡方案顧問

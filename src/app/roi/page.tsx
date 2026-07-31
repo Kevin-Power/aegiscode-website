@@ -55,7 +55,7 @@ export default function RoiPage() {
               申請 PQC Readiness 評估
             </Link>
             <a
-              href="mailto:sales@aegiscode.com"
+              href="mailto:IT@yilutek.com"
               className="inline-flex items-center justify-center rounded-lg border border-[#243447] px-6 py-3 text-sm font-semibold text-gray-300 transition hover:border-[#14B8A6] hover:text-white"
             >
               索取 ROI 評估

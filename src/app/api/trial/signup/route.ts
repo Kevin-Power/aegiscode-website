@@ -7,8 +7,10 @@ import {
   sendEmail,
   licenseActivationEmail,
   pocRequestReceivedEmail,
+  partnershipRequestReceivedEmail,
 } from "@/lib/email"
 import { notifyOps } from "@/lib/notify-sales"
+import { appendLead, type LeadTrack } from "@/lib/sheets-lead"
 import { storage } from "@/lib/storage"
 
 export const runtime = "nodejs"
@@ -23,14 +25,52 @@ interface TrialSignupBody {
   // New: which AegisCode product line the lead is evaluating.
   // CODE = SAST/CBOM platform (the legacy default). SURFACE/BOTH go to
   // sales for manual handling — Surface is annual consulting, not a JWT.
-  track?: "CODE" | "SURFACE" | "BOTH"
+  // PARTNER is not an evaluation at all — it's a channel/SI/tech/investment
+  // enquiry, so it never touches licensing.
+  track?: "CODE" | "SURFACE" | "BOTH" | "PARTNER"
   // Surface-specific fields (optional, but expected when track !== CODE)
   domainCount?: string | number
   hasExternalRating?: boolean
   monthlyReportEta?: string
   decisionMaker?: string
+  // Partner-specific fields (optional, but expected when track === PARTNER)
+  partnerType?: string
+  partnerWebsite?: string
+  partnerNote?: string
   // Honeypot — must be empty.
   website?: string
+}
+
+const PARTNER_TYPES = [
+  "reseller",
+  "si",
+  "technology",
+  "investment",
+] as const
+
+/** Free-text partner fields are operator-facing; cap them so a bot can't
+ *  push a novel into the ops mailbox or the sheet. */
+const PARTNER_NOTE_MAX = 2000
+const PARTNER_WEBSITE_MAX = 300
+
+/** Why this lead skipped auto-issuance — goes to the ops notification. */
+const MANUAL_REASON: Record<LeadTrack, string> = {
+  CODE: "Durable storage is not configured; auto license issuance paused.",
+  SURFACE:
+    "Surface is an advisory subscription; sales must qualify before issuing access.",
+  BOTH: "Both Code and Surface evaluation; sales must qualify and scope before issuance.",
+  PARTNER:
+    "Partnership enquiry; no licence involved — route to business development.",
+}
+
+/** Customer-facing confirmation text, keyed by track. */
+const MANUAL_INSTRUCTIONS: Record<LeadTrack, string> = {
+  CODE: "POC request received. AegisCode sales will contact you to schedule the product walkthrough and issue an evaluation license after environment readiness is confirmed.",
+  SURFACE:
+    "Surface 諮詢申請已建立。顧問會在 1-2 個工作天內聯繫,先確認 Domain 規模、現有評分授權與時程。",
+  BOTH: "已收到 Code + Surface 雙產品評估申請。顧問會聯繫您安排合併評估流程。",
+  PARTNER:
+    "合作洽談申請已建立。我們會在 2-3 個工作天內聯繫,先了解您的合作模式、既有客戶群與期望的分工方式。",
 }
 
 const EMAIL_RE = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/
@@ -85,23 +125,44 @@ export async function POST(req: NextRequest): Promise<Response> {
     )
   }
 
-  const track: "CODE" | "SURFACE" | "BOTH" =
-    body.track === "SURFACE"
-      ? "SURFACE"
-      : body.track === "BOTH"
-        ? "BOTH"
-        : "CODE"
+  const track: LeadTrack =
+    body.track === "SURFACE" ||
+    body.track === "BOTH" ||
+    body.track === "PARTNER"
+      ? body.track
+      : "CODE"
 
-  // Surface and Both are advisory subscriptions — they never get an
-  // auto-issued JWT, regardless of storage backend. CODE keeps the
-  // existing auto-issue behavior when durable storage is configured.
+  const partnerType =
+    track === "PARTNER" &&
+    PARTNER_TYPES.includes(body.partnerType as (typeof PARTNER_TYPES)[number])
+      ? body.partnerType
+      : undefined
+  const partnerWebsite =
+    track === "PARTNER"
+      ? body.partnerWebsite?.trim().slice(0, PARTNER_WEBSITE_MAX) || undefined
+      : undefined
+  const partnerNote =
+    track === "PARTNER"
+      ? body.partnerNote?.trim().slice(0, PARTNER_NOTE_MAX) || undefined
+      : undefined
+
+  // Surface, Both and Partner never get an auto-issued JWT, regardless of
+  // storage backend. CODE keeps the existing auto-issue behavior when durable
+  // storage is configured.
   const forceManual = track !== "CODE"
   if (forceManual || !canAutoIssueTrialLicense()) {
-    const ack = pocRequestReceivedEmail({
-      customerName: companyName,
-      tier,
-      teamSize: body.teamSize,
-    })
+    const ack =
+      track === "PARTNER"
+        ? partnershipRequestReceivedEmail({
+            customerName: companyName,
+            partnerType,
+            partnerWebsite,
+          })
+        : pocRequestReceivedEmail({
+            customerName: companyName,
+            tier,
+            teamSize: body.teamSize,
+          })
     await sendEmail({
       to: contactEmail,
       subject: ack.subject,
@@ -113,20 +174,36 @@ export async function POST(req: NextRequest): Promise<Response> {
       customerEmail: contactEmail,
       contactPhone: body.contactPhone,
       teamSize: body.teamSize,
-      tier,
+      // A partnership enquiry has no tier — sending the defaulted
+      // PROFESSIONAL would read as a product decision nobody made.
+      tier: track === "PARTNER" ? undefined : tier,
       track,
       domainCount: body.domainCount,
       hasExternalRating: body.hasExternalRating,
       monthlyReportEta: body.monthlyReportEta,
       decisionMaker: body.decisionMaker,
+      partnerType,
+      partnerWebsite,
+      partnerNote,
       fulfillment: "manual",
       storageBackend: storage.backend,
-      reason:
-        track === "CODE"
-          ? "Durable storage is not configured; auto license issuance paused."
-          : track === "SURFACE"
-            ? "Surface is an advisory subscription; sales must qualify before issuing access."
-            : "Both Code and Surface evaluation; sales must qualify and scope before issuance.",
+      reason: MANUAL_REASON[track],
+    })
+    await appendLead({
+      track,
+      companyName,
+      contactEmail,
+      contactPhone: body.contactPhone,
+      tier: track === "PARTNER" ? undefined : tier,
+      teamSize: body.teamSize,
+      domainCount: body.domainCount,
+      hasExternalRating: body.hasExternalRating,
+      monthlyReportEta: body.monthlyReportEta,
+      decisionMaker: body.decisionMaker,
+      partnerType,
+      partnerWebsite,
+      partnerNote,
+      fulfillment: "manual",
     })
     await recordAudit({
       action: "TRIAL_SIGNUP",
@@ -143,12 +220,7 @@ export async function POST(req: NextRequest): Promise<Response> {
         ok: true,
         manualReview: true,
         track,
-        instructions:
-          track === "CODE"
-            ? "POC request received. AegisCode sales will contact you to schedule the product walkthrough and issue an evaluation license after environment readiness is confirmed."
-            : track === "SURFACE"
-              ? "Surface 諮詢申請已建立。顧問會在 1-2 個工作天內聯繫,先確認 Domain 規模、現有評分授權與時程。"
-              : "已收到 Code + Surface 雙產品評估申請。顧問會聯繫您安排合併評估流程。",
+        instructions: MANUAL_INSTRUCTIONS[track],
       },
       { status: 202 },
     )
@@ -158,7 +230,7 @@ export async function POST(req: NextRequest): Promise<Response> {
     return Response.json(
       {
         error:
-          "Trial signup not configured — please contact sales@aegiscode.com.",
+          "Trial signup not configured — please contact IT@yilutek.com.",
       },
       { status: 503 },
     )
@@ -179,7 +251,7 @@ export async function POST(req: NextRequest): Promise<Response> {
     return Response.json(
       {
         error:
-          "An active trial already exists for this email. Contact sales@aegiscode.com to extend.",
+          "An active trial already exists for this email. Contact IT@yilutek.com to extend.",
       },
       { status: 409 },
     )
@@ -233,7 +305,7 @@ export async function POST(req: NextRequest): Promise<Response> {
     tier,
     isTrial: true,
     instructions:
-      "This is a 30-day POC license. Email sales@aegiscode.com before it expires to convert to a paid plan.",
+      "This is a 30-day POC license. Email IT@yilutek.com before it expires to convert to a paid plan.",
   })
   const mail = await sendEmail({
     to: contactEmail,
@@ -253,6 +325,17 @@ export async function POST(req: NextRequest): Promise<Response> {
     expiresAt: record.expiresAt,
   })
 
+  await appendLead({
+    track,
+    companyName,
+    contactEmail,
+    contactPhone: body.contactPhone,
+    tier,
+    teamSize: body.teamSize,
+    fulfillment: "auto",
+    licenseId: record.licenseId,
+  })
+
   // Only return the JWT in the API response when email delivery wasn't
   // configured — otherwise the customer should receive it via email and we
   // shouldn't put a long-lived secret into a network log.
@@ -264,7 +347,7 @@ export async function POST(req: NextRequest): Promise<Response> {
       expiresAt: record.expiresAt,
       instructions: emailDelivered
         ? "Check your email for activation steps."
-        : "Email service is not configured — copy the JWT below and email sales@aegiscode.com if you need help.",
+        : "Email service is not configured — copy the JWT below and email IT@yilutek.com if you need help.",
       ...(emailDelivered ? {} : { jwt: signed.jwt }),
     },
     { status: 201 },

@@ -288,7 +288,7 @@ function BrandHeader({ subtitle }: { subtitle: string }) {
 function DocFooter({ docCode }: { docCode: string }) {
   return (
     <div className="doc-footer">
-      <span>AegisCode · sales@aegiscode.com · https://aegiscode.yilutek.com</span>
+      <span>AegisCode · IT@yilutek.com · https://aegiscode.yilutek.com</span>
       <span>
         {docCode} · 印製日期 {printedAt()}
       </span>
@@ -426,7 +426,7 @@ function ServiceProposalPage() {
       <p>
         報價依範圍而定 — Domain 數量、外部評分整合的供應商、是否含
         Penetration Test 與額外顧問時數,皆會影響年費。請聯絡
-        <strong>sales@aegiscode.com</strong> 取得針對貴單位範圍的正式報價。
+        <strong>IT@yilutek.com</strong> 取得針對貴單位範圍的正式報價。
       </p>
 
       <DocFooter docCode="AC-SURFACE-PROPOSAL-v1" />
@@ -646,7 +646,7 @@ function TwComplianceMatrixPage() {
       <p>
         本表為公開速查版本。針對貴單位實際 Domain 範圍、業務類型(金融、
         政府、醫療等)與既有 ISMS 文件的完整客製化合規對應,由 Surface
-        顧問服務交付。請聯絡 <strong>sales@aegiscode.com</strong>。
+        顧問服務交付。請聯絡 <strong>IT@yilutek.com</strong>。
       </p>
 
       <DocFooter docCode="AC-TW-COMPLIANCE-MATRIX-v1" />

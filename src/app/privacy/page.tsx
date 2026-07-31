@@ -28,8 +28,8 @@ export default function PrivacyPage() {
             </p>
             <p>
               如需資料查詢、更新或刪除，請聯絡{" "}
-              <a className="text-[#5EEAD4] underline" href="mailto:sales@aegiscode.com">
-                sales@aegiscode.com
+              <a className="text-[#5EEAD4] underline" href="mailto:IT@yilutek.com">
+                IT@yilutek.com
               </a>
               。
             </p>

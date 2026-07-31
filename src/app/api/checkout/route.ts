@@ -44,7 +44,7 @@ export async function POST(req: NextRequest): Promise<Response> {
     return Response.json(
       {
         error:
-          "Self-service checkout is currently paused. Please contact sales@aegiscode.com for a POC-based quote.",
+          "Self-service checkout is currently paused. Please contact IT@yilutek.com for a POC-based quote.",
       },
       { status: 503 },
     )
@@ -52,7 +52,7 @@ export async function POST(req: NextRequest): Promise<Response> {
 
   if (!stripeEnabled()) {
     return Response.json(
-      { error: "Stripe checkout is not enabled — contact sales@aegiscode.com." },
+      { error: "Stripe checkout is not enabled — contact IT@yilutek.com." },
       { status: 503 },
     )
   }

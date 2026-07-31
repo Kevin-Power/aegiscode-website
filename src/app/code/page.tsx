@@ -332,8 +332,8 @@ export default function CodePage() {
           </div>
           <p className="mt-4 text-center text-xs text-gray-500 sm:text-left">
             或直接寄信:{" "}
-            <a href="mailto:sales@aegiscode.com" className="underline hover:text-gray-300">
-              sales@aegiscode.com
+            <a href="mailto:IT@yilutek.com" className="underline hover:text-gray-300">
+              IT@yilutek.com
             </a>
           </p>
         </div>

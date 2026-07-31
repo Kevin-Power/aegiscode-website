@@ -26,8 +26,8 @@ export default function TermsPage() {
             </p>
             <p>
               合約、退場條款或資安審查需求請聯絡{" "}
-              <a className="text-[#5EEAD4] underline" href="mailto:sales@aegiscode.com">
-                sales@aegiscode.com
+              <a className="text-[#5EEAD4] underline" href="mailto:IT@yilutek.com">
+                IT@yilutek.com
               </a>
               。
             </p>

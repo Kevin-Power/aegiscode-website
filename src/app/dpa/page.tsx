@@ -22,8 +22,8 @@ export default function DpaPage() {
             </p>
             <p>
               若需正式 DPA、資安問卷、供應商建檔資料或稽核證據樣本，請聯絡{" "}
-              <a className="text-[#5EEAD4] underline" href="mailto:sales@aegiscode.com">
-                sales@aegiscode.com
+              <a className="text-[#5EEAD4] underline" href="mailto:IT@yilutek.com">
+                IT@yilutek.com
               </a>
               。
             </p>
